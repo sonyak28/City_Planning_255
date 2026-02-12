@@ -1,0 +1,5 @@
+,total_amenities,total_amenities,total_amenities,total_amenities,total_amenities,hospitals,clinics,doctors,pharmacies
+,count,mean,median,min,max,sum,sum,sum,sum
+agency,,,,,,,,,
+BART,50,17.3,10.0,0,68,11,84,33,48
+Caltrain,31,13.8,12.0,4,27,2,44,37,25
