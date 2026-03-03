@@ -17,13 +17,13 @@ warnings.filterwarnings('ignore')
 # ============================================================
 
 # Set these paths
-CENSUS_SHAPEFILE = "../data/census_shapefiles/tl_2020_06_tract.shp"
+CENSUS_SHAPEFILE = "../data/tl_2024_06_tract/tl_2024_06_tract.shp"
 STATIONS_FILE = "../data/transit_gdf.csv"
 AMENITIES_FILE = "../data/all_amenities.csv"
 OUTPUT_DIR = Path("../data/final_results")
 
 # Optional: Add your Census API key here
-CENSUS_API_KEY = "7b4a89318687b3fe27be640b5333d3beb7d456e7"  # Get free key at: https://api.census.gov/data/key_signup.html
+#CENSUS_API_KEY = "7b4a89318687b3fe27be640b5333d3beb7d456e7"  # Get free key at: https://api.census.gov/data/key_signup.html
 
 # Create output directory
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -53,6 +53,7 @@ bay_area_counties = {
     '075': 'San Francisco', '081': 'San Mateo', '085': 'Santa Clara',
     '095': 'Solano', '097': 'Sonoma'
 }
+
 
 # Load and filter tracts
 ca_tracts = gpd.read_file(CENSUS_SHAPEFILE)
@@ -85,76 +86,93 @@ matched = (~stations_with_tracts['GEOID'].isna()).sum()
 print(f"✓ Matched {matched}/{len(stations_with_tracts)} stations to tracts")
 
 # Get census data from API
-if CENSUS_API_KEY:
-    print("\n Downloading census demographics...")
+# if CENSUS_API_KEY:
+#     print("\n Downloading census demographics...")
     
-    import requests
+#     import requests
     
-    census_vars = {
-        'B01003_001E': 'total_pop',
-        'B19013_001E': 'median_income',
-        'B25044_001E': 'total_households',
-        'B25044_003E': 'hh_no_veh_own',
-        'B25044_010E': 'hh_no_veh_rent',
-        'B02001_001E': 'pop_total_race',
-        'B02001_002E': 'pop_white',
-    }
+#     census_vars = {
+#         'B01003_001E': 'total_pop',
+#         'B19013_001E': 'median_income',
+#         'B25044_001E': 'total_households',
+#         'B25044_003E': 'hh_no_veh_own',
+#         'B25044_010E': 'hh_no_veh_rent',
+#         'B02001_001E': 'pop_total_race',
+#         'B02001_002E': 'pop_white',
+#     }
     
-    census_list = []
-    for cfips in bay_area_counties.keys():
-        url = "https://api.census.gov/data/2022/acs/acs5"
-        params = {
-            'get': ','.join(census_vars.keys()),
-            'for': 'tract:*',
-            'in': f'state:06 county:{cfips}',
-            'key': CENSUS_API_KEY
-        }
+#     census_list = []
+#     for cfips in bay_area_counties.keys():
+#         url = "https://api.census.gov/data/2022/acs/acs5"
+#         params = {
+#             'get': ','.join(census_vars.keys()),
+#             'for': 'tract:*',
+#             'in': f'state:06 county:{cfips}',
+#             'key': CENSUS_API_KEY
+#         }
         
-        try:
-            r = requests.get(url, params=params, timeout=30)
-            if r.status_code == 200:
-                data = r.json()
-                df = pd.DataFrame(data[1:], columns=data[0])
-                census_list.append(df)
-        except:
-            pass
+#         try:
+#             r = requests.get(url, params=params, timeout=30)
+#             if r.status_code == 200:
+#                 data = r.json()
+#                 df = pd.DataFrame(data[1:], columns=data[0])
+#                 census_list.append(df)
+#         except:
+#             pass
     
-    if census_list:
-        census_data = pd.concat(census_list)
-        census_data['GEOID'] = census_data['state'] + census_data['county'] + census_data['tract']
+#     if census_list:
+#         census_data = pd.concat(census_list)
+#         census_data['GEOID'] = census_data['state'] + census_data['county'] + census_data['tract']
         
-        for var in census_vars.keys():
-            census_data[var] = pd.to_numeric(census_data[var], errors='coerce')
+#         for var in census_vars.keys():
+#             census_data[var] = pd.to_numeric(census_data[var], errors='coerce')
         
-        census_data = census_data.rename(columns=census_vars)
+#         census_data = census_data.rename(columns=census_vars)
         
-        census_data['households_no_vehicle'] = (
-            census_data['hh_no_veh_own'].fillna(0) + 
-            census_data['hh_no_veh_rent'].fillna(0)
-        )
-        census_data['pct_no_vehicle'] = (
-            census_data['households_no_vehicle'] / census_data['total_households'] * 100
-        )
-        census_data['pct_nonwhite'] = (
-            (census_data['pop_total_race'] - census_data['pop_white']) / 
-            census_data['pop_total_race'] * 100
-        )
+#         census_data['households_no_vehicle'] = (
+#             census_data['hh_no_veh_own'].fillna(0) + 
+#             census_data['hh_no_veh_rent'].fillna(0)
+#         )
+#         census_data['pct_no_vehicle'] = (
+#             census_data['households_no_vehicle'] / census_data['total_households'] * 100
+#         )
+#         census_data['pct_nonwhite'] = (
+#             (census_data['pop_total_race'] - census_data['pop_white']) / 
+#             census_data['pop_total_race'] * 100
+#         )
         
-        census_final = census_data[[
-            'GEOID', 'total_pop', 'median_income', 'total_households',
-            'households_no_vehicle', 'pct_no_vehicle', 'pct_nonwhite'
-        ]]
+#         census_final = census_data[[
+#             'GEOID', 'total_pop', 'median_income', 'total_households',
+#             'households_no_vehicle', 'pct_no_vehicle', 'pct_nonwhite'
+#         ]]
         
-        stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
+#         stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
         
-        print(f"✓ Downloaded demographics for {len(census_final)} tracts")
-    else:
-        print("✗ Census API download failed - will use existing data if available")
-        stations_with_census = stations_with_tracts
-else:
-    print("⚠️  No Census API key - skipping demographics download")
-    print("   Get free key at: https://api.census.gov/data/key_signup.html")
-    stations_with_census = stations_with_tracts
+#         print(f"✓ Downloaded demographics for {len(census_final)} tracts")
+#     else:
+#         print("✗ Census API download failed - will use existing data if available")
+#         stations_with_census = stations_with_tracts
+# else:
+#     print("⚠️  No Census API key - skipping demographics download")
+#     print("   Get free key at: https://api.census.gov/data/key_signup.html")
+#     stations_with_census = stations_with_tracts
+
+
+census_final = pd.read_csv('../data/census_tract_data_2024_clean.csv')
+census_final = census_final.rename(columns={'median_household_income': 'median_income'})
+census_final['GEOID'] = census_final['GEOID'].astype(str).str.zfill(11)
+
+stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
+
+# # Verify
+# overlap = set(stations_with_tracts['GEOID'].dropna()) & set(census_final['GEOID'])
+# print(f"Matching GEOIDs: {len(overlap)} of {stations_with_tracts['GEOID'].notna().sum()} stations")
+
+# # Merge
+# stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
+# print(f"median_income non-null: {stations_with_census['median_household_income'].notna().sum()}/{len(stations_with_census)}")
+
+# --- DIAGNOSTIC ---
 
 # ============================================================
 # PART 2: CALCULATE AMENITY ACCESS
