@@ -22,8 +22,6 @@ STATIONS_FILE = "../data/transit_gdf.csv"
 AMENITIES_FILE = "../data/all_amenities.csv"
 OUTPUT_DIR = Path("../data/final_results")
 
-# Optional: Add your Census API key here
-#CENSUS_API_KEY = "7b4a89318687b3fe27be640b5333d3beb7d456e7"  # Get free key at: https://api.census.gov/data/key_signup.html
 
 # Create output directory
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -223,6 +221,7 @@ for idx, station in stations_with_census.iterrows():
         'pct_no_vehicle': station.get('pct_no_vehicle'),
         'pct_nonwhite': station.get('pct_nonwhite'),
         'total_pop': station.get('total_pop'),
+        'geometry' : station['geometry']
     })
 
 results_df = pd.DataFrame(results)
@@ -315,6 +314,7 @@ for var, label in test_vars.items():
     
     pooled_std = np.sqrt((core_vals.std()**2 + peri_vals.std()**2) / 2)
     cohens_d = (core_vals.mean() - peri_vals.mean()) / pooled_std
+    glass_d = (core_vals.mean() - peri_vals.mean()) / peri_vals.std()
     
     p_values.append(res.pvalue)
     
@@ -324,7 +324,8 @@ for var, label in test_vars.items():
         'peri_mean': peri_vals.mean(),
         'difference': core_vals.mean() - peri_vals.mean(),
         'p_value': res.pvalue,
-        'cohens_d': cohens_d
+        'cohens_d': cohens_d,
+        'glass delta': glass_d
     })
 
 comp_df = pd.DataFrame(comparison_results)
