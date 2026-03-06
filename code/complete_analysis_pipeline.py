@@ -20,7 +20,7 @@ warnings.filterwarnings('ignore')
 CENSUS_SHAPEFILE = "../data/tl_2024_06_tract/tl_2024_06_tract.shp"
 STATIONS_FILE = "../data/transit_gdf.csv"
 AMENITIES_FILE = "../data/all_amenities.csv"
-OUTPUT_DIR = Path("../data/final_results")
+OUTPUT_DIR = Path("../data")
 
 
 # Create output directory
