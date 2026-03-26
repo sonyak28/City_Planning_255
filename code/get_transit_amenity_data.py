@@ -21,10 +21,7 @@ import geopandas as gpd
 import requests
 from overpy import Overpass, exception as overpy_exc
 
-# =============================================================================
 # CONFIG
-# =============================================================================
-
 DATA_DIR  = os.path.join(os.path.dirname(__file__), "..", "data")
 CACHE_DIR = DATA_DIR
 
@@ -33,10 +30,7 @@ os.makedirs(DATA_DIR, exist_ok=True)
 BBOX = {"south": 36.9, "west": -123.0, "north": 38.9, "east": -121.2}
 
 
-# =============================================================================
 # SECTION 1: TRANSIT DATA
-# =============================================================================
-
 def get_bart_stations():
     url = "https://api.bart.gov/api/stn.aspx"
     params = {"cmd": "stns", "key": "MW9S-E7SL-26DU-VV8V", "json": "y"}
@@ -80,13 +74,11 @@ def get_caltrain_stations():
         stations["mode"]   = "Commuter Rail"
         return stations[["station_id", "name", "latitude", "longitude", "agency", "mode"]]
     except Exception as e:
-        print(f"  Warning: could not download Caltrain: {e}")
+        print(f"could not download Caltrain: {e}")
         return pd.DataFrame()
 
 
-# =============================================================================
 # SECTION 2: OSM AMENITIES (with caching + retry)
-# =============================================================================
 
 def run_overpass_query(query, max_retries=5, base_wait=60):
     api = Overpass()
@@ -213,16 +205,14 @@ def query_parks(bbox):
     return pd.DataFrame(features)
 
 
-# =============================================================================
 # MAIN
-# =============================================================================
 
 def main():
     print("=" * 60)
     print("Bay Area Data Collection")
     print("=" * 60)
 
-    # --- Transit ---
+    # Transit 
     print("\n[1/2] Transit stations...")
     bart_df     = get_bart_stations()
     caltrain_df = get_caltrain_stations()
@@ -234,7 +224,7 @@ def main():
     )
     print(f"  BART: {len(bart_df)}  Caltrain: {len(caltrain_df)}  Total: {len(transit_gdf)}")
 
-    # --- Amenities ---
+    # Amenities
     print("\n[2/2] OSM amenities...")
     jobs = [
         ("hospitals.csv",     query_osm_amenities, "hospital",     "hospital"),
@@ -269,19 +259,18 @@ def main():
         geometry=gpd.points_from_xy(all_amenities["longitude"], all_amenities["latitude"]),
         crs="EPSG:4326",
     )
-    print(f"  Total amenities: {len(amenities_gdf)}")
+    print(f"Total amenities: {len(amenities_gdf)}")
 
-    # --- Save ---
+    # Save 
     print("\nSaving to", os.path.abspath(DATA_DIR))
     transit_gdf.to_csv(os.path.join(DATA_DIR, "transit_gdf.csv"), index=False)
     amenities_gdf.to_csv(os.path.join(DATA_DIR, "all_amenities.csv"), index=False)
 
-    print("\n" + "=" * 60)
+
     print("DONE. Output files:")
     print(f"  data/transit_gdf.csv        ({len(transit_gdf)} rows)")
     print(f"  data/all_amenities.csv      ({len(amenities_gdf)} rows)")
     print(f"  data/hospitals.csv, clinics.csv, ... (per-amenity cache CSVs)")
-    print("=" * 60)
 
 
 if __name__ == "__main__":
