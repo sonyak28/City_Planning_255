@@ -12,10 +12,7 @@ from pathlib import Path
 import warnings
 warnings.filterwarnings('ignore')
 
-# ============================================================
 # CONFIGURATION
-# ============================================================
-
 # Set these paths
 CENSUS_SHAPEFILE = "../data/tl_2024_06_tract/tl_2024_06_tract.shp"
 STATIONS_FILE = "../data/transit_gdf.csv"
@@ -30,20 +27,15 @@ print("="*90)
 print("COMPLETE ANALYSIS PIPELINE WITH CORRECTED CENSUS DATA")
 print("="*90)
 
-# ============================================================
 # PART 1: FIX CENSUS MATCHING
-# ============================================================
-
 print("\nPART 1: FIXING CENSUS TRACT MATCHING")
 print("-"*90)
 
 # Load shapefile
 if not Path(CENSUS_SHAPEFILE).exists():
-    print(f"✗ Shapefile not found: {CENSUS_SHAPEFILE}")
-    print("\nDOWNLOAD INSTRUCTIONS:")
-    print("1. Go to: https://www.census.gov/cgi-bin/geo/shapefiles/index.php")
-    print("2. Select: 2020, Census Tracts, California")
-    print("3. Extract to: ../data/census_shapefiles/")
+    print(f"ERROR: Shapefile not found at {CENSUS_SHAPEFILE}")
+    print("Required: Census TIGER/Line 2020 California tract boundaries")
+    print("Download: https://www.census.gov/cgi-bin/geo/shapefiles/index.php")
     exit(1)
 
 bay_area_counties = {
@@ -60,7 +52,7 @@ bay_tracts = ca_tracts[
     (ca_tracts['COUNTYFP'].isin(bay_area_counties.keys()))
 ].to_crs('EPSG:4326')
 
-print(f"✓ Loaded {len(bay_tracts)} Bay Area census tracts")
+print(f"Loaded {len(bay_tracts)} Bay Area census tracts")
 
 # Load stations
 stations = pd.read_csv(STATIONS_FILE)
@@ -70,7 +62,7 @@ stations_gdf = gpd.GeoDataFrame(
     crs='EPSG:4326'
 )
 
-print(f"✓ Loaded {len(stations)} stations")
+print(f"Loaded {len(stations)} stations")
 
 # Spatial join
 stations_with_tracts = gpd.sjoin(
@@ -81,12 +73,12 @@ stations_with_tracts = gpd.sjoin(
 )
 
 matched = (~stations_with_tracts['GEOID'].isna()).sum()
-print(f"✓ Matched {matched}/{len(stations_with_tracts)} stations to tracts")
+print(f"Matched {matched}/{len(stations_with_tracts)} stations to tracts")
 
 # Get census data from API
 # if CENSUS_API_KEY:
-#     print("\n Downloading census demographics...")
-    
+#     print("\nDownloading census demographics")
+
 #     import requests
     
 #     census_vars = {
@@ -146,13 +138,13 @@ print(f"✓ Matched {matched}/{len(stations_with_tracts)} stations to tracts")
         
 #         stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
         
-#         print(f"✓ Downloaded demographics for {len(census_final)} tracts")
+#         print(f"Downloaded demographics for {len(census_final)} tracts")
 #     else:
-#         print("✗ Census API download failed - will use existing data if available")
+#         print("Census API download failed - will use existing data if available")
 #         stations_with_census = stations_with_tracts
 # else:
-#     print("⚠️  No Census API key - skipping demographics download")
-#     print("   Get free key at: https://api.census.gov/data/key_signup.html")
+#     print("No Census API key - skipping demographics download")
+#     print("Get free key at: https://api.census.gov/data/key_signup.html")
 #     stations_with_census = stations_with_tracts
 
 
@@ -172,15 +164,12 @@ stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how=
 
 # --- DIAGNOSTIC ---
 
-# ============================================================
 # PART 2: CALCULATE AMENITY ACCESS
-# ============================================================
-
 print("\n\nPART 2: CALCULATING AMENITY ACCESS")
 print("-"*90)
 
 amenities = pd.read_csv(AMENITIES_FILE)
-print(f"✓ Loaded {len(amenities)} amenities")
+print(f"Loaded {len(amenities)} amenities")
 
 from math import radians, cos, sin, asin, sqrt
 
@@ -229,7 +218,7 @@ results_df = pd.DataFrame(results)
 # Remove duplicates
 results_df = results_df.drop_duplicates(subset=['latitude', 'longitude'], keep='first')
 
-print(f"✓ Calculated amenity access for {len(results_df)} unique stations")
+print(f"Calculated amenity access for {len(results_df)} unique stations")
 
 # Classify stations
 def classify_station(row):
@@ -262,21 +251,18 @@ print("-"*70)
 
 core_noveh = core['pct_no_vehicle'].mean()
 peri_noveh = peri['pct_no_vehicle'].mean()
-status = "✓" if core_noveh > peri_noveh + 3 else "⚠️"
+status = "valid" if core_noveh > peri_noveh + 3 else "error"
 
 print(f"{'% No Vehicle':<25} {core_noveh:>14.1f}% {peri_noveh:>14.1f}%  {status}")
 print(f"{'Median Income':<25} ${core['median_income'].mean():>13,.0f} "
-      f"${peri['median_income'].mean():>13,.0f}  ✓")
+      f"${peri['median_income'].mean():>13,.0f}")
 
 if core_noveh > peri_noveh + 3:
-    print("\n✓ Census matching appears correct!")
+    print("\nCensus matching appears correct!")
 else:
-    print("\n⚠️  Census matching may still have issues")
+    print("\nCensus matching may still have issues")
 
-# ============================================================
 # PART 4: STATISTICAL ANALYSIS
-# ============================================================
-
 print("\n\nPART 4: STATISTICAL ANALYSIS")
 print("-"*90)
 
@@ -344,7 +330,7 @@ reject, p_adj, _, _ = multipletests(p_values, method='fdr_bh')
 
 print(f"\nAfter FDR correction:")
 for var, p_raw, p_adjusted, sig in zip(test_vars.values(), p_values, p_adj, reject):
-    print(f"  {var:<20} p={p_raw:.4f} → q={p_adjusted:.4f}  {'✓ Significant' if sig else ''}")
+    print(f"{var:<20} p={p_raw:.4f} → q={p_adjusted:.4f}  {'Significant' if sig else ''}")
 
 # Non-parametric correlations
 print(f"\n\nSpearman Correlations (with demographics):\n")
@@ -367,23 +353,17 @@ if corr_p_values:
     _, p_adj_corr, _, _ = multipletests(corr_p_values, method='fdr_bh')
     print(f"\n  After FDR: {sum(p_adj_corr < 0.05)}/{len(p_adj_corr)} significant")
 
-# ============================================================
 # PART 5: SAVE RESULTS
-# ============================================================
-
 print("\n\nPART 5: SAVING RESULTS")
 print("-"*90)
 
 results_df.to_csv(OUTPUT_DIR / 'final_station_data.csv', index=False)
 comp_df.to_csv(OUTPUT_DIR / 'peripheral_vs_core_results.csv', index=False)
 
-print(f"✓ Saved final station data")
-print(f"✓ Saved comparison results")
+print(f"Saved final station data")
+print(f"Saved comparison results")
 
-# ============================================================
 # SUMMARY
-# ============================================================
-
 print("\n\n" + "="*90)
 print("ANALYSIS COMPLETE")
 print("="*90)
@@ -391,7 +371,7 @@ print("="*90)
 sig_count = sum(reject)
 
 print(f"""
-✓ FINAL RESULTS:
+FINAL RESULTS:
 
 1. PERIPHERAL vs CORE:
    {sig_count} of {len(p_values)} comparisons significant after FDR correction
@@ -402,10 +382,10 @@ print(f"""
    Difference = {comp_df.iloc[0]['difference']:.1f} (p={comp_df.iloc[0]['p_value']:.3f}, d={comp_df.iloc[0]['cohens_d']:.2f})
 
 3. CENSUS MATCHING:
-   {"✓ Working correctly" if core_noveh > peri_noveh + 3 else "⚠️ May need review"}
+   {"Working correctly" if core_noveh > peri_noveh + 3 else "May need review"}
    Core: {core_noveh:.1f}% no vehicle, Peripheral: {peri_noveh:.1f}% no vehicle
 
-📁 OUTPUT FILES:
+OUTPUT FILES:
    - {OUTPUT_DIR / 'final_station_data.csv'}
    - {OUTPUT_DIR / 'peripheral_vs_core_results.csv'}
 
