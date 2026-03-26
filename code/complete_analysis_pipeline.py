@@ -232,6 +232,57 @@ def classify_station(row):
     return 'core'
 
 results_df['station_type'] = results_df.apply(classify_station, axis=1)
+core = results_df[results_df['station_type'] == 'core']
+peri = results_df[results_df['station_type'] == 'peripheral']
+
+# CALCULATE GINI INDEX & UNMET NEED INDEX
+print("\nCalculating Gini coefficient and unmet need index")
+
+# Gini coefficient for amenity distribution inequality
+def calculate_gini(values):
+    """
+    Calculate Gini coefficient for inequality measurement.
+    0 = perfect equality, 1 = perfect inequality
+    """
+    sorted_values = np.sort(values)
+    n = len(values)
+    cumsum = np.cumsum(sorted_values)
+    return (2 * np.sum((np.arange(1, n+1)) * sorted_values)) / (n * cumsum[-1]) - (n + 1) / n
+
+# Calculate overall Gini
+overall_gini = calculate_gini(results_df['total_amenities'].values)
+core_gini = calculate_gini(core['total_amenities'].values)
+peri_gini = calculate_gini(peri['total_amenities'].values)
+
+print(f"Gini coefficient (overall): {overall_gini:.3f}")
+print(f"Gini coefficient (core):    {core_gini:.3f}")
+print(f"Gini coefficient (peripheral): {peri_gini:.3f}")
+
+# Unmet Need Index
+# Combines high demand (% no vehicle) with low supply (amenities)
+results_df['need_score'] = results_df['pct_no_vehicle'] / 100
+results_df['supply_score'] = results_df['total_amenities'] / results_df['total_amenities'].max()
+results_df['unmet_need_index'] = results_df['need_score'] - results_df['supply_score']
+
+# Amenity Entropy (diversity score)
+from scipy.stats import entropy
+
+def amenity_entropy(row):
+    """
+    Shannon entropy measuring amenity diversity.
+    Higher = more varied mix of amenity types
+    """
+    counts = [row['grocery'], row['park'], row['clinic'], 
+              row['pharmacy'], row['childcare']]
+    counts = [c for c in counts if c > 0]
+    return entropy(counts) if counts else 0
+
+results_df['amenity_entropy'] = results_df.apply(amenity_entropy, axis=1)
+core = results_df[results_df['station_type'] == 'core']
+peri = results_df[results_df['station_type'] == 'peripheral']
+
+print(f"Calculated unmet need index for {len(results_df)} stations")
+print(f"Calculated amenity entropy scores")
 
 # ============================================================
 # PART 3: VALIDATION
@@ -240,8 +291,6 @@ results_df['station_type'] = results_df.apply(classify_station, axis=1)
 print("\n\nPART 3: VALIDATION")
 print("-"*90)
 
-core = results_df[results_df['station_type'] == 'core']
-peri = results_df[results_df['station_type'] == 'peripheral']
 
 print(f"\nSample size: Core={len(core)}, Peripheral={len(peri)}")
 
@@ -351,7 +400,62 @@ for var1, var2 in corr_pairs:
 
 if corr_p_values:
     _, p_adj_corr, _, _ = multipletests(corr_p_values, method='fdr_bh')
-    print(f"\n  After FDR: {sum(p_adj_corr < 0.05)}/{len(p_adj_corr)} significant")
+    print(f"\nAfter FDR: {sum(p_adj_corr < 0.05)}/{len(p_adj_corr)} significant")
+
+# UNMET NEED & ENTROPY ANALYSIS
+print(f"\n\nUNMET NEED ANALYSIS")
+print("-"*90)
+
+# Identify stations with highest unmet need
+high_unmet_need = results_df.nlargest(10, 'unmet_need_index')[
+    ['station_name', 'agency', 'station_type', 'total_amenities', 
+     'pct_no_vehicle', 'unmet_need_index']
+].copy()
+
+print("\nTop 10 Stations with Highest Unmet Need:")
+print("(High % no-vehicle + Low amenity count)")
+print()
+print(f"{'Station':<30} {'Agency':<10} {'Type':<12} {'Amenities':<12} {'% No Veh':<12} {'Unmet Need'}")
+print("-"*90)
+for _, row in high_unmet_need.iterrows():
+    print(f"{row['station_name']:<30} {row['agency']:<10} {row['station_type']:<12} "
+          f"{row['total_amenities']:<12.0f} {row['pct_no_vehicle']:<12.1f} {row['unmet_need_index']:>10.3f}")
+
+# Entropy analysis
+print(f"\n\nAMENITY DIVERSITY (ENTROPY) ANALYSIS")
+print("-"*90)
+
+core_entropy = core['amenity_entropy'].mean()
+peri_entropy = peri['amenity_entropy'].mean()
+
+print(f"\nMean amenity entropy:")
+print(f"Core stations:       {core_entropy:.3f}")
+print(f"Peripheral stations: {peri_entropy:.3f}")
+print(f"Difference:          {core_entropy - peri_entropy:.3f}")
+
+# Test if diversity differs
+from scipy.stats import mannwhitneyu
+entropy_stat, entropy_p = mannwhitneyu(
+    core['amenity_entropy'].dropna(), 
+    peri['amenity_entropy'].dropna(),
+    alternative='two-sided'
+)
+print(f"\nMann-Whitney U test: U={entropy_stat:.1f}, p={entropy_p:.4f}")
+
+# Stations with most diverse amenity mix
+diverse_stations = results_df.nlargest(10, 'amenity_entropy')[
+    ['station_name', 'agency', 'total_amenities', 'amenity_entropy',
+     'grocery', 'park', 'clinic', 'pharmacy', 'childcare']
+]
+
+print(f"\nTop 10 Most Diverse Amenity Mix (by entropy):")
+print()
+print(f"{'Station':<30} {'Total':<8} {'Entropy':<10} {'Groc':<6} {'Park':<6} {'Clin':<6} {'Phar':<6} {'Care':<6}")
+print("-"*90)
+for _, row in diverse_stations.iterrows():
+    print(f"{row['station_name']:<30} {row['total_amenities']:<8.0f} {row['amenity_entropy']:<10.3f} "
+          f"{row['grocery']:<6.0f} {row['park']:<6.0f} {row['clinic']:<6.0f} "
+          f"{row['pharmacy']:<6.0f} {row['childcare']:<6.0f}")
 
 # PART 5: SAVE RESULTS
 print("\n\nPART 5: SAVING RESULTS")
@@ -381,7 +485,15 @@ FINAL RESULTS:
    Core = {comp_df.iloc[0]['core_mean']:.1f}, Peripheral = {comp_df.iloc[0]['peri_mean']:.1f}
    Difference = {comp_df.iloc[0]['difference']:.1f} (p={comp_df.iloc[0]['p_value']:.3f}, d={comp_df.iloc[0]['cohens_d']:.2f})
 
-3. CENSUS MATCHING:
+3. INEQUALITY METRICS:
+   Gini coefficient: {overall_gini:.3f} (0=equality, 1=inequality)
+   Highest unmet need: {high_unmet_need.iloc[0]['station_name']} ({high_unmet_need.iloc[0]['unmet_need_index']:.3f})
+   
+4. AMENITY DIVERSITY:
+   Mean entropy: Core {core_entropy:.3f} vs Peripheral {peri_entropy:.3f}
+   Diversity difference: {'Significant' if entropy_p < 0.05 else 'Not significant'} (p={entropy_p:.4f})
+
+5. CENSUS MATCHING:
    {"Working correctly" if core_noveh > peri_noveh + 3 else "May need review"}
    Core: {core_noveh:.1f}% no vehicle, Peripheral: {peri_noveh:.1f}% no vehicle
 
