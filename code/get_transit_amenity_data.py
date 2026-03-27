@@ -79,7 +79,6 @@ def get_caltrain_stations():
 
 
 # SECTION 2: OSM AMENITIES (with caching + retry)
-
 def run_overpass_query(query, max_retries=5, base_wait=60):
     api = Overpass()
     for attempt in range(max_retries):

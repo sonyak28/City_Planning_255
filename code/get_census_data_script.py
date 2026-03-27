@@ -128,8 +128,7 @@ rename_map = {
 
 df = df.rename(columns=rename_map)
 
-# Make sure numerical columns remain numerical
-# Replace census data null values with nan
+# ACS encodes missing values as -666666666; replace before computing derived rates
 numeric_cols = list(rename_map.values())
 df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors="coerce")
 df[numeric_cols] = df[numeric_cols].replace(-666666666, np.nan)

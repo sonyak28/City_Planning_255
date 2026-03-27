@@ -12,8 +12,8 @@ from pathlib import Path
 import warnings
 warnings.filterwarnings('ignore')
 
-# CONFIGURATION
-# Set these paths
+# Configs
+# Paths assume script is run from the code/ directory
 CENSUS_SHAPEFILE = "../data/tl_2024_06_tract/tl_2024_06_tract.shp"
 STATIONS_FILE = "../data/transit_gdf.csv"
 AMENITIES_FILE = "../data/all_amenities.csv"
@@ -162,7 +162,6 @@ stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how=
 # stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
 # print(f"median_income non-null: {stations_with_census['median_household_income'].notna().sum()}/{len(stations_with_census)}")
 
-# --- DIAGNOSTIC ---
 
 # PART 2: CALCULATE AMENITY ACCESS
 print("\n\nPART 2: CALCULATING AMENITY ACCESS")
