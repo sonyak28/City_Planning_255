@@ -1,0 +1,83 @@
+station,agency,fiscal_year,metric,avg_weekday_exits,avg_weekly_ridership,avg_annual_ridership,months_available,rank,source
+Embarcadero,BART,FY2025,avg_weekday_exits,17500,87500,4375000,4,1,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Montgomery St.,BART,FY2025,avg_weekday_exits,15800,79000,3950000,4,2,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Civic Center/UN Plaza,BART,FY2025,avg_weekday_exits,13500,67500,3375000,4,3,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Powell St.,BART,FY2025,avg_weekday_exits,13200,66000,3300000,4,4,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+24th St. Mission,BART,FY2025,avg_weekday_exits,8200,41000,2050000,4,5,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+San Francisco,Caltrain,FY2025,avg_mid_week_ridership_AMWR,7400,37000,1850000,12,6,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+12th St. Oakland City Center,BART,FY2025,avg_weekday_exits,6900,34500,1725000,4,7,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+19th St. Oakland,BART,FY2025,avg_weekday_exits,6100,30500,1525000,4,8,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Millbrae,BART,FY2025,avg_weekday_exits,5800,29000,1450000,4,9,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Walnut Creek,BART,FY2025,avg_weekday_exits,5500,27500,1375000,4,10,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Downtown Berkeley,BART,FY2025,avg_weekday_exits,5461,27305,1365250,4,11,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Daly City,BART,FY2025,avg_weekday_exits,4800,24000,1200000,4,12,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Lake Merritt,BART,FY2025,avg_weekday_exits,4800,24000,1200000,4,13,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Fruitvale,BART,FY2025,avg_weekday_exits,4700,23500,1175000,4,14,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+San Francisco Airport,BART,FY2025,avg_weekday_exits,4500,22500,1125000,4,15,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Dublin/Pleasanton,BART,FY2025,avg_weekday_exits,4500,22500,1125000,4,16,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Rockridge,BART,FY2025,avg_weekday_exits,4300,21500,1075000,4,17,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Fremont,BART,FY2025,avg_weekday_exits,4200,21000,1050000,4,18,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+MacArthur,BART,FY2025,avg_weekday_exits,4200,21000,1050000,4,19,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Pleasant Hill/Contra Costa Centre,BART,FY2025,avg_weekday_exits,4200,21000,1050000,4,20,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Coliseum,BART,FY2025,avg_weekday_exits,4100,20500,1025000,4,21,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+16th St. Mission,BART,FY2025,avg_weekday_exits,4000,20000,1000000,4,22,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Bay Fair,BART,FY2025,avg_weekday_exits,3900,19500,975000,4,23,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+El Cerrito Del Norte,BART,FY2025,avg_weekday_exits,3867,19335,966750,4,24,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Concord,BART,FY2025,avg_weekday_exits,3800,19000,950000,4,25,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+West Oakland,BART,FY2025,avg_weekday_exits,3800,19000,950000,4,26,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+San Jose Diridon,Caltrain,FY2025,avg_mid_week_ridership_AMWR,3760,18800,940000,12,27,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+San Leandro,BART,FY2025,avg_weekday_exits,3700,18500,925000,4,28,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Balboa Park,BART,FY2025,avg_weekday_exits,3600,18000,900000,4,29,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Glen Park,BART,FY2025,avg_weekday_exits,3500,17500,875000,4,30,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Berryessa/North San José,BART,FY2025,avg_weekday_exits,3300,16500,825000,4,31,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Palo Alto,Caltrain,FY2025,avg_mid_week_ridership_AMWR,3290,16450,822500,12,32,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Hayward,BART,FY2025,avg_weekday_exits,3200,16000,800000,4,33,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Lafayette,BART,FY2025,avg_weekday_exits,3100,15500,775000,4,34,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Milpitas,BART,FY2025,avg_weekday_exits,3100,15500,775000,4,35,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Pittsburg/Bay Point,BART,FY2025,avg_weekday_exits,3100,15500,775000,4,36,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Orinda,BART,FY2025,avg_weekday_exits,2800,14000,700000,4,37,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Warm Springs/South Fremont,BART,FY2025,avg_weekday_exits,2800,14000,700000,4,38,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+West Dublin/Pleasanton,BART,FY2025,avg_weekday_exits,2600,13000,650000,4,39,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Castro Valley,BART,FY2025,avg_weekday_exits,2600,13000,650000,4,40,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Union City,BART,FY2025,avg_weekday_exits,2600,13000,650000,4,41,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Millbrae,Caltrain,FY2025,avg_mid_week_ridership_AMWR,2570,12850,642500,12,42,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+South San Francisco,BART,FY2025,avg_weekday_exits,2500,12500,625000,4,43,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+San Bruno,BART,FY2025,avg_weekday_exits,2400,12000,600000,4,44,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Richmond,BART,FY2025,avg_weekday_exits,2397,11985,599250,4,45,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Colma,BART,FY2025,avg_weekday_exits,2300,11500,575000,4,46,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Redwood City,Caltrain,FY2025,avg_mid_week_ridership_AMWR,2290,11450,572500,12,47,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Mountain View,Caltrain,FY2025,avg_mid_week_ridership_AMWR,2270,11350,567500,12,48,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+El Cerrito Plaza,BART,FY2025,avg_weekday_exits,2100,10500,525000,4,49,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+South Hayward,BART,FY2025,avg_weekday_exits,2000,10000,500000,4,50,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Oakland Airport,BART,FY2025,avg_weekday_exits,2000,10000,500000,4,51,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Sunnyvale,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1930,9650,482500,12,52,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Ashby,BART,FY2025,avg_weekday_exits,1806,9030,451500,4,53,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+North Berkeley,BART,FY2025,avg_weekday_exits,1800,9000,450000,4,54,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+San Mateo,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1700,8500,425000,12,55,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Hillsdale,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1560,7800,390000,12,56,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Menlo Park,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1470,7350,367500,12,57,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+San Antonio,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1460,7300,365000,12,58,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+North Concord/Martinez,BART,FY2025,avg_weekday_exits,1400,7000,350000,4,59,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Santa Clara,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1340,6700,335000,12,60,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+San Bruno,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1230,6150,307500,12,61,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Santa Clara,BART,FY2025,avg_weekday_exits,1200,6000,300000,4,62,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+San Carlos,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1180,5900,295000,12,63,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+California Ave,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1130,5650,282500,12,64,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Antioch,BART,FY2025,avg_weekday_exits,1100,5500,275000,4,65,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+South San Francisco,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1070,5350,267500,12,66,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+22nd Street,Caltrain,FY2025,avg_mid_week_ridership_AMWR,910,4550,227500,12,67,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Pittsburg Center,BART,FY2025,avg_weekday_exits,900,4500,225000,4,68,BART Monthly Snapshot Hardcoded Fallback (Jan/Mar/Jun/Sep 2025)
+Burlingame,Caltrain,FY2025,avg_mid_week_ridership_AMWR,870,4350,217500,12,69,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Belmont,Caltrain,FY2025,avg_mid_week_ridership_AMWR,700,3500,175000,12,70,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Lawrence,Caltrain,FY2025,avg_mid_week_ridership_AMWR,600,3000,150000,12,71,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Hayward Park,Caltrain,FY2025,avg_mid_week_ridership_AMWR,410,2050,102500,12,72,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Bayshore,Caltrain,FY2025,avg_mid_week_ridership_AMWR,380,1900,95000,12,73,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Tamien,Caltrain,FY2025,avg_mid_week_ridership_AMWR,360,1800,90000,12,74,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Gilroy,Caltrain,FY2025,avg_mid_week_ridership_AMWR,170,850,42500,12,75,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Blossom Hill,Caltrain,FY2025,avg_mid_week_ridership_AMWR,110,550,27500,12,76,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Morgan Hill,Caltrain,FY2025,avg_mid_week_ridership_AMWR,110,550,27500,12,77,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Capitol,Caltrain,FY2025,avg_mid_week_ridership_AMWR,80,400,20000,12,78,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Broadway,Caltrain,FY2025,avg_mid_week_ridership_AMWR,60,300,15000,12,79,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+College Park,Caltrain,FY2025,avg_mid_week_ridership_AMWR,50,250,12500,12,80,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+San Martin,Caltrain,FY2025,avg_mid_week_ridership_AMWR,40,200,10000,12,81,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"
+Stanford,Caltrain,FY2025,avg_mid_week_ridership_AMWR,30,150,7500,12,82,"Caltrain FY2025 Annual Ridership Report, Table 3 (hardcoded)"

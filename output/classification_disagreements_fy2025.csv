@@ -1,0 +1,67 @@
+station,agency,fiscal_year,metric,avg_weekday_exits,rank,method_percentile,method_zscore,method_kmeans,method_jenks,core_votes,consensus
+San Francisco,Caltrain,FY2025,avg_mid_week_ridership_AMWR,7400,6,core,core,core,peripheral,3,core
+12th St. Oakland City Center,BART,FY2025,avg_weekday_exits,6900,7,core,core,core,peripheral,3,core
+19th St. Oakland,BART,FY2025,avg_weekday_exits,6100,8,core,core,core,peripheral,3,core
+Millbrae,BART,FY2025,avg_weekday_exits,5800,9,core,core,core,peripheral,3,core
+Walnut Creek,BART,FY2025,avg_weekday_exits,5500,10,core,core,core,peripheral,3,core
+Downtown Berkeley,BART,FY2025,avg_weekday_exits,5461,11,core,core,core,peripheral,3,core
+Daly City,BART,FY2025,avg_weekday_exits,4800,12,core,core,core,peripheral,3,core
+Lake Merritt,BART,FY2025,avg_weekday_exits,4800,13,core,core,core,peripheral,3,core
+Fruitvale,BART,FY2025,avg_weekday_exits,4700,14,core,core,core,peripheral,3,core
+San Francisco Airport,BART,FY2025,avg_weekday_exits,4500,15,core,core,core,peripheral,3,core
+Dublin/Pleasanton,BART,FY2025,avg_weekday_exits,4500,16,core,core,core,peripheral,3,core
+Rockridge,BART,FY2025,avg_weekday_exits,4300,17,core,core,core,peripheral,3,core
+Fremont,BART,FY2025,avg_weekday_exits,4200,18,core,core,core,peripheral,3,core
+MacArthur,BART,FY2025,avg_weekday_exits,4200,19,core,core,core,peripheral,3,core
+Pleasant Hill/Contra Costa Centre,BART,FY2025,avg_weekday_exits,4200,20,core,core,core,peripheral,3,core
+Coliseum,BART,FY2025,avg_weekday_exits,4100,21,core,core,core,peripheral,3,core
+16th St. Mission,BART,FY2025,avg_weekday_exits,4000,22,core,core,core,peripheral,3,core
+Bay Fair,BART,FY2025,avg_weekday_exits,3900,23,core,core,core,peripheral,3,core
+El Cerrito Del Norte,BART,FY2025,avg_weekday_exits,3867,24,core,core,core,peripheral,3,core
+Concord,BART,FY2025,avg_weekday_exits,3800,25,core,core,core,peripheral,3,core
+West Oakland,BART,FY2025,avg_weekday_exits,3800,26,core,core,core,peripheral,3,core
+San Jose Diridon,Caltrain,FY2025,avg_mid_week_ridership_AMWR,3760,27,core,core,core,peripheral,3,core
+San Leandro,BART,FY2025,avg_weekday_exits,3700,28,core,core,core,peripheral,3,core
+Balboa Park,BART,FY2025,avg_weekday_exits,3600,29,core,core,core,peripheral,3,core
+Glen Park,BART,FY2025,avg_weekday_exits,3500,30,core,core,core,peripheral,3,core
+Berryessa/North San José,BART,FY2025,avg_weekday_exits,3300,31,core,core,core,peripheral,3,core
+Palo Alto,Caltrain,FY2025,avg_mid_week_ridership_AMWR,3290,32,core,core,core,peripheral,3,core
+Hayward,BART,FY2025,avg_weekday_exits,3200,33,core,peripheral,core,peripheral,2,peripheral
+Lafayette,BART,FY2025,avg_weekday_exits,3100,34,core,peripheral,core,peripheral,2,peripheral
+Milpitas,BART,FY2025,avg_weekday_exits,3100,35,core,peripheral,core,peripheral,2,peripheral
+Pittsburg/Bay Point,BART,FY2025,avg_weekday_exits,3100,36,core,peripheral,core,peripheral,2,peripheral
+Orinda,BART,FY2025,avg_weekday_exits,2800,37,core,peripheral,core,peripheral,2,peripheral
+Warm Springs/South Fremont,BART,FY2025,avg_weekday_exits,2800,38,core,peripheral,core,peripheral,2,peripheral
+West Dublin/Pleasanton,BART,FY2025,avg_weekday_exits,2600,39,core,peripheral,core,peripheral,2,peripheral
+Castro Valley,BART,FY2025,avg_weekday_exits,2600,40,core,peripheral,core,peripheral,2,peripheral
+Union City,BART,FY2025,avg_weekday_exits,2600,41,core,peripheral,core,peripheral,2,peripheral
+Millbrae,Caltrain,FY2025,avg_mid_week_ridership_AMWR,2570,42,peripheral,peripheral,core,peripheral,1,peripheral
+South San Francisco,BART,FY2025,avg_weekday_exits,2500,43,peripheral,peripheral,core,peripheral,1,peripheral
+San Bruno,BART,FY2025,avg_weekday_exits,2400,44,peripheral,peripheral,core,peripheral,1,peripheral
+Richmond,BART,FY2025,avg_weekday_exits,2397,45,peripheral,peripheral,core,peripheral,1,peripheral
+Colma,BART,FY2025,avg_weekday_exits,2300,46,peripheral,peripheral,core,peripheral,1,peripheral
+Redwood City,Caltrain,FY2025,avg_mid_week_ridership_AMWR,2290,47,peripheral,peripheral,core,peripheral,1,peripheral
+Mountain View,Caltrain,FY2025,avg_mid_week_ridership_AMWR,2270,48,peripheral,peripheral,core,peripheral,1,peripheral
+El Cerrito Plaza,BART,FY2025,avg_weekday_exits,2100,49,peripheral,peripheral,core,peripheral,1,peripheral
+South Hayward,BART,FY2025,avg_weekday_exits,2000,50,peripheral,peripheral,core,peripheral,1,peripheral
+Oakland Airport,BART,FY2025,avg_weekday_exits,2000,51,peripheral,peripheral,core,peripheral,1,peripheral
+Sunnyvale,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1930,52,peripheral,peripheral,core,peripheral,1,peripheral
+Ashby,BART,FY2025,avg_weekday_exits,1806,53,peripheral,peripheral,core,peripheral,1,peripheral
+North Berkeley,BART,FY2025,avg_weekday_exits,1800,54,peripheral,peripheral,core,peripheral,1,peripheral
+San Mateo,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1700,55,peripheral,peripheral,core,peripheral,1,peripheral
+Hillsdale,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1560,56,peripheral,peripheral,core,peripheral,1,peripheral
+Menlo Park,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1470,57,peripheral,peripheral,core,peripheral,1,peripheral
+San Antonio,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1460,58,peripheral,peripheral,core,peripheral,1,peripheral
+North Concord/Martinez,BART,FY2025,avg_weekday_exits,1400,59,peripheral,peripheral,core,peripheral,1,peripheral
+Santa Clara,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1340,60,peripheral,peripheral,core,peripheral,1,peripheral
+San Bruno,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1230,61,peripheral,peripheral,core,peripheral,1,peripheral
+Santa Clara,BART,FY2025,avg_weekday_exits,1200,62,peripheral,peripheral,core,peripheral,1,peripheral
+San Carlos,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1180,63,peripheral,peripheral,core,peripheral,1,peripheral
+California Ave,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1130,64,peripheral,peripheral,core,peripheral,1,peripheral
+Antioch,BART,FY2025,avg_weekday_exits,1100,65,peripheral,peripheral,core,peripheral,1,peripheral
+South San Francisco,Caltrain,FY2025,avg_mid_week_ridership_AMWR,1070,66,peripheral,peripheral,core,peripheral,1,peripheral
+22nd Street,Caltrain,FY2025,avg_mid_week_ridership_AMWR,910,67,peripheral,peripheral,core,peripheral,1,peripheral
+Pittsburg Center,BART,FY2025,avg_weekday_exits,900,68,peripheral,peripheral,core,peripheral,1,peripheral
+Burlingame,Caltrain,FY2025,avg_mid_week_ridership_AMWR,870,69,peripheral,peripheral,core,peripheral,1,peripheral
+Belmont,Caltrain,FY2025,avg_mid_week_ridership_AMWR,700,70,peripheral,peripheral,core,peripheral,1,peripheral
+Lawrence,Caltrain,FY2025,avg_mid_week_ridership_AMWR,600,71,peripheral,peripheral,core,peripheral,1,peripheral
