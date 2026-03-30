@@ -194,4 +194,4 @@ df["pct_foreign_born"] = (df["foreign_born"] / df["total_pop_nativity"] * 100).r
 
 
 # Save census data into data folder
-df.to_csv('../data/census_tract_data_2024_clean.csv', index=False)
+df.to_csv('../data/processed/census_tract_data_2024_clean.csv', index=False)

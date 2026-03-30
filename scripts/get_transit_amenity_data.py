@@ -22,7 +22,7 @@ import requests
 from overpy import Overpass, exception as overpy_exc
 
 # CONFIG
-DATA_DIR  = os.path.join(os.path.dirname(__file__), "..", "data")
+DATA_DIR  = os.path.join(os.path.dirname(__file__), "..", "data/raw")
 CACHE_DIR = DATA_DIR
 
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -266,10 +266,9 @@ def main():
     amenities_gdf.to_csv(os.path.join(DATA_DIR, "all_amenities.csv"), index=False)
 
 
-    print("DONE. Output files:")
-    print(f"  data/transit_gdf.csv        ({len(transit_gdf)} rows)")
-    print(f"  data/all_amenities.csv      ({len(amenities_gdf)} rows)")
-    print(f"  data/hospitals.csv, clinics.csv, ... (per-amenity cache CSVs)")
+    print("DONE! Output files:")
+    print(f"  data/raw/transit_gdf.csv        ({len(transit_gdf)} rows)")
+    print(f"  data/raw/all_amenities.csv      ({len(amenities_gdf)} rows)")
 
 
 if __name__ == "__main__":
