@@ -9,15 +9,19 @@ import numpy as np
 from scipy import stats
 from scipy.stats import permutation_test, rankdata
 from pathlib import Path
+from statsmodels.stats.multitest import multipletests
+from scipy.stats import entropy
+from scipy.stats import mannwhitneyu
+from math import radians, cos, sin, asin, sqrt
 import warnings
 warnings.filterwarnings('ignore')
 
 # Configs
 # Paths assume script is run from the code/ directory
-CENSUS_SHAPEFILE = "../data/tl_2024_06_tract/tl_2024_06_tract.shp"
-STATIONS_FILE = "../data/transit_gdf.csv"
-AMENITIES_FILE = "../data/all_amenities.csv"
-OUTPUT_DIR = Path("../data")
+CENSUS_SHAPEFILE = "../data/raw/tl_2024_06_tract/tl_2024_06_tract.shp"
+STATIONS_FILE = "../data/raw/transit_gdf.csv"
+AMENITIES_FILE = "../data/raw/all_amenities.csv"
+OUTPUT_DIR = Path("../data/processed")
 
 
 # Create output directory
@@ -75,93 +79,12 @@ stations_with_tracts = gpd.sjoin(
 matched = (~stations_with_tracts['GEOID'].isna()).sum()
 print(f"Matched {matched}/{len(stations_with_tracts)} stations to tracts")
 
-# Get census data from API
-# if CENSUS_API_KEY:
-#     print("\nDownloading census demographics")
 
-#     import requests
-    
-#     census_vars = {
-#         'B01003_001E': 'total_pop',
-#         'B19013_001E': 'median_income',
-#         'B25044_001E': 'total_households',
-#         'B25044_003E': 'hh_no_veh_own',
-#         'B25044_010E': 'hh_no_veh_rent',
-#         'B02001_001E': 'pop_total_race',
-#         'B02001_002E': 'pop_white',
-#     }
-    
-#     census_list = []
-#     for cfips in bay_area_counties.keys():
-#         url = "https://api.census.gov/data/2022/acs/acs5"
-#         params = {
-#             'get': ','.join(census_vars.keys()),
-#             'for': 'tract:*',
-#             'in': f'state:06 county:{cfips}',
-#             'key': CENSUS_API_KEY
-#         }
-        
-#         try:
-#             r = requests.get(url, params=params, timeout=30)
-#             if r.status_code == 200:
-#                 data = r.json()
-#                 df = pd.DataFrame(data[1:], columns=data[0])
-#                 census_list.append(df)
-#         except:
-#             pass
-    
-#     if census_list:
-#         census_data = pd.concat(census_list)
-#         census_data['GEOID'] = census_data['state'] + census_data['county'] + census_data['tract']
-        
-#         for var in census_vars.keys():
-#             census_data[var] = pd.to_numeric(census_data[var], errors='coerce')
-        
-#         census_data = census_data.rename(columns=census_vars)
-        
-#         census_data['households_no_vehicle'] = (
-#             census_data['hh_no_veh_own'].fillna(0) + 
-#             census_data['hh_no_veh_rent'].fillna(0)
-#         )
-#         census_data['pct_no_vehicle'] = (
-#             census_data['households_no_vehicle'] / census_data['total_households'] * 100
-#         )
-#         census_data['pct_nonwhite'] = (
-#             (census_data['pop_total_race'] - census_data['pop_white']) / 
-#             census_data['pop_total_race'] * 100
-#         )
-        
-#         census_final = census_data[[
-#             'GEOID', 'total_pop', 'median_income', 'total_households',
-#             'households_no_vehicle', 'pct_no_vehicle', 'pct_nonwhite'
-#         ]]
-        
-#         stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
-        
-#         print(f"Downloaded demographics for {len(census_final)} tracts")
-#     else:
-#         print("Census API download failed - will use existing data if available")
-#         stations_with_census = stations_with_tracts
-# else:
-#     print("No Census API key - skipping demographics download")
-#     print("Get free key at: https://api.census.gov/data/key_signup.html")
-#     stations_with_census = stations_with_tracts
-
-
-census_final = pd.read_csv('../data/census_tract_data_2024_clean.csv')
+census_final = pd.read_csv('../data/processed/census_tract_data_2024_clean.csv')
 census_final = census_final.rename(columns={'median_household_income': 'median_income'})
 census_final['GEOID'] = census_final['GEOID'].astype(str).str.zfill(11)
 
 stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
-
-# # Verify
-# overlap = set(stations_with_tracts['GEOID'].dropna()) & set(census_final['GEOID'])
-# print(f"Matching GEOIDs: {len(overlap)} of {stations_with_tracts['GEOID'].notna().sum()} stations")
-
-# # Merge
-# stations_with_census = stations_with_tracts.merge(census_final, on='GEOID', how='left')
-# print(f"median_income non-null: {stations_with_census['median_household_income'].notna().sum()}/{len(stations_with_census)}")
-
 
 # PART 2: CALCULATE AMENITY ACCESS
 print("\n\nPART 2: CALCULATING AMENITY ACCESS")
@@ -170,7 +93,6 @@ print("-"*90)
 amenities = pd.read_csv(AMENITIES_FILE)
 print(f"Loaded {len(amenities)} amenities")
 
-from math import radians, cos, sin, asin, sqrt
 
 def haversine(lon1, lat1, lon2, lat2):
     lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
@@ -214,13 +136,10 @@ for idx, station in stations_with_census.iterrows():
 
 results_df = pd.DataFrame(results)
 
-# ============================================================
 # RIDERSHIP-BASED CLASSIFICATION
 # Replaces the old keyword/geographic classify_station approach
-# ============================================================
  
-ridership_df = pd.read_csv('../output/classification_results_fy2025.csv')
-# print(ridership_df[ridership_df['station'].str.contains('Berr', na=False)]['station'].tolist())
+ridership_df = pd.read_csv('../data/processed/classification_results_fy2025.csv')
  
 NAME_CROSSWALK = {
     # BART
@@ -360,9 +279,7 @@ print("\nPeripheral stations:")
 print(peri[['station_name', 'agency', 'ridership']].sort_values(
     'ridership', ascending=False).to_string(index=False))
  
-# ============================================================
 # GINI COEFFICIENT WITH BOOTSTRAP CONFIDENCE INTERVALS
-# ============================================================
 print("\nCalculating Gini coefficient and unmet need index")
  
 def calculate_gini(values):
@@ -396,19 +313,14 @@ print(f"Gini (overall):    {overall_gini:.3f} (95% CI: {overall_ci[0]:.3f}–{ov
 print(f"Gini (core):       {core_gini:.3f} (95% CI: {core_ci[0]:.3f}–{core_ci[1]:.3f})")
 print(f"Gini (peripheral): {peri_gini:.3f} (95% CI: {peri_ci[0]:.3f}–{peri_ci[1]:.3f})")
  
-# ============================================================
 # UNMET NEED INDEX — percentile rank multiplication
-# High need AND low supply both required for high score
-# ============================================================
- 
+# High need AND low supply both required for high score 
 results_df['need_pct']    = rankdata(results_df['pct_no_vehicle'].fillna(0)) / len(results_df)
 results_df['supply_pct']  = rankdata(results_df['total_amenities']) / len(results_df)
 results_df['supply_gap']  = 1 - results_df['supply_pct']
 results_df['unmet_need_index'] = results_df['need_pct'] * results_df['supply_gap']
 
 # Amenity Entropy (diversity score)
-from scipy.stats import entropy
-
 def amenity_entropy(row):
     """
     Shannon entropy measuring amenity diversity.
@@ -426,10 +338,7 @@ peri = results_df[results_df['station_type'] == 'peripheral']
 print(f"Calculated unmet need index for {len(results_df)} stations")
 print(f"Calculated amenity entropy scores")
 
-# ============================================================
 # PART 3: VALIDATION
-# ============================================================
-
 print("\n\nPART 3: VALIDATION")
 print("-"*90)
 
@@ -515,8 +424,6 @@ for _, row in comp_df.iterrows():
           f"{row['difference']:>7.1f} {row['p_value']:>9.4f} {sig:3} {row['cohens_d']:>5.2f}")
 
 # FDR correction
-from statsmodels.stats.multitest import multipletests
-
 reject, p_adj, _, _ = multipletests(p_values, method='fdr_bh')
 
 print(f"\nAfter FDR correction:")
@@ -576,7 +483,6 @@ print(f"Peripheral stations: {peri_entropy:.3f}")
 print(f"Difference:          {core_entropy - peri_entropy:.3f}")
 
 # Test if diversity differs
-from scipy.stats import mannwhitneyu
 entropy_stat, entropy_p = mannwhitneyu(
     core['amenity_entropy'].dropna(), 
     peri['amenity_entropy'].dropna(),
