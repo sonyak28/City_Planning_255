@@ -20,7 +20,7 @@ Data from FY2025 Edition (July 2024 - June 2025)
 Usage:
   python bay_area_transit_classification_fy2025.py
 
-Outputs (written to ./output/):
+Outputs (written to ../visualizations/):
   ridership_raw_fy2025.csv            — cleaned merged table with source metadata
   classification_results_fy2025.csv  — all four labels + consensus per station
   # classification_disagreements_fy2025.csv — borderline stations
@@ -44,20 +44,20 @@ from scipy import stats
 from sklearn.cluster import KMeans
 
 warnings.filterwarnings("ignore")
-OUTPUT_DIR = "./output"
+OUTPUT_DIR = "../data/processed"
+OUTPUT_VIZ_DIR = "../visualizations"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(OUTPUT_VIZ_DIR, exist_ok=True)
 
-# ──────────────────────────────────────────────────────────────────────────────
 # SECTION 1 — BART DATA  (FY2025: Jul 2024 – Jun 2025)
-# ──────────────────────────────────────────────────────────────────────────────
-#
+
 # BART ridership csv was manually created from "Average Weekday Exits by Station" XLS on 
 # https://www.bart.gov/about/reports/ridership as we were unable to parse the pdf document
 # shared on the same site.
 # We used XLS from July 2024 to Jun 2025
 
 
-bart_csv_path = "../City_Planning_255/data/bart_stations_ridership.csv"
+bart_csv_path = "../data/raw/bart_stations_ridership.csv"
 
 def fetch_bart_fy2025():
     """
@@ -83,9 +83,8 @@ def fetch_bart_fy2025():
     print(f"Loaded {len(result)} BART stations from {bart_csv_path}")
     return result
 
-# ──────────────────────────────────────────────────────────────────────────────
 # SECTION 2 — CALTRAIN DATA  (FY2025: Jul 2024 – Jun 2025)
-# ──────────────────────────────────────────────────────────────────────────────
+
 # Table 3 from the FY2025 Annual Ridership Report (caltrain.com/media/35885)
 # "Average Mid-Week Ridership by Origin Station"
 # AMWR = average of Tuesday, Wednesday, Thursday boardings across FY2025.
@@ -235,9 +234,8 @@ def _caltrain_fy2025_fallback() -> pd.DataFrame:
     return df
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+
 # SECTION 3 — MERGE & CLEAN
-# ──────────────────────────────────────────────────────────────────────────────
 
 def build_ridership_table():
     """
@@ -267,9 +265,7 @@ def build_ridership_table():
     return combined
 
 
-# ──────────────────────────────────────────────────────────────────────────────
 # SECTION 4 — CLASSIFICATION METHODS
-# ──────────────────────────────────────────────────────────────────────────────
 
 def classify_percentile(df, threshold = 0.50):
     """
@@ -285,14 +281,6 @@ def classify_percentile(df, threshold = 0.50):
     cutoff = df["avg_weekday_exits"].quantile(threshold)
     return (df["avg_weekday_exits"] >= cutoff).map({True: "core", False: "peripheral"})
 
-
-# def classify_zscore(df, z_threshold) -> pd.Series:
-#     """Classify stations with z-score >= z_threshold as core.
-
-    
-#     """
-#     z = pd.Series(stats.zscore(df["avg_weekday_exits"]), index=df.index)
-#     return (z >= z_threshold).map({True: "core", False: "peripheral"})
 
 
 def classify_kmeans(df, n_clusters = 2, random_state = 255):
@@ -366,9 +354,7 @@ def run_all_classifications(df):
     return df
 
 
-# ──────────────────────────────────────────────────────────────────────────────
 # SECTION 5 — VISUALISATIONS
-# ──────────────────────────────────────────────────────────────────────────────
 
 COLORS = {
     "core":       "#2563EB",
@@ -420,51 +406,11 @@ def plot_distribution(df):
         ax.set_ylabel("# Stations")
         ax.legend(fontsize=8)
     plt.tight_layout()
-    path = os.path.join(OUTPUT_DIR, "ridership_distribution_fy2025.png")
+    path = os.path.join(OUTPUT_VIZ_DIR, "ridership_distribution_fy2025.png")
     plt.savefig(path, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"  Saved: {path}")
 
-
-# def plot_comparison_heatmap(df):
-#     method_cols = ["method_percentile",
-#                    "method_jenks", "consensus"]
-#     col_labels  = ["Percentile", "Jenks", "Consensus"]
-
-#     heat = (df.set_index("station")[method_cols]
-#               .applymap(lambda v: 1 if v == "core" else 0))
-#     heat = heat.loc[df.sort_values("avg_weekday_exits", ascending=False)["station"]]
-
-#     fig_h = max(8, len(heat) * 0.27)
-#     fig, ax = plt.subplots(figsize=(9, fig_h))
-#     cmap = plt.matplotlib.colors.ListedColormap([COLORS["peripheral"], COLORS["core"]])
-#     sns.heatmap(heat, ax=ax, cmap=cmap, linewidths=0.4, linecolor="white",
-#                 cbar=False, xticklabels=col_labels, yticklabels=True)
-#     ax.set_title("FY2025 Core/Peripheral Classification Comparison\n(blue = core, grey = peripheral)",
-#                  fontweight="bold", pad=12)
-#     ax.tick_params(axis="y", labelsize=7)
-#     ax.tick_params(axis="x", labelsize=9)
-
-#     agency_order = df.set_index("station").loc[heat.index, "agency"]
-#     for i, (_, agency) in enumerate(agency_order.items()):
-#         ax.add_patch(mpatches.Rectangle(
-#             (len(method_cols) + 0.05, i), 0.35, 1,
-#             color=COLORS[agency], clip_on=False, transform=ax.transData
-#         ))
-
-#     legend_patches = [
-#         mpatches.Patch(color=COLORS["core"],       label="Core"),
-#         mpatches.Patch(color=COLORS["peripheral"], label="Peripheral"),
-#         mpatches.Patch(color=COLORS["BART"],       label="BART"),
-#         mpatches.Patch(color=COLORS["Caltrain"],   label="Caltrain"),
-#     ]
-#     ax.legend(handles=legend_patches, loc="upper left",
-#               bbox_to_anchor=(1.12, 1.0), fontsize=8)
-#     plt.tight_layout()
-#     path = os.path.join(OUTPUT_DIR, "classification_comparison_fy2025.png")
-#     plt.savefig(path, dpi=150, bbox_inches="tight")
-#     plt.close()
-#     print(f"  Saved: {path}")
 
 
 def plot_ridership_bar(df):
@@ -492,15 +438,13 @@ def plot_ridership_bar(df):
     ]
     ax.legend(handles=legend_patches, loc="lower right", fontsize=8)
     plt.tight_layout()
-    path = os.path.join(OUTPUT_DIR, "ridership_bar_fy2025.png")
+    path = os.path.join(OUTPUT_VIZ_DIR, "ridership_bar_fy2025.png")
     plt.savefig(path, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"  Saved: {path}")
 
 
-# ──────────────────────────────────────────────────────────────────────────────
 # SECTION 6 — SAVE OUTPUTS
-# ──────────────────────────────────────────────────────────────────────────────
 
 def save_outputs(df: pd.DataFrame):
     raw_cols = ["station", "agency", "metric", "avg_weekday_exits",
@@ -516,16 +460,7 @@ def save_outputs(df: pd.DataFrame):
     df[class_cols].to_csv(os.path.join(OUTPUT_DIR, "classification_results_fy2025.csv"), index=False)
     print(f"  Saved: classification_results_fy2025.csv")
 
-    # mixed = df[(df["core_votes"] > 0) & (df["core_votes"] < 3)]
-    # if not mixed.empty:
-    #     mixed[class_cols].to_csv(
-    #         os.path.join(OUTPUT_DIR, "classification_disagreements_fy2025.csv"), index=False)
-    #     print(f"  Saved: classification_disagreements_fy2025.csv ({len(mixed)} borderline stations)")
-
-
-# ──────────────────────────────────────────────────────────────────────────────
 # SECTION 7 — SUMMARY TABLE
-# ──────────────────────────────────────────────────────────────────────────────
 
 def print_summary(df):
     method_cols = ["method_percentile",
@@ -547,9 +482,7 @@ def print_summary(df):
     print("Consensus: ≥2 of 3 methods → CORE")
 
 
-# ──────────────────────────────────────────────────────────────────────────────
 # MAIN
-# ──────────────────────────────────────────────────────────────────────────────
 
 def main():
     print("=" * 65)
@@ -563,13 +496,12 @@ def main():
 
     print("\nGenerating visualisations...")
     plot_distribution(df)
-    #plot_comparison_heatmap(df)
     plot_ridership_bar(df)
 
     print("\nSaving CSVs...")
     save_outputs(df)
 
-    print("\n Done — all outputs in ./output/")
+    print("\n Done!")
 
 
 if __name__ == "__main__":
