@@ -563,7 +563,7 @@ def main():
 
     print("\nGenerating visualisations...")
     plot_distribution(df)
-    plot_comparison_heatmap(df)
+    #plot_comparison_heatmap(df)
     plot_ridership_bar(df)
 
     print("\nSaving CSVs...")
