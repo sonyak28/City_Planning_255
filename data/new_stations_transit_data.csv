@@ -1,0 +1,81 @@
+,Unnamed: 0,station_id_x,name,latitude,longitude,address,city,county,zipcode,agency,mode,geometry,station_id_y,station_type
+0,0,12TH,12th St. Oakland City Center,37.803768,-122.27145,1245 Broadway,Oakland,alameda,94612.0,BART,Heavy Rail,POINT (-122.27145 37.803768),12th St. Oakland City Center,core
+1,1,16TH,16th St. Mission,37.765062,-122.419694,2000 Mission Street,San Francisco,sanfrancisco,94110.0,BART,Heavy Rail,POINT (-122.419694 37.765062),16th St. Mission,core
+2,2,19TH,19th St. Oakland,37.80835,-122.268602,1900 Broadway,Oakland,alameda,94612.0,BART,Heavy Rail,POINT (-122.268602 37.80835),19th St. Oakland,core
+3,3,24TH,24th St. Mission,37.75247,-122.418143,2800 Mission Street,San Francisco,sanfrancisco,94110.0,BART,Heavy Rail,POINT (-122.418143 37.75247),24th St. Mission,core
+4,4,ANTC,Antioch,37.995388,-121.78042,1600 Slatten Ranch Road,Antioch,Contra Costa,94509.0,BART,Heavy Rail,POINT (-121.78042 37.995388),Antioch,peripheral
+5,5,ASHB,Ashby,37.852803,-122.270062,3100 Adeline Street,Berkeley,alameda,94703.0,BART,Heavy Rail,POINT (-122.270062 37.852803),Ashby,core
+6,6,BALB,Balboa Park,37.721585,-122.447506,401 Geneva Avenue,San Francisco,sanfrancisco,94112.0,BART,Heavy Rail,POINT (-122.447506 37.721585),Balboa Park,core
+7,7,BAYF,Bay Fair,37.696924,-122.126514,15242 Hesperian Blvd.,San Leandro,alameda,94578.0,BART,Heavy Rail,POINT (-122.126514 37.696924),Bay Fair,core
+8,8,BERY,Berryessa/North San Jose,37.368473,-121.874681,1620 Berryessa Road,San Jose,Santa Clara,95133.0,BART,Heavy Rail,POINT (-121.874681 37.368473),Berryessa/North San Jose,peripheral
+9,9,CAST,Castro Valley,37.690746,-122.075602,3301 Norbridge Dr.,Castro Valley,alameda,94546.0,BART,Heavy Rail,POINT (-122.075602 37.690746),Castro Valley,peripheral
+10,10,CIVC,Civic Center/UN Plaza,37.779732,-122.414123,1150 Market Street,San Francisco,sanfrancisco,94102.0,BART,Heavy Rail,POINT (-122.414123 37.779732),Civic Center/UN Plaza,core
+11,11,COLS,Coliseum,37.753661,-122.196869,7200 San Leandro St.,Oakland,alameda,94621.0,BART,Heavy Rail,POINT (-122.196869 37.753661),Coliseum,core
+12,12,COLM,Colma,37.684638,-122.466233,365 D Street,Colma,sanmateo,94014.0,BART,Heavy Rail,POINT (-122.466233 37.684638),Colma,peripheral
+13,13,CONC,Concord,37.973737,-122.029095,1451 Oakland Avenue,Concord,contracosta,94520.0,BART,Heavy Rail,POINT (-122.029095 37.973737),Concord,core
+14,14,DALY,Daly City,37.706121,-122.469081,500 John Daly Blvd.,Daly City,sanmateo,94014.0,BART,Heavy Rail,POINT (-122.469081 37.706121),Daly City,core
+15,15,DBRK,Downtown Berkeley,37.870104,-122.268133,2160 Shattuck Avenue,Berkeley,alameda,94704.0,BART,Heavy Rail,POINT (-122.268133 37.870104),Downtown Berkeley,core
+16,16,DUBL,Dublin/Pleasanton,37.701687,-121.899179,5801 Owens Dr.,Pleasanton,alameda,94588.0,BART,Heavy Rail,POINT (-121.899179 37.701687),Dublin/Pleasanton,core
+17,17,DELN,El Cerrito del Norte,37.925086,-122.316794,6400 Cutting Blvd.,El Cerrito,contracosta,94530.0,BART,Heavy Rail,POINT (-122.316794 37.925086),El Cerrito del Norte,core
+18,18,PLZA,El Cerrito Plaza,37.902632,-122.298904,6699 Fairmount Avenue,El Cerrito,contracosta,94530.0,BART,Heavy Rail,POINT (-122.298904 37.902632),El Cerrito Plaza,core
+19,19,EMBR,Embarcadero,37.792874,-122.39702,298 Market Street,San Francisco,sanfrancisco,94111.0,BART,Heavy Rail,POINT (-122.39702 37.792874),Embarcadero,core
+20,20,FRMT,Fremont,37.557465,-121.976608,2000 BART Way,Fremont,alameda,94536.0,BART,Heavy Rail,POINT (-121.976608 37.557465),Fremont,core
+21,21,FTVL,Fruitvale,37.774836,-122.224175,3401 East 12th Street,Oakland,alameda,94601.0,BART,Heavy Rail,POINT (-122.224175 37.774836),Fruitvale,core
+22,22,GLEN,Glen Park,37.733064,-122.433817,2901 Diamond Street,San Francisco,sanfrancisco,94131.0,BART,Heavy Rail,POINT (-122.433817 37.733064),Glen Park,core
+23,23,HAYW,Hayward,37.669723,-122.087018,699 'B' Street,Hayward,alameda,94541.0,BART,Heavy Rail,POINT (-122.087018 37.669723),Hayward,core
+24,24,LAFY,Lafayette,37.893176,-122.12463,3601 Deer Hill Road,Lafayette,contracosta,94549.0,BART,Heavy Rail,POINT (-122.12463 37.893176),Lafayette,peripheral
+25,25,LAKE,Lake Merritt,37.797027,-122.26518,800 Madison Street,Oakland,alameda,94607.0,BART,Heavy Rail,POINT (-122.26518 37.797027),Lake Merritt,core
+26,26,MCAR,MacArthur,37.829065,-122.26704,555 40th Street,Oakland,alameda,94609.0,BART,Heavy Rail,POINT (-122.26704 37.829065),MacArthur,core
+27,27,MLBR,Millbrae,37.600271,-122.386702,200 North Rollins Road,Millbrae,sanmateo,94030.0,BART,Heavy Rail,POINT (-122.386702 37.600271),Millbrae,core
+28,28,MLPT,Milpitas,37.410277,-121.891081,1755 S. Milpitas Blvd.,Milpitas,Santa Clara,95035.0,BART,Heavy Rail,POINT (-121.891081 37.410277),Milpitas,peripheral
+29,29,MONT,Montgomery St.,37.789405,-122.401066,598 Market Street,San Francisco,sanfrancisco,94104.0,BART,Heavy Rail,POINT (-122.401066 37.789405),Montgomery St.,core
+30,30,NBRK,North Berkeley,37.873967,-122.28344,1750 Sacramento Street,Berkeley,alameda,94702.0,BART,Heavy Rail,POINT (-122.28344 37.873967),North Berkeley,peripheral
+31,31,NCON,North Concord/Martinez,38.003193,-122.024653,3700 Port Chicago Highway,Concord,contracosta,94520.0,BART,Heavy Rail,POINT (-122.024653 38.003193),North Concord/Martinez,peripheral
+32,32,OAKL,Oakland International Airport,37.713238,-122.212191,4 Airport Drive,Oakland,alameda,94621.0,BART,Heavy Rail,POINT (-122.212191 37.713238),Oakland International Airport,peripheral
+33,33,ORIN,Orinda,37.878361,-122.183791,11 Camino Pablo,Orinda,contracosta,94563.0,BART,Heavy Rail,POINT (-122.183791 37.878361),Orinda,peripheral
+34,34,PITT,Pittsburg/Bay Point,38.018914,-121.945154,1700 West Leland Road,Pittsburg,contracosta,94565.0,BART,Heavy Rail,POINT (-121.945154 38.018914),Pittsburg/Bay Point,core
+35,35,PCTR,Pittsburg Center,38.016941,-121.889457,2099 Railroad Avenue,Pittsburg,Contra Costa,94565.0,BART,Heavy Rail,POINT (-121.889457 38.016941),Pittsburg Center,core
+36,36,PHIL,Pleasant Hill/Contra Costa Centre,37.928468,-122.056012,1365 Treat Blvd.,Walnut Creek,contracosta,94597.0,BART,Heavy Rail,POINT (-122.056012 37.928468),Pleasant Hill/Contra Costa Centre,core
+37,37,POWL,Powell St.,37.784471,-122.407974,899 Market Street,San Francisco,sanfrancisco,94102.0,BART,Heavy Rail,POINT (-122.407974 37.784471),Powell St.,core
+38,38,RICH,Richmond,37.936853,-122.353099,1700 Nevin Avenue,Richmond,contracosta,94801.0,BART,Heavy Rail,POINT (-122.353099 37.936853),Richmond,core
+39,39,ROCK,Rockridge,37.844702,-122.251371,5660 College Avenue,Oakland,alameda,94618.0,BART,Heavy Rail,POINT (-122.251371 37.844702),Rockridge,core
+40,40,SBRN,San Bruno,37.637761,-122.416287,1151 Huntington Avenue,San Bruno,sanmateo,94066.0,BART,Heavy Rail,POINT (-122.416287 37.637761),San Bruno,peripheral
+41,41,SFIA,San Francisco International Airport,37.615966,-122.392409,"International Terminal, Level 3",San Francisco Int'l Airport,sanmateo,94128.0,BART,Heavy Rail,POINT (-122.392409 37.615966),San Francisco International Airport,core
+42,42,SANL,San Leandro,37.721947,-122.160844,1401 San Leandro Blvd.,San Leandro,alameda,94577.0,BART,Heavy Rail,POINT (-122.160844 37.721947),San Leandro,core
+43,43,SHAY,South Hayward,37.634375,-122.057189,28601 Dixon Street,Hayward,alameda,94544.0,BART,Heavy Rail,POINT (-122.057189 37.634375),South Hayward,peripheral
+44,44,SSAN,South San Francisco,37.664245,-122.44396,1333 Mission Road,South San Francisco,sanmateo,94080.0,BART,Heavy Rail,POINT (-122.44396 37.664245),South San Francisco,peripheral
+45,45,UCTY,Union City,37.59063,-122.017388,10 Union Square,Union City,alameda,94587.0,BART,Heavy Rail,POINT (-122.017388 37.59063),Union City,core
+46,46,WCRK,Walnut Creek,37.905522,-122.067527,200 Ygnacio Valley Road,Walnut Creek,contracosta,94596.0,BART,Heavy Rail,POINT (-122.067527 37.905522),Walnut Creek,core
+47,47,WARM,Warm Springs/South Fremont,37.502171,-121.939313,45193 Warm Springs Blvd,Fremont,alameda,94539.0,BART,Heavy Rail,POINT (-121.939313 37.502171),Warm Springs/South Fremont,peripheral
+48,48,WDUB,West Dublin/Pleasanton,37.699756,-121.92824,6501 Golden Gate Drive,Dublin,alameda,94568.0,BART,Heavy Rail,POINT (-121.92824 37.699756),West Dublin/Pleasanton,peripheral
+49,49,WOAK,West Oakland,37.804872,-122.29514,1451 7th Street,Oakland,alameda,94607.0,BART,Heavy Rail,POINT (-122.29514 37.804872),West Oakland,core
+50,50,22nd_street,22nd Street,37.756972,-122.392492,,,,,Caltrain,Commuter Rail,POINT (-122.392492 37.756972),22nd Street,peripheral
+51,51,bayshore,Bayshore,37.70766,-122.401665,,,,,Caltrain,Commuter Rail,POINT (-122.401665 37.70766),Bayshore,peripheral
+52,52,belmont,Belmont,37.52133,-122.2763,,,,,Caltrain,Commuter Rail,POINT (-122.2763 37.52133),Belmont,peripheral
+53,53,blossom_hill,Blossom Hill Caltrain Station,37.252606,-121.797907,,,,,Caltrain,Commuter Rail,POINT (-121.797907 37.252606),Blossom Hill Caltrain Station,peripheral
+54,54,broadway,Broadway,37.58726,-122.362,,,,,Caltrain,Commuter Rail,POINT (-122.362 37.58726),Broadway,peripheral
+55,55,burlingame,Burlingame,37.57985,-122.34418,,,,,Caltrain,Commuter Rail,POINT (-122.34418 37.57985),Burlingame,peripheral
+56,56,california_ave,California Avenue,37.428834,-122.14113,,,,,Caltrain,Commuter Rail,POINT (-122.14113 37.428834),California Avenue,peripheral
+57,57,capitol,Capitol Caltrain Station,37.284016,-121.841899,,,,,Caltrain,Commuter Rail,POINT (-121.841899 37.284016),Capitol Caltrain Station,peripheral
+58,58,college_park,College Park,37.34289,-121.91565,,,,,Caltrain,Commuter Rail,POINT (-121.91565 37.34289),College Park,peripheral
+59,59,gilroy,Gilroy,37.004466,-121.566727,,,,,Caltrain,Commuter Rail,POINT (-121.566727 37.004466),Gilroy,peripheral
+60,60,hayward_park,Hayward Park,37.553161,-122.309494,,,,,Caltrain,Commuter Rail,POINT (-122.309494 37.553161),Hayward Park,peripheral
+61,61,hillsdale,Hillsdale,37.542392678,-122.301612061,,,,,Caltrain,Commuter Rail,POINT (-122.301612061 37.542392678),Hillsdale,peripheral
+62,62,lawrence,Lawrence,37.3707,-121.9969,,,,,Caltrain,Commuter Rail,POINT (-121.9969 37.3707),Lawrence,peripheral
+63,63,menlo_park,Menlo Park,37.4548,-122.18245,,,,,Caltrain,Commuter Rail,POINT (-122.18245 37.4548),Menlo Park,peripheral
+64,64,place_MLBR,Millbrae Caltrain Station,37.5999,-122.38675,,,,,Caltrain,Commuter Rail,POINT (-122.38675 37.5999),Millbrae Caltrain Station,peripheral
+65,65,morgan_hill,Morgan Hill,37.129644,-121.650558,,,,,Caltrain,Commuter Rail,POINT (-121.650558 37.129644),Morgan Hill,peripheral
+66,66,mountain_view,Mountain View,37.395067,-122.07722,,,,,Caltrain,Commuter Rail,POINT (-122.07722 37.395067),Mountain View,core
+67,67,palo_alto,Palo Alto,37.44322,-122.16429,,,,,Caltrain,Commuter Rail,POINT (-122.16429 37.44322),Palo Alto,core
+68,68,redwood_city,Redwood City,37.485865,-122.2315,,,,,Caltrain,Commuter Rail,POINT (-122.2315 37.485865),Redwood City,core
+69,69,san_antonio,San Antonio,37.407239431,-122.107115562,,,,,Caltrain,Commuter Rail,POINT (-122.107115562 37.407239431),San Antonio,peripheral
+70,70,san_bruno,San Bruno Caltrain Station,37.630460335,-122.411709042,,,,,Caltrain,Commuter Rail,POINT (-122.411709042 37.630460335),San Bruno Caltrain Station,peripheral
+71,71,san_carlos,San Carlos,37.508033,-122.2602,,,,,Caltrain,Commuter Rail,POINT (-122.2602 37.508033),San Carlos,peripheral
+72,72,san_francisco,San Francisco Caltrain Station,37.776404,-122.394911,,,,,Caltrain,Commuter Rail,POINT (-122.394911 37.776404),San Francisco Caltrain Station,core
+73,73,sj_diridon,San Jose Diridon,37.329694,-121.903208,,,,,Caltrain,Commuter Rail,POINT (-121.903208 37.329694),San Jose Diridon,core
+74,74,san_martin,San Martin,37.085984,-121.61048,,,,,Caltrain,Commuter Rail,POINT (-121.61048 37.085984),San Martin,peripheral
+75,75,san_mateo,San Mateo,37.56824,-122.3239,,,,,Caltrain,Commuter Rail,POINT (-122.3239 37.56824),San Mateo,peripheral
+76,76,santa_clara,Santa Clara Caltrain Station,37.353384,-121.936465,,,,,Caltrain,Commuter Rail,POINT (-121.936465 37.353384),Santa Clara Caltrain Station,peripheral
+77,77,south_sf,South San Francisco Caltrain Station,37.655941416,-122.404979006,,,,,Caltrain,Commuter Rail,POINT (-122.404979006 37.655941416),South San Francisco Caltrain Station,peripheral
+78,79,sunnyvale,Sunnyvale,37.378934,-122.0315,,,,,Caltrain,Commuter Rail,POINT (-122.0315 37.378934),Sunnyvale,peripheral
+79,80,tamien,Tamien Caltrain Station,37.31269,-121.8847,,,,,Caltrain,Commuter Rail,POINT (-121.8847 37.31269),Tamien Caltrain Station,peripheral

@@ -1,3 +1,20 @@
+"""
+Bay Area Census Pipeline
+Data from 2024 ACS
+============================================================================
+
+  American Community Survey 2024
+  ─────────────────────────────────────
+  Source: API call: https://api.census.gov/data/2024/acs/acs5?get=NAME,group(B01001)&for=us:1&key=YOUR_KEY_GOES_HERE
+
+
+Usage:
+  python get_census_data_script.py
+
+Outputs:
+  census_tract_data_2024_clean.py
+"""
+
 import requests
 import pandas as pd
 import numpy as np
