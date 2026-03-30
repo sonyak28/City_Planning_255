@@ -7,7 +7,7 @@ import pandas as pd
 import geopandas as gpd
 import numpy as np
 from scipy import stats
-from scipy.stats import permutation_test
+from scipy.stats import permutation_test, rankdata
 from pathlib import Path
 import warnings
 warnings.filterwarnings('ignore')
@@ -214,54 +214,197 @@ for idx, station in stations_with_census.iterrows():
 
 results_df = pd.DataFrame(results)
 
-# Remove duplicates
+# ============================================================
+# RIDERSHIP-BASED CLASSIFICATION
+# Replaces the old keyword/geographic classify_station approach
+# ============================================================
+ 
+ridership_df = pd.read_csv('../output/classification_results_fy2025.csv')
+# print(ridership_df[ridership_df['station'].str.contains('Berr', na=False)]['station'].tolist())
+ 
+NAME_CROSSWALK = {
+    # BART
+    '12th Street / Oakland City Center':    '12th St. Oakland City Center',
+    '16th Street Mission':                  '16th St. Mission',
+    '19th Street Oakland':                  '19th St. Oakland',
+    '24th Street Mission':                  '24th St. Mission',
+    'Antioch':                   'Antioch',
+    'Ashby':                                'Ashby',
+    'Balboa Park':                          'Balboa Park',
+    'Bayfair':                              'Bay Fair',
+    'Berkeley':                             'Downtown Berkeley',
+    'Berryessa / North San Jos\x8e':            'Berryessa/North San Jose',
+    'Castro Valley':                        'Castro Valley',
+    'Civic Center':                         'Civic Center/UN Plaza',
+    'Coliseum':                             'Coliseum',
+    'Colma':                                'Colma',
+    'Concord':                              'Concord',
+    'Daly City':                            'Daly City',
+    'Dublin/Pleasanton':                    'Dublin/Pleasanton',
+    'El Cerrito Del Norte':                 'El Cerrito del Norte',
+    'El Cerrito Plaza':                     'El Cerrito Plaza',
+    'Embarcadero':                          'Embarcadero',
+    'Fremont':                              'Fremont',
+    'Fruitvale':                            'Fruitvale',
+    'Glen Park':                            'Glen Park',
+    'Hayward':                              'Hayward',
+    'Lafayette':                            'Lafayette',
+    'Lake Merritt':                         'Lake Merritt',
+    'MacArthur':                            'MacArthur',
+    'Milpitas':                             'Milpitas',
+    'Montgomery Street':                    'Montgomery St.',
+    'North Berkeley':                       'North Berkeley',
+    'North Concord':                        'North Concord/Martinez',
+    'Oakland International Airport':        'Oakland International Airport',
+    'Orinda':                               'Orinda',
+    'Pittsburg Center':                     'Pittsburg Center',
+    'Pittsburg/Bay Point':                  'Pittsburg/Bay Point',
+    'Pleasant Hill':                        'Pleasant Hill/Contra Costa Centre',
+    'Powell Street':                        'Powell St.',
+    'Richmond':                             'Richmond',
+    'Rockridge':                            'Rockridge',
+    'San Francisco International Airport':  'San Francisco International Airport',
+    'San Leandro':                          'San Leandro',
+    'South Hayward':                        'South Hayward',
+    'Union City':                           'Union City',
+    'Walnut Creek':                         'Walnut Creek',
+    'Warm Springs':                         'Warm Springs/South Fremont',
+    'West Dublin/Pleasanton':               'West Dublin/Pleasanton',
+    'West Oakland':                         'West Oakland',
+    # Caltrain
+    '22nd Street':                          '22nd Street',
+    'Bayshore':                             'Bayshore',
+    'Belmont':                              'Belmont',
+    'Blossom Hill':                         'Blossom Hill Caltrain Station',
+    'Broadway':                             'Broadway',
+    'Burlingame':                           'Burlingame',
+    'California Ave':                       'California Avenue',
+    'Capitol':                              'Capitol Caltrain Station',
+    'College Park':                         'College Park',
+    'Gilroy':                               'Gilroy',
+    'Hayward Park':                         'Hayward Park',
+    'Hillsdale':                            'Hillsdale',
+    'Lawrence':                             'Lawrence',
+    'Menlo Park':                           'Menlo Park',
+    'Morgan Hill':                          'Morgan Hill',
+    'Mountain View':                        'Mountain View',
+    'Palo Alto':                            'Palo Alto',
+    'Redwood City':                         'Redwood City',
+    'San Antonio':                          'San Antonio',
+    'San Carlos':                           'San Carlos',
+    'San Francisco':                        'San Francisco Caltrain Station',
+    'San Jose Diridon':                     'San Jose Diridon',
+    'San Martin':                           'San Martin',
+    'San Mateo':                            'San Mateo',
+    'Santa Clara':                          'Santa Clara Caltrain Station',
+    'Sunnyvale':                            'Sunnyvale',
+    'Tamien':                               'Tamien Caltrain Station',
+}
+ 
+ridership_df['station_name'] = ridership_df['station'].map(NAME_CROSSWALK)
+ 
+# Handle duplicate station names across agencies
+ridership_df.loc[
+    (ridership_df['station'] == 'Millbrae') & (ridership_df['agency'] == 'BART'),
+    'station_name'] = 'Millbrae'
+ridership_df.loc[
+    (ridership_df['station'] == 'Millbrae') & (ridership_df['agency'] == 'Caltrain'),
+    'station_name'] = 'Millbrae'
+ridership_df.loc[
+    (ridership_df['station'] == 'South San Francisco') & (ridership_df['agency'] == 'BART'),
+    'station_name'] = 'South San Francisco'
+ridership_df.loc[
+    (ridership_df['station'] == 'South San Francisco') & (ridership_df['agency'] == 'Caltrain'),
+    'station_name'] = 'South San Francisco Caltrain Station'
+ridership_df.loc[
+    (ridership_df['station'] == 'San Bruno') & (ridership_df['agency'] == 'BART'),
+    'station_name'] = 'San Bruno'
+ridership_df.loc[
+    (ridership_df['station'] == 'San Bruno') & (ridership_df['agency'] == 'Caltrain'),
+    'station_name'] = 'San Bruno Caltrain Station'
+ 
+unmapped = ridership_df[ridership_df['station_name'].isna()]
+if len(unmapped) > 0:
+    print(f"\nWARNING: {len(unmapped)} ridership stations could not be mapped:")
+    print(unmapped[['station', 'agency']].to_string(index=False))
+else:
+    print("\nAll ridership stations mapped successfully")
+ 
+ridership_merge = ridership_df[['station_name', 'consensus', 'avg_weekday_exits']].copy()
+ridership_merge = ridership_merge.rename(columns={
+    'consensus': 'station_type',
+    'avg_weekday_exits': 'ridership'
+})
+ 
+results_df = results_df.merge(ridership_merge, on='station_name', how='left')
+
+# Remove stations not in scope
+EXCLUDE_STATIONS = ['Stanford', 'San Francisco International Airport']
+results_df = results_df[~results_df['station_name'].isin(EXCLUDE_STATIONS)].reset_index(drop=True)
+print(f"Removed {EXCLUDE_STATIONS} — {len(results_df)} stations remaining")
+
 results_df = results_df.drop_duplicates(subset=['latitude', 'longitude'], keep='first')
-
-print(f"Calculated amenity access for {len(results_df)} unique stations")
-
-# Classify stations
-def classify_station(row):
-    peripheral_indicators = [
-        'antioch', 'pittsburg', 'concord', 'walnut creek', 
-        'san jose', 'milpitas', 'fremont', 'dublin', 'pleasanton'
-    ]
-    station_name = str(row['station_name']).lower()
-    if any(ind in station_name for ind in peripheral_indicators):
-        return 'peripheral'
-    return 'core'
-
-results_df['station_type'] = results_df.apply(classify_station, axis=1)
+ 
+unmatched = results_df[results_df['station_type'].isna()]
+if len(unmatched) > 0:
+    print(f"\nWARNING: {len(unmatched)} amenity stations did not match ridership data:")
+    print(unmatched[['station_name', 'agency']].to_string(index=False))
+else:
+    print("All amenity stations matched to ridership classification")
+ 
 core = results_df[results_df['station_type'] == 'core']
 peri = results_df[results_df['station_type'] == 'peripheral']
-
-# CALCULATE GINI INDEX & UNMET NEED INDEX
+ 
+print(f"\nClassification result: {len(core)} core, {len(peri)} peripheral")
+print("\nPeripheral stations:")
+print(peri[['station_name', 'agency', 'ridership']].sort_values(
+    'ridership', ascending=False).to_string(index=False))
+ 
+# ============================================================
+# GINI COEFFICIENT WITH BOOTSTRAP CONFIDENCE INTERVALS
+# ============================================================
 print("\nCalculating Gini coefficient and unmet need index")
-
-# Gini coefficient for amenity distribution inequality
+ 
 def calculate_gini(values):
-    """
-    Calculate Gini coefficient for inequality measurement.
-    0 = perfect equality, 1 = perfect inequality
-    """
+    """Gini coefficient: 0 = perfect equality, 1 = perfect inequality."""
     sorted_values = np.sort(values)
     n = len(values)
+    if n == 0:
+        return np.nan
     cumsum = np.cumsum(sorted_values)
     return (2 * np.sum((np.arange(1, n+1)) * sorted_values)) / (n * cumsum[-1]) - (n + 1) / n
-
-# Calculate overall Gini
+ 
+def bootstrap_gini(values, n_bootstrap=1000, ci=95):
+    """Bootstrap confidence interval for Gini coefficient."""
+    bootstrapped = [
+        calculate_gini(np.random.choice(values, size=len(values), replace=True))
+        for _ in range(n_bootstrap)
+    ]
+    lower = np.percentile(bootstrapped, (100 - ci) / 2)
+    upper = np.percentile(bootstrapped, 100 - (100 - ci) / 2)
+    return lower, upper
+ 
 overall_gini = calculate_gini(results_df['total_amenities'].values)
-core_gini = calculate_gini(core['total_amenities'].values)
-peri_gini = calculate_gini(peri['total_amenities'].values)
-
-print(f"Gini coefficient (overall): {overall_gini:.3f}")
-print(f"Gini coefficient (core):    {core_gini:.3f}")
-print(f"Gini coefficient (peripheral): {peri_gini:.3f}")
-
-# Unmet Need Index
-# Combines high demand (% no vehicle) with low supply (amenities)
-results_df['need_score'] = results_df['pct_no_vehicle'] / 100
-results_df['supply_score'] = results_df['total_amenities'] / results_df['total_amenities'].max()
-results_df['unmet_need_index'] = results_df['need_score'] - results_df['supply_score']
+core_gini    = calculate_gini(core['total_amenities'].values)
+peri_gini    = calculate_gini(peri['total_amenities'].values)
+ 
+overall_ci = bootstrap_gini(results_df['total_amenities'].values)
+core_ci    = bootstrap_gini(core['total_amenities'].values)
+peri_ci    = bootstrap_gini(peri['total_amenities'].values)
+ 
+print(f"Gini (overall):    {overall_gini:.3f} (95% CI: {overall_ci[0]:.3f}–{overall_ci[1]:.3f})")
+print(f"Gini (core):       {core_gini:.3f} (95% CI: {core_ci[0]:.3f}–{core_ci[1]:.3f})")
+print(f"Gini (peripheral): {peri_gini:.3f} (95% CI: {peri_ci[0]:.3f}–{peri_ci[1]:.3f})")
+ 
+# ============================================================
+# UNMET NEED INDEX — percentile rank multiplication
+# High need AND low supply both required for high score
+# ============================================================
+ 
+results_df['need_pct']    = rankdata(results_df['pct_no_vehicle'].fillna(0)) / len(results_df)
+results_df['supply_pct']  = rankdata(results_df['total_amenities']) / len(results_df)
+results_df['supply_gap']  = 1 - results_df['supply_pct']
+results_df['unmet_need_index'] = results_df['need_pct'] * results_df['supply_gap']
 
 # Amenity Entropy (diversity score)
 from scipy.stats import entropy
