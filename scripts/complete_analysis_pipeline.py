@@ -127,6 +127,8 @@ for idx, station in stations_with_census.iterrows():
         'hospital': counts.get('hospital', 0),
         'doctors': counts.get('doctors', 0),
         'childcare': counts.get('childcare', 0),
+        'kindergarten': counts.get('kindergarten', 0),
+        'convenience': counts.get('convenience', 0),
         'median_income': station.get('median_income'),
         'pct_no_vehicle': station.get('pct_no_vehicle'),
         'pct_nonwhite': station.get('pct_nonwhite'),
@@ -135,6 +137,7 @@ for idx, station in stations_with_census.iterrows():
     })
 
 results_df = pd.DataFrame(results)
+# print(results_df)
 
 # RIDERSHIP-BASED CLASSIFICATION
 # Replaces the old keyword/geographic classify_station approach
@@ -373,6 +376,12 @@ test_vars = {
     'park': 'Parks',
     'clinic': 'Clinics',
     'pharmacy': 'Pharmacies',
+    'hospital': "Hosptials",
+    'doctors': "Doctors",
+    'childcare': "Childcare",
+    'convenience': "Convenience",
+    'kindergarten': 'Kindergarten'
+
 }
 
 print("\nPeripheral vs Core Comparison (Permutation Tests):\n")
@@ -398,6 +407,7 @@ for var, label in test_vars.items():
         random_state=42
     )
     
+    # print(f'std for core:{core_vals.std()}, std for peri:{peri_vals.std()}')
     pooled_std = np.sqrt((core_vals.std()**2 + peri_vals.std()**2) / 2)
     cohens_d = (core_vals.mean() - peri_vals.mean()) / pooled_std
     glass_d = (core_vals.mean() - peri_vals.mean()) / peri_vals.std()
@@ -411,7 +421,7 @@ for var, label in test_vars.items():
         'difference': core_vals.mean() - peri_vals.mean(),
         'p_value': res.pvalue,
         'cohens_d': cohens_d,
-        'glass delta': glass_d
+        'glass_delta': glass_d
     })
 
 comp_df = pd.DataFrame(comparison_results)
@@ -421,7 +431,7 @@ print("-"*65)
 for _, row in comp_df.iterrows():
     sig = "***" if row['p_value'] < 0.001 else "**" if row['p_value'] < 0.01 else "*" if row['p_value'] < 0.05 else ""
     print(f"{row['variable']:<20} {row['core_mean']:>7.1f} {row['peri_mean']:>7.1f} "
-          f"{row['difference']:>7.1f} {row['p_value']:>9.4f} {sig:3} {row['cohens_d']:>5.2f}")
+          f"{row['difference']:>7.1f} {row['p_value']:>9.4f} {sig:3} {row['glass_delta']:>5.2f}")
 
 # FDR correction
 reject, p_adj, _, _ = multipletests(p_values, method='fdr_bh')
@@ -531,7 +541,7 @@ FINAL RESULTS:
 2. STRONGEST FINDING:
    {comp_df.iloc[0]['variable']}: 
    Core = {comp_df.iloc[0]['core_mean']:.1f}, Peripheral = {comp_df.iloc[0]['peri_mean']:.1f}
-   Difference = {comp_df.iloc[0]['difference']:.1f} (p={comp_df.iloc[0]['p_value']:.3f}, d={comp_df.iloc[0]['cohens_d']:.2f})
+   Difference = {comp_df.iloc[0]['difference']:.1f} (p={comp_df.iloc[0]['p_value']:.3f}, d={comp_df.iloc[0]['glass_delta']:.2f})
 
 3. INEQUALITY METRICS:
    Gini coefficient: {overall_gini:.3f} (0=equality, 1=inequality)
