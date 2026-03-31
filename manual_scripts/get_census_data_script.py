@@ -19,7 +19,7 @@ import requests
 import pandas as pd
 import numpy as np
 
-API_KEY = "7b4a89318687b3fe27be640b5333d3beb7d456e7"
+API_KEY = input("Please enter your API key: ")
 BASE_URL = "https://api.census.gov/data/2024/acs/acs5"
 
 
