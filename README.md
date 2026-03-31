@@ -1,5 +1,5 @@
 # City_Planning_255
-Group Final Project
+Destiny Ogu, Sonya Kiskachi, Donjhai Holland
 # Bay Area Transit Equity Analysis
 
 An analysis of amenity access disparities at BART and Caltrain stations across the Bay Area, examining whether core (high-ridership) stations serve communities with greater transit dependency than peripheral (low-ridership) stations.
