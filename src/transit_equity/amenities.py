@@ -95,6 +95,8 @@ def count_amenities_for_station(
         "hospital":  counts.get("hospital",  0),
         "doctors":   counts.get("doctors",   0),
         "childcare": counts.get("childcare", 0),
+        'convenience': counts.get('convenience', 0),
+        'kindergarten': counts.get('kindergarten', 0)
     }
 
 

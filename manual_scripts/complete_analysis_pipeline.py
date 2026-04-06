@@ -329,8 +329,17 @@ def amenity_entropy(row):
     Shannon entropy measuring amenity diversity.
     Higher = more varied mix of amenity types
     """
-    counts = [row['grocery'], row['park'], row['clinic'], 
-              row['pharmacy'], row['childcare']]
+    counts = [
+        row["grocery"],
+        row["park"],
+        row["clinic"],
+        row["pharmacy"],
+        row["childcare"],
+        row["convenience"],
+        row['kindergarten'],
+        row['hospital'],
+        row['doctors']
+    ]
     counts = [c for c in counts if c > 0]
     return entropy(counts) if counts else 0
 
@@ -376,7 +385,7 @@ test_vars = {
     'park': 'Parks',
     'clinic': 'Clinics',
     'pharmacy': 'Pharmacies',
-    'hospital': "Hosptials",
+    'hospital': "Hospital",
     'doctors': "Doctors",
     'childcare': "Childcare",
     'convenience': "Convenience",
@@ -503,17 +512,19 @@ print(f"\nMann-Whitney U test: U={entropy_stat:.1f}, p={entropy_p:.4f}")
 # Stations with most diverse amenity mix
 diverse_stations = results_df.nlargest(10, 'amenity_entropy')[
     ['station_name', 'agency', 'total_amenities', 'amenity_entropy',
-     'grocery', 'park', 'clinic', 'pharmacy', 'childcare']
+     'grocery', 'park', 'clinic', 'pharmacy', 'childcare', 'doctors', 
+     'hospital', 'kindergarten', 'convenience']
 ]
 
 print(f"\nTop 10 Most Diverse Amenity Mix (by entropy):")
 print()
-print(f"{'Station':<30} {'Total':<8} {'Entropy':<10} {'Groc':<6} {'Park':<6} {'Clin':<6} {'Phar':<6} {'Care':<6}")
-print("-"*90)
+print(f"{'Station':<30} {'Total':<8} {'Entropy':<10} {'Groc':<6} {'Park':<6} {'Clin':<6} {'Phar':<6} {'Care':<6} {'Doc':<6} {'Hosp':<6} {'Kind':<6} {'Conv':<6}" )
+print("-"*150)
 for _, row in diverse_stations.iterrows():
     print(f"{row['station_name']:<30} {row['total_amenities']:<8.0f} {row['amenity_entropy']:<10.3f} "
           f"{row['grocery']:<6.0f} {row['park']:<6.0f} {row['clinic']:<6.0f} "
-          f"{row['pharmacy']:<6.0f} {row['childcare']:<6.0f}")
+          f"{row['pharmacy']:<6.0f} {row['childcare']:<6.0f} {row['doctors']:<6.0f}"
+          f"{row['hospital']:<6.0f} {row['kindergarten']:<6.0f} {row['convenience']:<6.0f}")
 
 # PART 5: SAVE RESULTS
 print("\n\nPART 5: SAVING RESULTS")

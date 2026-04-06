@@ -206,12 +206,18 @@ print("\n\nPART 4: STATISTICAL ANALYSIS")
 print("-" * 90)
 
 test_vars = {
-    "total_amenities": "Total Amenities",
-    "grocery":         "Grocery Stores",
-    "park":            "Parks",
-    "clinic":          "Clinics",
-    "pharmacy":        "Pharmacies",
+    'total_amenities': 'Total Amenities',
+    'grocery': 'Grocery Stores',
+    'park': 'Parks',
+    'clinic': 'Clinics',
+    'pharmacy': 'Pharmacies',
+    'hospital': "Hosiptal",
+    'doctors': "Doctors",
+    'childcare': "Childcare",
+    'convenience': "Convenience",
+    'kindergarten': 'Kindergarten'
 }
+
 
 print("\nPeripheral vs Core Comparison (Permutation Tests):\n")
 
@@ -340,8 +346,9 @@ entropy_stat, entropy_p = mannwhitneyu(
 print(f"\nMann-Whitney U test: U={entropy_stat:.1f}, p={entropy_p:.4f}")
 
 diverse_stations = results_df.nlargest(10, "amenity_entropy")[
-    ["station_name", "agency", "total_amenities", "amenity_entropy",
-     "grocery", "park", "clinic", "pharmacy", "childcare"]
+    ['station_name', 'agency', 'total_amenities', 'amenity_entropy',
+     'grocery', 'park', 'clinic', 'pharmacy', 'childcare', 'doctors', 
+     'hospital', 'kindergarten', 'convenience']
 ]
 print("\nTop 10 Most Diverse Amenity Mix (by entropy):\n")
 print(

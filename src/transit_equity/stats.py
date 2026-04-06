@@ -153,6 +153,10 @@ def amenity_entropy(row: pd.Series) -> float:
         row["clinic"],
         row["pharmacy"],
         row["childcare"],
+        row["convenience"],
+        row['kindergarten'],
+        row['hospital'],
+        row['doctors']
     ]
     counts = [c for c in counts if c > 0]
     return float(entropy(counts)) if counts else 0.0
