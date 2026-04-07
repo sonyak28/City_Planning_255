@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bay Area Transit Equity &#8212; Transit Equity Visualization</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transit_equity_visualization';</script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Transit Equity Visualization</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bay Area Transit Equity</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=lab/tree/docs/transit_equity_visualization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftransit_equity_visualization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/transit_equity_visualization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bay Area Transit Equity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-where-you-live-near-transit-determine-what-you-can-access">Does where you live near transit determine what you can access?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-area-and-data">Study area and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-station-map">Interactive station map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-analysis">Equity analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology-notes">Methodology notes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bay-area-transit-equity">
+<h1>Bay Area Transit Equity<a class="headerlink" href="#bay-area-transit-equity" title="Link to this heading">#</a></h1>
+<section id="does-where-you-live-near-transit-determine-what-you-can-access">
+<h2>Does where you live near transit determine what you can access?<a class="headerlink" href="#does-where-you-live-near-transit-determine-what-you-can-access" title="Link to this heading">#</a></h2>
+<p>This analysis examines amenity access — grocery stores, parks, clinics, pharmacies, and childcare — within a half-mile walking radius of every BART station in the Bay Area.
+We classify stations as <strong>core</strong> (high ridership, central locations) or <strong>peripheral</strong> (lower ridership, suburban or terminus stations) and ask whether riders at peripheral stations face systematically worse access to essential services.</p>
+<p>The data comes from FY2025 BART ridership records, OpenStreetMap amenity extracts, and the 2024 ACS 5-year Census estimates.
+All analysis was conducted at the census tract level using a spatial join between station buffers and tract boundaries.</p>
+<blockquote>
+<div><p><strong>Group 13</strong> · Sonya Kiskachi, Destiny Ogu, Donjhai Holland · CP 255 · Spring 2026</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Install / upgrade visualization deps if needed ──────────────────────────</span>
+<span class="c1"># Uncomment if running for the first time:</span>
+<span class="c1"># !pip install folium plotly ipywidgets --quiet</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+</section>
+<section id="study-area-and-data">
+<h2>Study area and data<a class="headerlink" href="#study-area-and-data" title="Link to this heading">#</a></h2>
+<p>Our dataset covers 79 BART stations across the Bay Area after removing two out-of-scope stations (Stanford and SFO, which serve captive populations rather than general riders).
+For each station we computed the count of five essential amenity categories within a 0.5-mile Euclidean buffer — a distance generally considered walkable in urban planning research.
+Census demographic variables (median household income, share of households without a vehicle, and share of non-white residents) were joined from the tract containing each station centroid.</p>
+<p>The table below shows a sample of the loaded data with key equity indicators.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded 79 stations  (40 core · 39 peripheral)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>station_name</th>
+      <th>agency</th>
+      <th>station_type</th>
+      <th>total_amenities</th>
+      <th>unmet_need_index</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12th St. Oakland City Center</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>53</td>
+      <td>0.024035</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>16th St. Mission</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>45</td>
+      <td>0.058484</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19th St. Oakland</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>39</td>
+      <td>0.073065</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24th St. Mission</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>50</td>
+      <td>0.034129</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Antioch</td>
+      <td>BART</td>
+      <td>peripheral</td>
+      <td>5</td>
+      <td>0.076270</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="summary-statistics">
+<h2>Summary statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">#</a></h2>
+<p>The summary table below reveals a clear pattern: core stations average <strong>21.9 amenities</strong> within walking distance compared to just <strong>9.8</strong> for peripheral stations —
+a gap of more than 2× in raw access. The Gini coefficient of 0.43 for the full network indicates substantial inequality in how amenities are distributed across stations,
+comparable to income inequality levels seen in moderately unequal countries.</p>
+<p>Notably, the unmet need index — which combines high car-free household rates with low amenity counts — is elevated across both groups,
+suggesting that even some core stations serve transit-dependent populations without adequate nearby services.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_fdfd1">
+  <caption>Summary statistics by station type</caption>
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_fdfd1_level0_col0" class="col_heading level0 col0" >group</th>
+      <th id="T_fdfd1_level0_col1" class="col_heading level0 col1" >n</th>
+      <th id="T_fdfd1_level0_col2" class="col_heading level0 col2" >mean_amenities</th>
+      <th id="T_fdfd1_level0_col3" class="col_heading level0 col3" >median_amenities</th>
+      <th id="T_fdfd1_level0_col4" class="col_heading level0 col4" >gini</th>
+      <th id="T_fdfd1_level0_col5" class="col_heading level0 col5" >mean_unmet_need</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_fdfd1_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_fdfd1_row0_col0" class="data row0 col0" >All</td>
+      <td id="T_fdfd1_row0_col1" class="data row0 col1" >79</td>
+      <td id="T_fdfd1_row0_col2" class="data row0 col2" >15.9</td>
+      <td id="T_fdfd1_row0_col3" class="data row0 col3" >11.0</td>
+      <td id="T_fdfd1_row0_col4" class="data row0 col4" >0.428</td>
+      <td id="T_fdfd1_row0_col5" class="data row0 col5" >0.210</td>
+    </tr>
+    <tr>
+      <th id="T_fdfd1_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_fdfd1_row1_col0" class="data row1 col0" >Core</td>
+      <td id="T_fdfd1_row1_col1" class="data row1 col1" >40</td>
+      <td id="T_fdfd1_row1_col2" class="data row1 col2" >21.9</td>
+      <td id="T_fdfd1_row1_col3" class="data row1 col3" >16.5</td>
+      <td id="T_fdfd1_row1_col4" class="data row1 col4" >0.410</td>
+      <td id="T_fdfd1_row1_col5" class="data row1 col5" >0.217</td>
+    </tr>
+    <tr>
+      <th id="T_fdfd1_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_fdfd1_row2_col0" class="data row2 col0" >Peripheral</td>
+      <td id="T_fdfd1_row2_col1" class="data row2 col1" >39</td>
+      <td id="T_fdfd1_row2_col2" class="data row2 col2" >9.8</td>
+      <td id="T_fdfd1_row2_col3" class="data row2 col3" >9.0</td>
+      <td id="T_fdfd1_row2_col4" class="data row2 col4" >0.315</td>
+      <td id="T_fdfd1_row2_col5" class="data row2 col5" >0.204</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="interactive-station-map">
+<h2>Interactive station map<a class="headerlink" href="#interactive-station-map" title="Link to this heading">#</a></h2>
+<p>The map below plots all 79 stations sized by total amenity count and colored by station type.
+Stations with a red halo fall in the top quartile of our unmet need index — meaning they serve a high proportion of car-free households while offering relatively few walkable amenities.
+These are the stations where gaps in access are most consequential for riders who depend on transit as their primary mode.</p>
+<p><strong>How to use:</strong> Click any station bubble to see its full demographic and amenity profile in the panel on the right. Use the legend to toggle core and peripheral layers on and off.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="position:relative;width:100%;height:600px;border:0.5px solid #D3D1C7;border-radius:8px;overflow:hidden;"><div style="position:absolute;top:0;left:0;right:280px;height:600px;"><div>                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.4.0.min.js" integrity="sha256-KEmPoupLpFyGMyGAiOsiNDbKDKAvxXAn/W+oQa0ZAfk=" crossorigin="anonymous"></script>                <div id="transit-map" class="plotly-graph-div" style="height:600px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("transit-map")) {                    Plotly.newPlot(                        "transit-map",                        [{"hoverinfo":"skip","lat":{"dtype":"f8","bdata":"XyS05VzcQkAV5j3ONNlCQOHra11q2EJApaKx9nfgQkBpAkUsYtpCQGX+0Tdp9kJADqFKzR7qQkDZIf5hS9tCQBR7aB8rAkNAahSSzOr3QkDSbvQxH+xCQAbVBiei0UJAADlhwmjcQkAJxOv6BdVCQH3nFyXo80JA3h\u002fvVSvLQkBIUPwYc69CQP922a87rUJA1qvI6ICwQkCk5NU5BqhCQA=="},"lon":{"dtype":"f8","bdata":"4rA08KOcXsAdHy3OGIhewMhgxanWhF7AKSZvgJmMXsAzi1BsBZ5ewGtkV1pGlF7AU67wLheRXsBbYI+JlI1ewLCMDd3seF7ABVCMLJmWXsBsCmR2FpBewP+vOnKkml7AgPChREuKXsDcLjTXaZxewDUmxFxShF7AukkMAiuXXsB5WKg1zX9ewFA25Qrve17AvHSTGASCXsBbsb\u002fsnnhewA=="},"marker":{"color":"rgba(226,75,74,0.22)","size":{"dtype":"f8","bdata":"8fDw8PDwNkB4eHh4eHg1QPHw8PDw8DZA4uHh4eHhNEDEw8PDw8M1QFpaWlpaWjZA8fDw8PDwNkCWlpaWlpY0QOLh4eHh4TRAWlpaWlpaNkDx8PDw8PA2QA8PDw8PDzZAPDw8PDw8N0DEw8PDw8M1QHh4eHh4eDVADw8PDw8PNkCmpaWlpaU2QA8PDw8PDzZAeHh4eHh4NUDx8PDw8PA2QA=="},"sizemode":"diameter"},"mode":"markers","name":"High unmet need","showlegend":true,"type":"scattermapbox"},{"customdata":[0,1,2,3,5,6,7,10,11,13,14,15,16,17,18,19,20,21,22,23,25,26,27,29,34,35,36,37,38,39,41,44,45,48,63,65,66,67,71,72],"hovertemplate":["\u003cb\u003e12th St. Oakland City Center\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 53\u003cbr\u003eRidership: 5,164\u003cbr\u003eUnmet need: 0.024\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003e16th St. Mission\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 45\u003cbr\u003eRidership: 5,642\u003cbr\u003eUnmet need: 0.058\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003e19th St. Oakland\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 39\u003cbr\u003eRidership: 4,606\u003cbr\u003eUnmet need: 0.073\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003e24th St. Mission\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 50\u003cbr\u003eRidership: 5,491\u003cbr\u003eUnmet need: 0.034\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eAshby\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 25\u003cbr\u003eRidership: 1,908\u003cbr\u003eUnmet need: 0.105\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBalboa Park\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 4,019\u003cbr\u003eUnmet need: 0.474\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBay Fair\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 5\u003cbr\u003eRidership: 2,623\u003cbr\u003eUnmet need: 0.654\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eCivic Center\u002fUN Plaza\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 68\u003cbr\u003eRidership: 9,172\u003cbr\u003eUnmet need: 0.000\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eColiseum\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 3\u003cbr\u003eRidership: 2,670\u003cbr\u003eUnmet need: 0.801\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eConcord\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 13\u003cbr\u003eRidership: 2,660\u003cbr\u003eUnmet need: 0.020\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eDaly City\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 6\u003cbr\u003eRidership: 4,864\u003cbr\u003eUnmet need: 0.434\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eDowntown Berkeley\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 26\u003cbr\u003eRidership: 5,587\u003cbr\u003eUnmet need: 0.119\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eDublin\u002fPleasanton\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 17\u003cbr\u003eRidership: 3,057\u003cbr\u003eUnmet need: 0.092\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eEl Cerrito del Norte\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 8\u003cbr\u003eRidership: 3,819\u003cbr\u003eUnmet need: 0.538\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eEl Cerrito Plaza\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 18\u003cbr\u003eRidership: 2,074\u003cbr\u003eUnmet need: 0.232\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eEmbarcadero\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 37\u003cbr\u003eRidership: 17,741\u003cbr\u003eUnmet need: 0.101\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eFremont\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 15\u003cbr\u003eRidership: 2,043\u003cbr\u003eUnmet need: 0.081\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eFruitvale\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 21\u003cbr\u003eRidership: 3,998\u003cbr\u003eUnmet need: 0.174\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eGlen Park\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 13\u003cbr\u003eRidership: 3,186\u003cbr\u003eUnmet need: 0.227\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eHayward\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 2,294\u003cbr\u003eUnmet need: 0.066\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eLake Merritt\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 38\u003cbr\u003eRidership: 2,855\u003cbr\u003eUnmet need: 0.056\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMacArthur\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 3,762\u003cbr\u003eUnmet need: 0.481\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMillbrae\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 23\u003cbr\u003eRidership: 1,773\u003cbr\u003eUnmet need: 0.068\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMontgomery St.\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 49\u003cbr\u003eRidership: 14,342\u003cbr\u003eUnmet need: 0.044\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003ePittsburg\u002fBay Point\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 8\u003cbr\u003eRidership: 2,197\u003cbr\u003eUnmet need: 0.317\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003ePittsburg Center\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 3\u003cbr\u003eRidership: 1,798\u003cbr\u003eUnmet need: 0.577\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003ePleasant Hill\u002fContra Costa Centre\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 7\u003cbr\u003eRidership: 2,536\u003cbr\u003eUnmet need: 0.204\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003ePowell St.\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 66\u003cbr\u003eRidership: 11,002\u003cbr\u003eUnmet need: 0.012\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eRichmond\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 8\u003cbr\u003eRidership: 2,414\u003cbr\u003eUnmet need: 0.388\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eRockridge\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 2,638\u003cbr\u003eUnmet need: 0.452\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Leandro\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 11\u003cbr\u003eRidership: 3,360\u003cbr\u003eUnmet need: 0.358\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eUnion City\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 1,858\u003cbr\u003eUnmet need: 0.073\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eWalnut Creek\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 5\u003cbr\u003eRidership: 2,897\u003cbr\u003eUnmet need: 0.360\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eWest Oakland\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Core\u003cbr\u003eAmenities: 16\u003cbr\u003eRidership: 3,510\u003cbr\u003eUnmet need: 0.225\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMillbrae\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Core\u003cbr\u003eAmenities: 23\u003cbr\u003eRidership: 1,773\u003cbr\u003eUnmet need: 0.068\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMountain View\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Core\u003cbr\u003eAmenities: 13\u003cbr\u003eRidership: 2,288\u003cbr\u003eUnmet need: 0.237\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003ePalo Alto\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Core\u003cbr\u003eAmenities: 27\u003cbr\u003eRidership: 3,603\u003cbr\u003eUnmet need: 0.104\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eRedwood City\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Core\u003cbr\u003eAmenities: 21\u003cbr\u003eRidership: 2,111\u003cbr\u003eUnmet need: 0.161\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Francisco Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Core\u003cbr\u003eAmenities: 25\u003cbr\u003eRidership: 6,874\u003cbr\u003eUnmet need: 0.129\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Jose Diridon\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Core\u003cbr\u003eAmenities: 19\u003cbr\u003eRidership: 2,136\u003cbr\u003eUnmet need: 0.041\u003cextra\u003e\u003c\u002fextra\u003e"],"lat":{"dtype":"f8","bdata":"Icms3uHmQkDItDaN7eFCQF3cRgN450JATpzc71DgQkAhdxGmKO1CQF8ktOVc3EJAFeY9zjTZQkCF0hdCzuNCQKWisfZ34EJA3PP8aaP8QkBpAkUsYtpCQDQPYJFf70JAoYMu4dDZQkBl\u002ftE3afZCQFopBHKJ80JAouwt5XzlQkAT1VsDW8dCQLnhd9Mt40JA\u002fu+ICtXdQkCDMLd7udVCQLaDEfsE5kJADqFKzR7qQkBd3hyu1cxCQEImGTkL5UJA4bchxmsCQ0AUe2gfKwJDQPewFwrY9kJAidS0i2nkQkBqFJLM6vdCQNJu9DEf7EJAADlhwmjcQkCrBIvDmctCQH3nFyXo80JAqruyCwbnQkBpb\u002fCFycxCQEpdMo6RskJAcHfWbru4QkCxogbTML5CQOY9zjRh40JA\u002fte5aTOqQkA="},"lon":{"dtype":"f8","bdata":"8x\u002fSb1+RXsD1FDlE3JpewPloccYwkV7ASYPb2sKaXsAceSCySJFewOKwNPCjnF7AHR8tzhiIXsBfYcH9gJpewCkmb4CZjF7AiV5GsdyBXsAzi1BsBZ5ewJ5+UBcpkV7AAJATJox5XsBrZFdaRpRewDApPj4hk17A6PaSxmiZXsDEQNe+gH5ewCxlGeJYjl7AutxgqMObXsB0CvKzkYVewGnjiLX4kF7AU67wLheRXsAP0765v5hewGdiuhCrmV7AwOszZ318XsCwjA3d7HhewL8LW7OVg17Akuf6PhyaXsAFUIwsmZZewGwKZHYWkF7AgPChREuKXsDx1Y7iHIFewDUmxFxShF7AdO\u002fhkuOSXsCYbhKDwJhewDemJyzxhF7A1EM0uoOKXsCJQWDl0I5ewCl1yThGmV7AFF\u002ftKM55XsA="},"marker":{"color":"#378ADD","size":{"dtype":"f8","bdata":"lpaWlpaWN0A8PDw8PDw1QHh4eHh4eDNAtbS0tLS0NkC1tLS0tLQuQOLh4eHh4SVA8fDw8PDwIkAAAAAAAAA8QMTDw8PDwyFApqWlpaWlJ0CIh4eHh4cjQEtLS0tLSy9AAAAAAAAAKkC1tLS0tLQkQJaWlpaWlipA4uHh4eHhMkDT0tLS0tIoQFpaWlpaWixApqWlpaWlJ0Di4eHh4eElQC0tLS0tLTNA4uHh4eHhJUCIh4eHh4ctQGppaWlpaTZAtbS0tLS0JEDEw8PDw8MhQB4eHh4eHiRAaWlpaWlpO0C1tLS0tLQkQOLh4eHh4SVAeHh4eHh4JkDi4eHh4eElQPHw8PDw8CJAamlpaWlpKUCIh4eHh4ctQKalpaWlpSdA4uHh4eHhL0BaWlpaWlosQLW0tLS0tC5ALS0tLS0tK0A="},"sizemode":"diameter"},"mode":"markers","name":"Core","text":["12th St. Oakland City Center","16th St. Mission","19th St. Oakland","24th St. Mission","Ashby","Balboa Park","Bay Fair","Civic Center\u002fUN Plaza","Coliseum","Concord","Daly City","Downtown Berkeley","Dublin\u002fPleasanton","El Cerrito del Norte","El Cerrito Plaza","Embarcadero","Fremont","Fruitvale","Glen Park","Hayward","Lake Merritt","MacArthur","Millbrae","Montgomery St.","Pittsburg\u002fBay Point","Pittsburg Center","Pleasant Hill\u002fContra Costa Centre","Powell St.","Richmond","Rockridge","San Leandro","Union City","Walnut Creek","West Oakland","Millbrae","Mountain View","Palo Alto","Redwood City","San Francisco Caltrain Station","San Jose Diridon"],"type":"scattermapbox"},{"customdata":[4,8,9,12,24,28,30,31,32,33,40,42,43,46,47,49,50,51,52,53,54,55,56,57,58,59,60,61,62,64,68,69,70,73,74,75,76,77,78],"hovertemplate":["\u003cb\u003eAntioch\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 5\u003cbr\u003eRidership: 523\u003cbr\u003eUnmet need: 0.076\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBerryessa\u002fNorth San Jose\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 11\u003cbr\u003eRidership: 1,490\u003cbr\u003eUnmet need: 0.179\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eCastro Valley\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 1,228\u003cbr\u003eUnmet need: 0.488\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eColma\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 8\u003cbr\u003eRidership: 1,528\u003cbr\u003eUnmet need: 0.326\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eLafayette\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 11\u003cbr\u003eRidership: 1,641\u003cbr\u003eUnmet need: 0.037\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMilpitas\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 8\u003cbr\u003eRidership: 1,238\u003cbr\u003eUnmet need: 0.132\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eNorth Berkeley\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 21\u003cbr\u003eRidership: 1,740\u003cbr\u003eUnmet need: 0.131\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eNorth Concord\u002fMartinez\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 1\u003cbr\u003eRidership: 637\u003cbr\u003eUnmet need: 0.234\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eOakland International Airport\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 2\u003cbr\u003eRidership: 571\u003cbr\u003eUnmet need: 0.339\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eOrinda\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 7\u003cbr\u003eRidership: 1,276\u003cbr\u003eUnmet need: 0.015\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Bruno\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 7\u003cbr\u003eRidership: 1,468\u003cbr\u003eUnmet need: 0.368\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSouth Hayward\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 2\u003cbr\u003eRidership: 1,419\u003cbr\u003eUnmet need: 0.036\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSouth San Francisco\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 6\u003cbr\u003eRidership: 1,347\u003cbr\u003eUnmet need: 0.403\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eWarm Springs\u002fSouth Fremont\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 0\u003cbr\u003eRidership: 1,163\u003cbr\u003eUnmet need: 0.325\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eWest Dublin\u002fPleasanton\u003c\u002fb\u003e\u003cbr\u003eBART \u00b7 Peripheral\u003cbr\u003eAmenities: 7\u003cbr\u003eRidership: 1,280\u003cbr\u003eUnmet need: 0.165\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003e22nd Street\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 22\u003cbr\u003eRidership: 1,261\u003cbr\u003eUnmet need: 0.125\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBayshore\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 4\u003cbr\u003eRidership: 168\u003cbr\u003eUnmet need: 0.149\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBelmont\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 11\u003cbr\u003eRidership: 654\u003cbr\u003eUnmet need: 0.315\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBlossom Hill Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 5\u003cbr\u003eRidership: 71\u003cbr\u003eUnmet need: 0.240\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBroadway\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 7\u003cbr\u003eRidership: 91\u003cbr\u003eUnmet need: 0.388\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eBurlingame\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 11\u003cbr\u003eRidership: 620\u003cbr\u003eUnmet need: 0.099\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eCalifornia Avenue\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 11\u003cbr\u003eRidership: 817\u003cbr\u003eUnmet need: 0.123\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eCapitol Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 49\u003cbr\u003eUnmet need: 0.102\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eCollege Park\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 12\u003cbr\u003eRidership: 41\u003cbr\u003eUnmet need: 0.064\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eGilroy\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 16\u003cbr\u003eRidership: 110\u003cbr\u003eUnmet need: 0.112\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eHayward Park\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 14\u003cbr\u003eRidership: 366\u003cbr\u003eUnmet need: 0.107\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eHillsdale\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 9\u003cbr\u003eRidership: 1,596\u003cbr\u003eUnmet need: 0.204\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eLawrence\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 9\u003cbr\u003eRidership: 686\u003cbr\u003eUnmet need: 0.458\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMenlo Park\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 16\u003cbr\u003eRidership: 863\u003cbr\u003eUnmet need: 0.229\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eMorgan Hill\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 20\u003cbr\u003eRidership: 130\u003cbr\u003eUnmet need: 0.005\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Antonio\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 20\u003cbr\u003eRidership: 655\u003cbr\u003eUnmet need: 0.109\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Bruno Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 13\u003cbr\u003eRidership: 377\u003cbr\u003eUnmet need: 0.177\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Carlos\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 9\u003cbr\u003eRidership: 644\u003cbr\u003eUnmet need: 0.041\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Martin\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 4\u003cbr\u003eRidership: 25\u003cbr\u003eUnmet need: 0.092\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSan Mateo\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 20\u003cbr\u003eRidership: 1,270\u003cbr\u003eUnmet need: 0.147\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSanta Clara Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 7\u003cbr\u003eRidership: 839\u003cbr\u003eUnmet need: 0.417\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSouth San Francisco Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 12\u003cbr\u003eRidership: 692\u003cbr\u003eUnmet need: 0.166\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eSunnyvale\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 5\u003cbr\u003eRidership: 1,770\u003cbr\u003eUnmet need: 0.447\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eTamien Caltrain Station\u003c\u002fb\u003e\u003cbr\u003eCaltrain \u00b7 Peripheral\u003cbr\u003eAmenities: 10\u003cbr\u003eRidership: 243\u003cbr\u003eUnmet need: 0.386\u003cextra\u003e\u003c\u002fextra\u003e"],"lat":{"dtype":"f8","bdata":"WWq932j\u002fQkDBOo4fKq9CQOHra11q2EJAp8zNN6LXQkA6yVaXU\u002fJCQIem7PSDtEJAQWSRJt7vQkC\u002fSdOgaABDQNkh\u002fmFL20JAeoocIm7wQkAG1QYnotFCQDMzMzMz0UJACcTr+gXVQkDz\u002f6ojR8BCQAOXx5qR2UJAbf5fdeTgQkD7V1aalNpCQDs2AvG6wkJA\u002fmK2ZFWgQkDeH+9VK8tCQPVKWYY4ykJA2bRSCOS2QkA3xeOiWqRCQA4QzNHjq0JA0\u002fiFV5KAQkAaNsr6zcZCQMjMjh9txUJASFD8GHOvQkBDHOviNrpCQLIPsiyYkEJAseTyayC0QkAHIJzsstBCQPYksDkHwUJAWf0RhgGLQkC4I5wWvMhCQP922a87rUJA7edo4\u002fXTQkDWq8jogLBCQKTk1TkGqEJA"},"lon":{"dtype":"f8","bdata":"PUm6ZvJxXsCvWwTG+ndewMhgxanWhF7AOdTvwtadXsBuhhvw+YdewJFFmngHeV7ANZiG4SOSXsDkLy3qk4FewFtgj4mUjV7AJZNTO8OLXsD\u002frzpypJpewDgsDfyog17A3C4012mcXsBK7UW0HXxewLO1vkhoe17ARPzDlh6ZXsCpvB3htJlewKH4MeaukV7A94+F6BBzXsC6SQwCK5dewPz7jAsHll7AAp8fRgiJXsA\u002f4les4XVewEYldQKael7Ap7BSQUVkXsC6E+y\u002fzpNewL+ErJxNk17AeVioNc1\u002fXsDvycNCrYtewK2JBb6iaV7Ases6+9qGXsDhtuFwWZpewNSa5h2nkF7ALLe0GhJnXsApyxDHupRewFA25Qrve17Ai5UQLeuZXsC8dJMYBIJewFuxv+yeeF7A"},"marker":{"color":"#D85A30","size":{"dtype":"f8","bdata":"8fDw8PDwIkB4eHh4eHgmQOLh4eHh4SVAtbS0tLS0JEB4eHh4eHgmQLW0tLS0tCRAWlpaWlpaLECXlpaWlpYgQC0tLS0tLSFAHh4eHh4eJEAeHh4eHh4kQC0tLS0tLSFAiIeHh4eHI0AAAAAAAAAgQB4eHh4eHiRA8fDw8PDwLEBaWlpaWloiQHh4eHh4eCZA8fDw8PDwIkAeHh4eHh4kQHh4eHh4eCZAeHh4eHh4JkDi4eHh4eElQA8PDw8PDydAamlpaWlpKUA8PDw8PDwoQEtLS0tLSyVAS0tLS0tLJUBqaWlpaWkpQMTDw8PDwytAxMPDw8PDK0CmpaWlpaUnQEtLS0tLSyVAWlpaWlpaIkDEw8PDw8MrQB4eHh4eHiRADw8PDw8PJ0Dx8PDw8PAiQOLh4eHh4SVA"},"sizemode":"diameter"},"mode":"markers","name":"Peripheral","text":["Antioch","Berryessa\u002fNorth San Jose","Castro Valley","Colma","Lafayette","Milpitas","North Berkeley","North Concord\u002fMartinez","Oakland International Airport","Orinda","San Bruno","South Hayward","South San Francisco","Warm Springs\u002fSouth Fremont","West Dublin\u002fPleasanton","22nd Street","Bayshore","Belmont","Blossom Hill Caltrain Station","Broadway","Burlingame","California Avenue","Capitol Caltrain Station","College Park","Gilroy","Hayward Park","Hillsdale","Lawrence","Menlo Park","Morgan Hill","San Antonio","San Bruno Caltrain Station","San Carlos","San Martin","San Mateo","Santa Clara Caltrain Station","South San Francisco Caltrain Station","Sunnyvale","Tamien Caltrain Station"],"type":"scattermapbox"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"mapbox":{"center":{"lat":37.64820474506329,"lon":-122.16846004646834},"style":"carto-positron","zoom":9.5},"margin":{"l":0,"r":0,"t":0,"b":0},"legend":{"font":{"size":12},"x":0.01,"y":0.99,"bgcolor":"rgba(255,255,255,0.88)","bordercolor":"#D3D1C7","borderwidth":0.5},"height":600,"paper_bgcolor":"white","clickmode":"event+select"},                        {"scrollZoom": true, "displayModeBar": true, "responsive": true}                    )                };            </script>        </div></div><div id="detail-panel" style="position:absolute;top:0;right:0;width:280px;height:600px;background:#fff;border-left:0.5px solid #D3D1C7;overflow-y:auto;padding:16px;box-sizing:border-box;font-family:system-ui,sans-serif;font-size:13px;"><div id="dp-placeholder" style="color:#888780;text-align:center;padding-top:60px;line-height:1.7;">Click a station<br>on the map to<br>see details</div><div id="dp-content" style="display:none;"></div></div><script>
+(function(){
+  var D=[{"idx": 0, "name": "12th St. Oakland City Center", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 53, "ridership": "5,164", "income": "$58,794", "no_veh": "58.5%", "nonwhite": "86.9%", "unmet": "0.024", "unmet_color": "#1D9E75", "entropy": "1.728", "bars": [{"label": "Grocery", "val": 5, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 10, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 7, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 5, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 2, "max": 3, "color": "#EF9F27"}]}, {"idx": 1, "name": "16th St. Mission", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 45, "ridership": "5,642", "income": "$100,761", "no_veh": "53.5%", "nonwhite": "71.7%", "unmet": "0.058", "unmet_color": "#1D9E75", "entropy": "1.296", "bars": [{"label": "Grocery", "val": 7, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 7, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 6, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 2, "name": "19th St. Oakland", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 39, "ridership": "4,606", "income": "$66,050", "no_veh": "60.0%", "nonwhite": "72.8%", "unmet": "0.073", "unmet_color": "#1D9E75", "entropy": "1.588", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 9, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 6, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 3, "max": 3, "color": "#EF9F27"}]}, {"idx": 3, "name": "24th St. Mission", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 50, "ridership": "5,491", "income": "$96,250", "no_veh": "33.0%", "nonwhite": "67.4%", "unmet": "0.034", "unmet_color": "#1D9E75", "entropy": "1.533", "bars": [{"label": "Grocery", "val": 11, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 7, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 4, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 4, "name": "Antioch", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 5, "ridership": "523", "income": "$119,896", "no_veh": "1.6%", "nonwhite": "76.8%", "unmet": "0.076", "unmet_color": "#1D9E75", "entropy": "0.950", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 5, "name": "Ashby", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 25, "ridership": "1,908", "income": "$136,607", "no_veh": "15.4%", "nonwhite": "51.1%", "unmet": "0.105", "unmet_color": "#1D9E75", "entropy": "1.499", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 2, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 6, "name": "Balboa Park", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 10, "ridership": "4,019", "income": "$122,222", "no_veh": "17.3%", "nonwhite": "92.1%", "unmet": "0.474", "unmet_color": "#E24B4A", "entropy": "1.221", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 7, "name": "Bay Fair", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 5, "ridership": "2,623", "income": "$90,739", "no_veh": "16.0%", "nonwhite": "86.8%", "unmet": "0.654", "unmet_color": "#E24B4A", "entropy": "1.055", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 8, "name": "Berryessa/North San Jose", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 11, "ridership": "1,490", "income": "$227,279", "no_veh": "6.7%", "nonwhite": "88.2%", "unmet": "0.179", "unmet_color": "#1D9E75", "entropy": "1.516", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 9, "name": "Castro Valley", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 10, "ridership": "1,228", "income": "$122,872", "no_veh": "18.7%", "nonwhite": "62.9%", "unmet": "0.488", "unmet_color": "#E24B4A", "entropy": "1.221", "bars": [{"label": "Grocery", "val": 5, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 10, "name": "Civic Center/UN Plaza", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 68, "ridership": "9,172", "income": "$113,665", "no_veh": "71.2%", "nonwhite": "63.5%", "unmet": "0.000", "unmet_color": "#1D9E75", "entropy": "1.206", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 11, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 7, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 11, "name": "Coliseum", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 3, "ridership": "2,670", "income": "$42,759", "no_veh": "29.4%", "nonwhite": "89.9%", "unmet": "0.801", "unmet_color": "#E24B4A", "entropy": "0.637", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 12, "name": "Colma", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 8, "ridership": "1,528", "income": "$98,417", "no_veh": "8.0%", "nonwhite": "89.7%", "unmet": "0.326", "unmet_color": "#1D9E75", "entropy": "0.736", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 13, "name": "Concord", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 13, "ridership": "2,660", "income": "$175,208", "no_veh": "0.9%", "nonwhite": "50.0%", "unmet": "0.020", "unmet_color": "#1D9E75", "entropy": "1.439", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 14, "name": "Daly City", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 6, "ridership": "4,864", "income": "$93,077", "no_veh": "9.3%", "nonwhite": "87.8%", "unmet": "0.434", "unmet_color": "#E24B4A", "entropy": "1.242", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 15, "name": "Downtown Berkeley", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 26, "ridership": "5,587", "income": "$60,078", "no_veh": "53.7%", "nonwhite": "70.2%", "unmet": "0.119", "unmet_color": "#1D9E75", "entropy": "1.451", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 4, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 16, "name": "Dublin/Pleasanton", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 17, "ridership": "3,057", "income": "$169,415", "no_veh": "5.1%", "nonwhite": "78.6%", "unmet": "0.092", "unmet_color": "#1D9E75", "entropy": "0.660", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 14, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 17, "name": "El Cerrito del Norte", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 8, "ridership": "3,819", "income": "$83,162", "no_veh": "16.1%", "nonwhite": "69.2%", "unmet": "0.538", "unmet_color": "#E24B4A", "entropy": "0.736", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 6, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 18, "name": "El Cerrito Plaza", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 18, "ridership": "2,074", "income": "$85,045", "no_veh": "16.7%", "nonwhite": "67.7%", "unmet": "0.232", "unmet_color": "#1D9E75", "entropy": "1.426", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 9, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 19, "name": "Embarcadero", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 37, "ridership": "17,741", "income": "$51,464", "no_veh": "76.1%", "nonwhite": "55.0%", "unmet": "0.101", "unmet_color": "#1D9E75", "entropy": "1.460", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 16, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 9, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 3, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 20, "name": "Fremont", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 15, "ridership": "2,043", "income": "$190,826", "no_veh": "3.4%", "nonwhite": "82.5%", "unmet": "0.081", "unmet_color": "#1D9E75", "entropy": "1.845", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 3, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 21, "name": "Fruitvale", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 21, "ridership": "3,998", "income": "$73,267", "no_veh": "17.1%", "nonwhite": "80.8%", "unmet": "0.174", "unmet_color": "#1D9E75", "entropy": "1.356", "bars": [{"label": "Grocery", "val": 4, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 6, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 22, "name": "Glen Park", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 13, "ridership": "3,186", "income": "$200,545", "no_veh": "10.8%", "nonwhite": "58.2%", "unmet": "0.227", "unmet_color": "#1D9E75", "entropy": "1.378", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 6, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 23, "name": "Hayward", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 10, "ridership": "2,294", "income": "$96,233", "no_veh": "2.2%", "nonwhite": "77.0%", "unmet": "0.066", "unmet_color": "#1D9E75", "entropy": "1.194", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 24, "name": "Lafayette", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 11, "ridership": "1,641", "income": "$250,001", "no_veh": "1.1%", "nonwhite": "21.8%", "unmet": "0.037", "unmet_color": "#1D9E75", "entropy": "1.264", "bars": [{"label": "Grocery", "val": 4, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 25, "name": "Lake Merritt", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 38, "ridership": "2,855", "income": "$144,813", "no_veh": "12.3%", "nonwhite": "61.9%", "unmet": "0.056", "unmet_color": "#1D9E75", "entropy": "1.832", "bars": [{"label": "Grocery", "val": 6, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 6, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 3, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 3, "max": 3, "color": "#EF9F27"}]}, {"idx": 26, "name": "MacArthur", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 10, "ridership": "3,762", "income": "$96,599", "no_veh": "18.2%", "nonwhite": "62.0%", "unmet": "0.481", "unmet_color": "#E24B4A", "entropy": "0.637", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 27, "name": "Millbrae", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 23, "ridership": "1,773", "income": "$133,654", "no_veh": "6.8%", "nonwhite": "73.2%", "unmet": "0.068", "unmet_color": "#1D9E75", "entropy": "1.481", "bars": [{"label": "Grocery", "val": 5, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 3, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 28, "name": "Milpitas", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 8, "ridership": "1,238", "income": "$181,165", "no_veh": "3.1%", "nonwhite": "95.2%", "unmet": "0.132", "unmet_color": "#1D9E75", "entropy": "1.255", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 29, "name": "Montgomery St.", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 49, "ridership": "14,342", "income": "$229,363", "no_veh": "29.5%", "nonwhite": "54.8%", "unmet": "0.044", "unmet_color": "#1D9E75", "entropy": "1.673", "bars": [{"label": "Grocery", "val": 4, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 14, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 8, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 5, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 30, "name": "North Berkeley", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 21, "ridership": "1,740", "income": "$99,379", "no_veh": "11.4%", "nonwhite": "39.1%", "unmet": "0.131", "unmet_color": "#1D9E75", "entropy": "0.845", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 11, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 31, "name": "North Concord/Martinez", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 1, "ridership": "637", "income": "$136,354", "no_veh": "3.5%", "nonwhite": "90.3%", "unmet": "0.234", "unmet_color": "#1D9E75", "entropy": "0.000", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 32, "name": "Oakland International Airport", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 2, "ridership": "571", "income": "$75,987", "no_veh": "6.5%", "nonwhite": "95.5%", "unmet": "0.339", "unmet_color": "#E24B4A", "entropy": "0.000", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 0, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 33, "name": "Orinda", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 7, "ridership": "1,276", "income": "$231,108", "no_veh": "0.0%", "nonwhite": "30.8%", "unmet": "0.015", "unmet_color": "#1D9E75", "entropy": "1.475", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 34, "name": "Pittsburg/Bay Point", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 8, "ridership": "2,197", "income": "$173,611", "no_veh": "8.0%", "nonwhite": "93.3%", "unmet": "0.317", "unmet_color": "#1D9E75", "entropy": "1.386", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 35, "name": "Pittsburg Center", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 3, "ridership": "1,798", "income": "$60,625", "no_veh": "12.2%", "nonwhite": "72.8%", "unmet": "0.577", "unmet_color": "#E24B4A", "entropy": "1.099", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 36, "name": "Pleasant Hill/Contra Costa Centre", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 7, "ridership": "2,536", "income": "$93,828", "no_veh": "4.0%", "nonwhite": "54.2%", "unmet": "0.204", "unmet_color": "#1D9E75", "entropy": "1.352", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 37, "name": "Powell St.", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 66, "ridership": "11,002", "income": "$50,696", "no_veh": "74.5%", "nonwhite": "84.7%", "unmet": "0.012", "unmet_color": "#1D9E75", "entropy": "1.093", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 8, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 3, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 38, "name": "Richmond", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 8, "ridership": "2,414", "income": "$77,667", "no_veh": "9.9%", "nonwhite": "91.2%", "unmet": "0.388", "unmet_color": "#E24B4A", "entropy": "1.494", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 39, "name": "Rockridge", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 10, "ridership": "2,638", "income": "$176,618", "no_veh": "16.1%", "nonwhite": "39.6%", "unmet": "0.452", "unmet_color": "#E24B4A", "entropy": "1.273", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 40, "name": "San Bruno", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 7, "ridership": "1,468", "income": "$100,789", "no_veh": "8.1%", "nonwhite": "68.5%", "unmet": "0.368", "unmet_color": "#E24B4A", "entropy": "0.796", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 41, "name": "San Leandro", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 11, "ridership": "3,360", "income": "$91,835", "no_veh": "15.4%", "nonwhite": "72.3%", "unmet": "0.358", "unmet_color": "#E24B4A", "entropy": "1.547", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 42, "name": "South Hayward", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 2, "ridership": "1,419", "income": "$123,049", "no_veh": "0.5%", "nonwhite": "87.7%", "unmet": "0.036", "unmet_color": "#1D9E75", "entropy": "0.000", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 43, "name": "South San Francisco", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 6, "ridership": "1,347", "income": "$125,096", "no_veh": "8.3%", "nonwhite": "75.8%", "unmet": "0.403", "unmet_color": "#E24B4A", "entropy": "1.561", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 44, "name": "Union City", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 10, "ridership": "1,858", "income": "$138,204", "no_veh": "2.5%", "nonwhite": "71.8%", "unmet": "0.073", "unmet_color": "#1D9E75", "entropy": "1.221", "bars": [{"label": "Grocery", "val": 5, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 45, "name": "Walnut Creek", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 5, "ridership": "2,897", "income": "$129,637", "no_veh": "7.3%", "nonwhite": "52.2%", "unmet": "0.360", "unmet_color": "#E24B4A", "entropy": "1.332", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 46, "name": "Warm Springs/South Fremont", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 0, "ridership": "1,163", "income": "$230,268", "no_veh": "5.3%", "nonwhite": "90.8%", "unmet": "0.325", "unmet_color": "#1D9E75", "entropy": "0.000", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 0, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 47, "name": "West Dublin/Pleasanton", "agency": "BART", "stype": "Peripheral", "color": "#D85A30", "total": 7, "ridership": "1,280", "income": "$168,972", "no_veh": "3.3%", "nonwhite": "55.5%", "unmet": "0.165", "unmet_color": "#1D9E75", "entropy": "1.561", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 48, "name": "West Oakland", "agency": "BART", "stype": "Core", "color": "#378ADD", "total": 16, "ridership": "3,510", "income": "$125,351", "no_veh": "13.6%", "nonwhite": "76.8%", "unmet": "0.225", "unmet_color": "#1D9E75", "entropy": "0.970", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 8, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 2, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 49, "name": "22nd Street", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 22, "ridership": "1,261", "income": "$226,290", "no_veh": "12.9%", "nonwhite": "42.7%", "unmet": "0.125", "unmet_color": "#1D9E75", "entropy": "1.146", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 10, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 50, "name": "Bayshore", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 4, "ridership": "168", "income": "$156,310", "no_veh": "2.9%", "nonwhite": "58.3%", "unmet": "0.149", "unmet_color": "#1D9E75", "entropy": "1.040", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 51, "name": "Belmont", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 11, "ridership": "654", "income": "$146,389", "no_veh": "12.6%", "nonwhite": "57.4%", "unmet": "0.315", "unmet_color": "#1D9E75", "entropy": "1.241", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 52, "name": "Blossom Hill Caltrain Station", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 5, "ridership": "71", "income": "$138,750", "no_veh": "4.2%", "nonwhite": "78.3%", "unmet": "0.240", "unmet_color": "#1D9E75", "entropy": "1.332", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 53, "name": "Broadway", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 7, "ridership": "91", "income": "$172,054", "no_veh": "9.0%", "nonwhite": "52.8%", "unmet": "0.388", "unmet_color": "#E24B4A", "entropy": "1.277", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 54, "name": "Burlingame", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 11, "ridership": "620", "income": "$166,972", "no_veh": "3.1%", "nonwhite": "44.2%", "unmet": "0.099", "unmet_color": "#1D9E75", "entropy": "1.414", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 2, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 55, "name": "California Avenue", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 11, "ridership": "817", "income": "$250,001", "no_veh": "3.9%", "nonwhite": "45.7%", "unmet": "0.123", "unmet_color": "#1D9E75", "entropy": "1.373", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 3, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 56, "name": "Capitol Caltrain Station", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 10, "ridership": "49", "income": "$191,908", "no_veh": "2.9%", "nonwhite": "76.6%", "unmet": "0.102", "unmet_color": "#1D9E75", "entropy": "0.937", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 57, "name": "College Park", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 12, "ridership": "41", "income": "$107,431", "no_veh": "2.7%", "nonwhite": "58.6%", "unmet": "0.064", "unmet_color": "#1D9E75", "entropy": "1.720", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 3, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 58, "name": "Gilroy", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 16, "ridership": "110", "income": "$90,139", "no_veh": "5.7%", "nonwhite": "84.2%", "unmet": "0.112", "unmet_color": "#1D9E75", "entropy": "1.675", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 2, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 59, "name": "Hayward Park", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 14, "ridership": "366", "income": "$133,295", "no_veh": "4.9%", "nonwhite": "59.6%", "unmet": "0.107", "unmet_color": "#1D9E75", "entropy": "1.413", "bars": [{"label": "Grocery", "val": 4, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 60, "name": "Hillsdale", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 9, "ridership": "1,596", "income": "$233,378", "no_veh": "5.2%", "nonwhite": "70.8%", "unmet": "0.204", "unmet_color": "#1D9E75", "entropy": "0.684", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 7, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 61, "name": "Lawrence", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 9, "ridership": "686", "income": "$250,001", "no_veh": "14.7%", "nonwhite": "87.6%", "unmet": "0.458", "unmet_color": "#E24B4A", "entropy": "1.213", "bars": [{"label": "Grocery", "val": 2, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 62, "name": "Menlo Park", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 16, "ridership": "863", "income": "$165,521", "no_veh": "14.0%", "nonwhite": "41.8%", "unmet": "0.229", "unmet_color": "#1D9E75", "entropy": "1.561", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 63, "name": "Millbrae", "agency": "Caltrain", "stype": "Core", "color": "#378ADD", "total": 23, "ridership": "1,773", "income": "$133,654", "no_veh": "6.8%", "nonwhite": "73.2%", "unmet": "0.068", "unmet_color": "#1D9E75", "entropy": "1.481", "bars": [{"label": "Grocery", "val": 5, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 3, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 64, "name": "Morgan Hill", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 20, "ridership": "130", "income": "$206,208", "no_veh": "0.0%", "nonwhite": "58.7%", "unmet": "0.005", "unmet_color": "#1D9E75", "entropy": "0.914", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 14, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 2, "max": 3, "color": "#EF9F27"}]}, {"idx": 65, "name": "Mountain View", "agency": "Caltrain", "stype": "Core", "color": "#378ADD", "total": 13, "ridership": "2,288", "income": "$182,611", "no_veh": "11.2%", "nonwhite": "52.1%", "unmet": "0.237", "unmet_color": "#1D9E75", "entropy": "1.468", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 2, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 66, "name": "Palo Alto", "agency": "Caltrain", "stype": "Core", "color": "#378ADD", "total": 27, "ridership": "3,603", "income": "$139,167", "no_veh": "34.4%", "nonwhite": "54.1%", "unmet": "0.104", "unmet_color": "#1D9E75", "entropy": "1.625", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 9, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 5, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 3, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 67, "name": "Redwood City", "agency": "Caltrain", "stype": "Core", "color": "#378ADD", "total": 21, "ridership": "2,111", "income": "$185,920", "no_veh": "15.8%", "nonwhite": "58.8%", "unmet": "0.161", "unmet_color": "#1D9E75", "entropy": "1.791", "bars": [{"label": "Grocery", "val": 4, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 3, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 2, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 68, "name": "San Antonio", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 20, "ridership": "655", "income": "$203,864", "no_veh": "7.5%", "nonwhite": "67.7%", "unmet": "0.109", "unmet_color": "#1D9E75", "entropy": "1.102", "bars": [{"label": "Grocery", "val": 5, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 12, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 69, "name": "San Bruno Caltrain Station", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 13, "ridership": "377", "income": "$130,077", "no_veh": "7.8%", "nonwhite": "77.8%", "unmet": "0.177", "unmet_color": "#1D9E75", "entropy": "1.073", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 5, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 70, "name": "San Carlos", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 9, "ridership": "644", "income": "$242,750", "no_veh": "0.9%", "nonwhite": "50.3%", "unmet": "0.041", "unmet_color": "#1D9E75", "entropy": "1.465", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 71, "name": "San Francisco Caltrain Station", "agency": "Caltrain", "stype": "Core", "color": "#378ADD", "total": 25, "ridership": "6,874", "income": "$179,727", "no_veh": "32.4%", "nonwhite": "58.0%", "unmet": "0.129", "unmet_color": "#1D9E75", "entropy": "1.731", "bars": [{"label": "Grocery", "val": 3, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 9, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 5, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 2, "max": 3, "color": "#EF9F27"}]}, {"idx": 72, "name": "San Jose Diridon", "agency": "Caltrain", "stype": "Core", "color": "#378ADD", "total": 19, "ridership": "2,136", "income": "$107,431", "no_veh": "2.7%", "nonwhite": "58.6%", "unmet": "0.041", "unmet_color": "#1D9E75", "entropy": "0.987", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 1, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 73, "name": "San Martin", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 4, "ridership": "25", "income": "$197,540", "no_veh": "1.8%", "nonwhite": "52.8%", "unmet": "0.092", "unmet_color": "#1D9E75", "entropy": "1.040", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 0, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 74, "name": "San Mateo", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 20, "ridership": "1,270", "income": "$138,250", "no_veh": "10.8%", "nonwhite": "81.6%", "unmet": "0.147", "unmet_color": "#1D9E75", "entropy": "1.817", "bars": [{"label": "Grocery", "val": 4, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 4, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 75, "name": "Santa Clara Caltrain Station", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 7, "ridership": "839", "income": "$139,028", "no_veh": "9.3%", "nonwhite": "51.2%", "unmet": "0.417", "unmet_color": "#E24B4A", "entropy": "1.277", "bars": [{"label": "Grocery", "val": 0, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 76, "name": "South San Francisco Caltrain Station", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 12, "ridership": "692", "income": "$146,750", "no_veh": "6.8%", "nonwhite": "81.7%", "unmet": "0.166", "unmet_color": "#1D9E75", "entropy": "1.127", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 4, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 0, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 1, "max": 3, "color": "#EF9F27"}]}, {"idx": 77, "name": "Sunnyvale", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 5, "ridership": "1,770", "income": "$173,165", "no_veh": "9.1%", "nonwhite": "78.9%", "unmet": "0.447", "unmet_color": "#E24B4A", "entropy": "1.386", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 1, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}, {"idx": 78, "name": "Tamien Caltrain Station", "agency": "Caltrain", "stype": "Peripheral", "color": "#D85A30", "total": 10, "ridership": "243", "income": "$95,625", "no_veh": "13.1%", "nonwhite": "78.5%", "unmet": "0.386", "unmet_color": "#E24B4A", "entropy": "1.418", "bars": [{"label": "Grocery", "val": 1, "max": 11, "color": "#378ADD"}, {"label": "Parks", "val": 3, "max": 16, "color": "#1D9E75"}, {"label": "Clinics", "val": 0, "max": 9, "color": "#D85A30"}, {"label": "Pharmacy", "val": 1, "max": 5, "color": "#7F77DD"}, {"label": "Childcare", "val": 0, "max": 3, "color": "#EF9F27"}]}];
+  function bar(b){
+    var p=Math.round(Math.min(b.val/Math.max(b.max,1),1)*100);
+    return '<div style="margin:4px 0;">'
+      +'<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;">'
+      +'<span style="color:#5F5E5A;">'+b.label+'</span>'
+      +'<span style="font-weight:500;color:#2C2C2A;">'+b.val+'</span></div>'
+      +'<div style="background:#F1EFE8;border-radius:3px;height:5px;">'
+      +'<div style="background:'+b.color+';width:'+p+'%;height:5px;border-radius:3px;"></div>'
+      +'</div></div>';}
+  function row(l,v){
+    return '<div style="display:flex;justify-content:space-between;padding:5px 0;'
+      +'border-bottom:0.5px solid #F1EFE8;font-size:12px;">'
+      +'<span style="color:#888780;">'+l+'</span>'
+      +'<span style="font-weight:500;color:#2C2C2A;">'+v+'</span></div>';}
+  function render(d){
+    return '<div>'
+      +'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:12px;">'
+      +'<div style="width:10px;height:10px;border-radius:50%;background:'+d.color+';margin-top:4px;flex-shrink:0;"></div>'
+      +'<div><div style="font-size:14px;font-weight:500;color:#2C2C2A;line-height:1.3;">'+d.name+'</div>'
+      +'<div style="font-size:11px;color:#888780;margin-top:2px;">'+d.agency+' · '+d.stype+'</div></div></div>'
+      +'<div style="background:#F1EFE8;border-radius:8px;padding:10px 12px;margin-bottom:12px;">'
+      +'<div style="font-size:11px;color:#888780;margin-bottom:2px;">Amenities within ½ mile</div>'
+      +'<div style="font-size:24px;font-weight:500;color:#2C2C2A;">'+d.total+'</div></div>'
+      +'<div style="margin-bottom:12px;">'
+      +'<div style="font-size:11px;font-weight:500;color:#5F5E5A;margin-bottom:6px;">Amenity breakdown</div>'
+      +d.bars.map(bar).join('')+'</div>'
+      +'<div style="margin-bottom:12px;">'
+      +'<div style="font-size:11px;font-weight:500;color:#5F5E5A;margin-bottom:4px;">Demographics</div>'
+      +row('Median income',d.income)+row('% No vehicle',d.no_veh)
+      +row('% Non-white',d.nonwhite)+row('Avg weekday ridership',d.ridership)+'</div>'
+      +'<div><div style="font-size:11px;font-weight:500;color:#5F5E5A;margin-bottom:4px;">Equity metrics</div>'
+      +row('Unmet need index','<span style="color:'+d.unmet_color+';font-weight:500;">'+d.unmet+'</span>')
+      +row('Amenity entropy',d.entropy)+'</div></div>';}
+  function attach(){
+    var el=document.getElementById('transit-map');
+    if(!el){setTimeout(attach,400);return;}
+    el.on('plotly_click',function(ev){
+      var pt=ev.points[0];
+      if(pt.customdata===undefined||pt.customdata===null)return;
+      var d=D[pt.customdata];
+      if(!d)return;
+      document.getElementById('dp-placeholder').style.display='none';
+      var c=document.getElementById('dp-content');
+      c.style.display='block';
+      c.innerHTML=render(d);
+    });
+  }
+  setTimeout(attach,800);
+})();
+</script>
+</div></div></div>
+</div>
+</section>
+<section id="equity-analysis">
+<h2>Equity analysis<a class="headerlink" href="#equity-analysis" title="Link to this heading">#</a></h2>
+<p>The charts below unpack the core–peripheral amenity gap across multiple dimensions.</p>
+<p><strong>Amenity distribution</strong> (top left): The box plots show that core stations not only have higher median amenity counts but also greater spread — a handful of central stations like Powell St. and Montgomery St. have exceptionally high access, pulling the core mean up. Peripheral stations cluster tightly at the low end with little variation.</p>
+<p><strong>Unmet need</strong> (top right): Stations flagged with the highest unmet need index are disproportionately peripheral and located in lower-income corridors in the East Bay and South Bay. South Hayward, Bay Fair, and Hayward consistently appear at the top of this ranking.</p>
+<p><strong>Category breakdown</strong> (bottom right): The gap is most pronounced for groceries and clinics — resource types with the greatest health and daily-life implications for transit-dependent riders.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="74b3ba2a-433f-4415-bd8e-7f3615994347" class="plotly-graph-div" style="height:420px; width:560px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("74b3ba2a-433f-4415-bd8e-7f3615994347")) {                    Plotly.newPlot(                        "74b3ba2a-433f-4415-bd8e-7f3615994347",                        [{"boxpoints":"all","jitter":0.3,"marker":{"color":"#378ADD","opacity":0.6,"size":5},"name":"Core","pointpos":-1.8,"y":{"dtype":"i1","bdata":"NS0nMhkKBUQDDQYaEQgSJQ8VDQomChcxCAMHQggKCwoFEBcNGxUZEw=="},"type":"box"},{"boxpoints":"all","jitter":0.3,"marker":{"color":"#D85A30","opacity":0.6,"size":5},"name":"Peripheral","pointpos":-1.8,"y":{"dtype":"i1","bdata":"BQsKCAsIFQECBwcCBgAHFgQLBQcLCwoMEA4JCRAUFA0JBBQHDAUK"},"type":"box"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"yaxis":{"title":{"text":"Total amenities (\u00bd-mile radius)"},"gridcolor":"#F1EFE8"},"margin":{"l":50,"r":20,"t":50,"b":40},"title":{"text":"Total amenities: core vs peripheral"},"height":420,"width":560,"paper_bgcolor":"white","plot_bgcolor":"white","showlegend":false},                        {"responsive": true}                    )                };            </script>        </div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="58f3d736-2c7a-4d9b-986e-fbff5ad75fd6" class="plotly-graph-div" style="height:480px; width:640px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("58f3d736-2c7a-4d9b-986e-fbff5ad75fd6")) {                    Plotly.newPlot(                        "58f3d736-2c7a-4d9b-986e-fbff5ad75fd6",                        [{"marker":{"color":["#378ADD","#D85A30","#D85A30","#D85A30","#378ADD","#D85A30","#378ADD","#D85A30","#378ADD","#378ADD","#D85A30","#378ADD","#378ADD","#378ADD","#378ADD"]},"orientation":"h","text":{"dtype":"f8","bdata":"okW28\u002f3U2D+iRbbz\u002fdTYP5huEoPAytk\u002f46WbxCCw2j8tsp3vp8bbP8\u002f3U+Olm9w\u002fIbByaJHt3D8dWmQ730\u002fdP7x0kxgEVt4\u002fYhBYObTI3j8IrBxaZDvfP57vp8ZLN+E\u002fEFg5tMh24j8hsHJoke3kP28Sg8DKoek\u002f"},"textposition":"outside","x":{"dtype":"f8","bdata":"P7OufQjR2D9Bs659CNHYPy9TlOC9y9k\u002fsgBPuoKt2j+UWXjKuMfbPzXbID8dl9w\u002f0xebG7\u002ft3D9I8\u002fUUoUndP7Fvfc4WVN4\u002f+4xzX4nL3j9Eqmnw+0LfPypf8JzOM+E\u002fzpqCkF134j9Z0vgOc+vkP+A0V\u002fJsoOk\u002f"},"y":["Richmond","Broadway","South San Francisco","Santa Clara Caltrain Station","Daly City","Sunnyvale","Rockridge","Lawrence","Balboa Park","MacArthur","Castro Valley","El Cerrito del Norte","Pittsburg Center","Bay Fair","Coliseum"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"title":{"text":"Unmet need index"},"gridcolor":"#F1EFE8"},"margin":{"l":160,"r":60,"t":50,"b":40},"title":{"text":"Top 15 stations by unmet need index"},"height":480,"width":640,"paper_bgcolor":"white","plot_bgcolor":"white"},                        {"responsive": true}                    )                };            </script>        </div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="f9ea9ba3-a434-4d23-a5c8-5dbcf1340828" class="plotly-graph-div" style="height:420px; width:620px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("f9ea9ba3-a434-4d23-a5c8-5dbcf1340828")) {                    Plotly.newPlot(                        "f9ea9ba3-a434-4d23-a5c8-5dbcf1340828",                        [{"marker":{"color":"#378ADD"},"name":"Core","x":["Grocery","Parks","Clinics","Pharmacy","Childcare"],"y":[2.55,5.475,2.475,1.25,0.425],"type":"bar"},{"marker":{"color":"#D85A30"},"name":"Peripheral","x":["Grocery","Parks","Clinics","Pharmacy","Childcare"],"y":[1.4871794871794872,3.6153846153846154,0.5641025641025641,0.5641025641025641,0.15384615384615385],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"yaxis":{"title":{"text":"Mean count (\u00bd-mile radius)"},"gridcolor":"#F1EFE8"},"margin":{"l":50,"r":20,"t":60,"b":40},"barmode":"group","title":{"text":"Mean amenity count by category (core vs peripheral)"},"height":420,"width":620,"paper_bgcolor":"white","plot_bgcolor":"white"},                        {"responsive": true}                    )                };            </script>        </div></div></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="methodology-notes">
+<h2>Methodology notes<a class="headerlink" href="#methodology-notes" title="Link to this heading">#</a></h2>
+<p><strong>Amenity classification:</strong> Points of interest were extracted from OpenStreetMap using the Overpass API with the following tag mappings: <code class="docutils literal notranslate"><span class="pre">shop=supermarket</span></code> / <code class="docutils literal notranslate"><span class="pre">shop=grocery</span></code> → Grocery; <code class="docutils literal notranslate"><span class="pre">leisure=park</span></code> / <code class="docutils literal notranslate"><span class="pre">landuse=park</span></code> → Parks; <code class="docutils literal notranslate"><span class="pre">amenity=clinic</span></code> / <code class="docutils literal notranslate"><span class="pre">amenity=hospital</span></code> / <code class="docutils literal notranslate"><span class="pre">amenity=doctors</span></code> → Clinics; <code class="docutils literal notranslate"><span class="pre">amenity=pharmacy</span></code> → Pharmacy; <code class="docutils literal notranslate"><span class="pre">amenity=childcare</span></code> / <code class="docutils literal notranslate"><span class="pre">amenity=kindergarten</span></code> → Childcare.</p>
+<p><strong>Unmet need index:</strong> Computed as <code class="docutils literal notranslate"><span class="pre">pct_no_vehicle</span> <span class="pre">×</span> <span class="pre">(1</span> <span class="pre">−</span> <span class="pre">normalized_amenity_count)</span></code>, then min-max normalized across all stations. Higher values indicate stations where a large share of riders lack cars and also lack walkable services.</p>
+<p><strong>Amenity entropy:</strong> Shannon entropy across the five amenity categories, measuring diversity of access rather than raw count. A station with 20 groceries and nothing else scores lower than one with 4 amenities of each type.</p>
+<p><strong>Statistical tests:</strong> Permutation tests (n=10,000 resamples) were used to compare core vs. peripheral distributions. All comparisons reported as significant passed FDR correction at q &lt; 0.05 (Benjamini-Hochberg method).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Requires kaleido: pip install kaleido</span>
+<span class="c1"># Uncomment to export:</span>
+
+<span class="c1"># from pathlib import Path</span>
+<span class="c1"># OUT = Path(&quot;../figures&quot;)</span>
+<span class="c1"># OUT.mkdir(exist_ok=True)</span>
+
+<span class="c1"># for name, fig in [</span>
+<span class="c1">#     (&quot;amenity_distribution&quot;, fig_dist),</span>
+<span class="c1">#     (&quot;unmet_need_top15&quot;,      fig_unmet),</span>
+<span class="c1">#     (&quot;novehicle_vs_amenities&quot;,fig_scatter),</span>
+<span class="c1">#     (&quot;category_breakdown&quot;,    fig_bar),</span>
+<span class="c1"># ]:</span>
+<span class="c1">#     fig.write_image(OUT / f&quot;{name}.png&quot;, scale=2)</span>
+<span class="c1">#     print(f&quot;Saved {name}.png&quot;)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Export block ready — uncomment to run.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Export block ready — uncomment to run.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-where-you-live-near-transit-determine-what-you-can-access">Does where you live near transit determine what you can access?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-area-and-data">Study area and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-station-map">Interactive station map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-analysis">Equity analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology-notes">Methodology notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sonya Kiskachi, Destiny Ogu, Donjhai Holland
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
