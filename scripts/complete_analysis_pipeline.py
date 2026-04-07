@@ -354,6 +354,7 @@ print("\nTop 10 Most Diverse Amenity Mix (by entropy):\n")
 print(
     f"{'Station':<30} {'Total':<8} {'Entropy':<10} "
     f"{'Groc':<6} {'Park':<6} {'Clin':<6} {'Phar':<6} {'Care':<6}"
+    f"{'Doc':<6} {'Hosp':<6} {'Kind':<6} {'Conv':<6}"
 )
 print("-" * 90)
 for _, row in diverse_stations.iterrows():
@@ -361,7 +362,8 @@ for _, row in diverse_stations.iterrows():
         f"{row['station_name']:<30} {row['total_amenities']:<8.0f} "
         f"{row['amenity_entropy']:<10.3f} {row['grocery']:<6.0f} "
         f"{row['park']:<6.0f} {row['clinic']:<6.0f} "
-        f"{row['pharmacy']:<6.0f} {row['childcare']:<6.0f}"
+        f"{row['pharmacy']:<6.0f} {row['childcare']:<6.0f}{row['doctors']:<6.0f}"
+        f"{row['hospital']:<6.0f} {row['kindergarten']:<6.0f} {row['convenience']:<6.0f}"
     )
 
 # PART 5: Save results
