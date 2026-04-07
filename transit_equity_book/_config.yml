@@ -30,9 +30,9 @@ nb_mime_priority_overrides:
 
 # Repository info
 repository:
-  url: https://github.com/executablebooks/jupyter-book
-  path_to_book: docs
-  branch: master
+  url: https://github.com/sonyak28/City_Planning_255
+  path_to_book: transit_equity_book
+  branch: main
 
 # Citations
 bibtex_bibfiles:
