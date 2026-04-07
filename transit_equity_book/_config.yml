@@ -1,0 +1,48 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Transit Equity Visualization
+author: Sonya Kiskachi, Destiny Ogu, Donjhai Holland
+logo: ""
+
+# Force re-execution of notebooks on each build.
+execute:
+  execute_notebooks: force
+  timeout: 120                  # give the map cell time to run
+
+# Allow raw HTML output (needed for Plotly figures)
+sphinx:
+  config:
+    html_js_files:
+      - https://cdn.plot.ly/plotly-latest.min.js
+  extra_extensions:
+    - sphinx.ext.mathjax
+
+# Jupyter Book HTML output settings
+html:
+  use_issues_button: true
+  use_repository_button: true
+
+# Plotly figures need this so they are not stripped as "unsafe" HTML
+nb_render_plugin: default
+nb_mime_priority_overrides:
+  - ["text/html", 0]            # render text/html output cells (Plotly + our HTML panel)
+
+# Repository info
+repository:
+  url: https://github.com/executablebooks/jupyter-book
+  path_to_book: docs
+  branch: master
+
+# Citations
+bibtex_bibfiles:
+  - references.bib
+
+# LaTeX (for PDF builds)
+latex:
+  latex_documents:
+    targetname: book.tex
+
+launch_buttons:
+  binderhub_url: https://mybinder.org
+  notebook_interface: jupyterlab
