@@ -269,7 +269,7 @@ for _, row in comp_df.iterrows():
     )
     print(
         f"{row['variable']:<20} {row['core_mean']:>7.1f} {row['peri_mean']:>7.1f} "
-        f"{row['difference']:>7.1f} {row['p_value']:>9.4f} {sig:3} {row['cohens_d']:>5.2f}"
+        f"{row['difference']:>7.1f} {row['p_value']:>9.4f} {sig:3} {row["glass delta"]:>5.2f}"
     )
 
 # FDR correction
@@ -393,7 +393,7 @@ FINAL RESULTS:
    {comp_df.iloc[0]['variable']}:
    Core = {comp_df.iloc[0]['core_mean']:.1f}, Peripheral = {comp_df.iloc[0]['peri_mean']:.1f}
    Difference = {comp_df.iloc[0]['difference']:.1f} \
-(p={comp_df.iloc[0]['p_value']:.3f}, d={comp_df.iloc[0]['cohens_d']:.2f})
+(p={comp_df.iloc[0]['p_value']:.3f}, d={comp_df.iloc[0]["glass delta"]:.2f})
 
 3. INEQUALITY METRICS:
    Gini coefficient: {overall_gini:.3f} (0=equality, 1=inequality)
