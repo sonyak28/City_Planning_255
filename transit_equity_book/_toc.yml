@@ -6,4 +6,4 @@ root: intro
 chapters:
   - file: transit_equity_visualization
   - file: statistical_results
-    title: Statistical analysis
+    title: Statistical Results
