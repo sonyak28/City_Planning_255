@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bay Area Transit Equity &#8212; Transit Equity Visualization</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"be5f1097b484403aa188c17937aac0a7": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": "0 0 8px 0", "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ddd9dabe3778400782472af3c713ea95": {"model_name": "ToggleButtonsStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ToggleButtonsStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "button_width": "140px", "description_width": "", "font_weight": ""}}, "944bfa7843064b068e99428858e30faa": {"model_name": "ToggleButtonsModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ToggleButtonsModel", "_options_labels": ["All stations", "Core only", "Peripheral only"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "ToggleButtonsView", "button_style": "", "description": "", "description_allow_html": false, "disabled": false, "icons": [], "index": 0, "layout": "IPY_MODEL_be5f1097b484403aa188c17937aac0a7", "style": "IPY_MODEL_ddd9dabe3778400782472af3c713ea95", "tabbable": null, "tooltip": null, "tooltips": []}}, "fd73ee252f7a4dca82e7e94463a165de": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "340px"}}, "92305dc140604b32b50cda366e949293": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "60px"}}, "c978e04d53784f3597196bafca3804a7": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "DropdownModel", "_options_labels": ["12th St. Oakland City Center", "16th St. Mission", "19th St. Oakland", "24th St. Mission", "Antioch", "Ashby", "Balboa Park", "Bay Fair", "Berryessa/North San Jose", "Castro Valley", "Civic Center/UN Plaza", "Coliseum", "Colma", "Concord", "Daly City", "Downtown Berkeley", "Dublin/Pleasanton", "El Cerrito del Norte", "El Cerrito Plaza", "Embarcadero", "Fremont", "Fruitvale", "Glen Park", "Hayward", "Lafayette", "Lake Merritt", "MacArthur", "Millbrae", "Milpitas", "Montgomery St.", "North Berkeley", "North Concord/Martinez", "Oakland International Airport", "Orinda", "Pittsburg/Bay Point", "Pittsburg Center", "Pleasant Hill/Contra Costa Centre", "Powell St.", "Richmond", "Rockridge", "San Bruno", "San Leandro", "South Hayward", "South San Francisco", "Union City", "Walnut Creek", "Warm Springs/South Fremont", "West Dublin/Pleasanton", "West Oakland", "22nd Street", "Bayshore", "Belmont", "Blossom Hill Caltrain Station", "Broadway", "Burlingame", "California Avenue", "Capitol Caltrain Station", "College Park", "Gilroy", "Hayward Park", "Hillsdale", "Lawrence", "Menlo Park", "Millbrae", "Morgan Hill", "Mountain View", "Palo Alto", "Redwood City", "San Antonio", "San Bruno Caltrain Station", "San Carlos", "San Francisco Caltrain Station", "San Jose Diridon", "San Martin", "San Mateo", "Santa Clara Caltrain Station", "South San Francisco Caltrain Station", "Sunnyvale", "Tamien Caltrain Station"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "DropdownView", "description": "Station:", "description_allow_html": false, "disabled": false, "index": 0, "layout": "IPY_MODEL_fd73ee252f7a4dca82e7e94463a165de", "style": "IPY_MODEL_92305dc140604b32b50cda366e949293", "tabbable": null, "tooltip": null}}, "c970c882cc9d4770b97ba9e8093f40a8": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ec493bc9f4c44bfca3f3e6cdc99c3811": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c970c882cc9d4770b97ba9e8093f40a8", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {}, "data": {"application/vnd.plotly.v1+json": {"data": [{"hoverinfo": "skip", "lat": {"dtype": "f8", "bdata": "XyS05VzcQkAV5j3ONNlCQOHra11q2EJApaKx9nfgQkBpAkUsYtpCQGX+0Tdp9kJADqFKzR7qQkDZIf5hS9tCQBR7aB8rAkNAahSSzOr3QkDSbvQxH+xCQAbVBiei0UJAADlhwmjcQkAJxOv6BdVCQH3nFyXo80JA3h/vVSvLQkBIUPwYc69CQP922a87rUJA1qvI6ICwQkCk5NU5BqhCQA=="}, "lon": {"dtype": "f8", "bdata": "4rA08KOcXsAdHy3OGIhewMhgxanWhF7AKSZvgJmMXsAzi1BsBZ5ewGtkV1pGlF7AU67wLheRXsBbYI+JlI1ewLCMDd3seF7ABVCMLJmWXsBsCmR2FpBewP+vOnKkml7AgPChREuKXsDcLjTXaZxewDUmxFxShF7AukkMAiuXXsB5WKg1zX9ewFA25Qrve17AvHSTGASCXsBbsb/snnhewA=="}, "marker": {"color": "rgba(226,75,74,0.25)", "size": {"dtype": "f8", "bdata": "8fDw8PDwNEB4eHh4eHgzQPHw8PDw8DRA4uHh4eHhMkDEw8PDw8MzQFpaWlpaWjRA8fDw8PDwNECWlpaWlpYyQOLh4eHh4TJAWlpaWlpaNEDx8PDw8PA0QA8PDw8PDzRAPDw8PDw8NUDEw8PDw8MzQHh4eHh4eDNADw8PDw8PNECmpaWlpaU0QA8PDw8PDzRAeHh4eHh4M0Dx8PDw8PA0QA=="}, "sizemode": "diameter"}, "mode": "markers", "name": "High unmet need", "showlegend": true, "type": "scattermapbox"}, {"customdata": [0, 1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 29, 34, 35, 36, 37, 38, 39, 41, 44, 45, 48, 63, 65, 66, 67, 71, 72], "hovertemplate": ["<b>12th St. Oakland City Center</b><br>BART \u00b7 Core<br>Amenities: 53<br>Ridership: 5,164<br>Unmet need: 0.024<extra></extra>", "<b>16th St. Mission</b><br>BART \u00b7 Core<br>Amenities: 45<br>Ridership: 5,642<br>Unmet need: 0.058<extra></extra>", "<b>19th St. Oakland</b><br>BART \u00b7 Core<br>Amenities: 39<br>Ridership: 4,606<br>Unmet need: 0.073<extra></extra>", "<b>24th St. Mission</b><br>BART \u00b7 Core<br>Amenities: 50<br>Ridership: 5,491<br>Unmet need: 0.034<extra></extra>", "<b>Ashby</b><br>BART \u00b7 Core<br>Amenities: 25<br>Ridership: 1,908<br>Unmet need: 0.105<extra></extra>", "<b>Balboa Park</b><br>BART \u00b7 Core<br>Amenities: 10<br>Ridership: 4,019<br>Unmet need: 0.474<extra></extra>", "<b>Bay Fair</b><br>BART \u00b7 Core<br>Amenities: 5<br>Ridership: 2,623<br>Unmet need: 0.654<extra></extra>", "<b>Civic Center/UN Plaza</b><br>BART \u00b7 Core<br>Amenities: 68<br>Ridership: 9,172<br>Unmet need: 0.000<extra></extra>", "<b>Coliseum</b><br>BART \u00b7 Core<br>Amenities: 3<br>Ridership: 2,670<br>Unmet need: 0.801<extra></extra>", "<b>Concord</b><br>BART \u00b7 Core<br>Amenities: 13<br>Ridership: 2,660<br>Unmet need: 0.020<extra></extra>", "<b>Daly City</b><br>BART \u00b7 Core<br>Amenities: 6<br>Ridership: 4,864<br>Unmet need: 0.434<extra></extra>", "<b>Downtown Berkeley</b><br>BART \u00b7 Core<br>Amenities: 26<br>Ridership: 5,587<br>Unmet need: 0.119<extra></extra>", "<b>Dublin/Pleasanton</b><br>BART \u00b7 Core<br>Amenities: 17<br>Ridership: 3,057<br>Unmet need: 0.092<extra></extra>", "<b>El Cerrito del Norte</b><br>BART \u00b7 Core<br>Amenities: 8<br>Ridership: 3,819<br>Unmet need: 0.538<extra></extra>", "<b>El Cerrito Plaza</b><br>BART \u00b7 Core<br>Amenities: 18<br>Ridership: 2,074<br>Unmet need: 0.232<extra></extra>", "<b>Embarcadero</b><br>BART \u00b7 Core<br>Amenities: 37<br>Ridership: 17,741<br>Unmet need: 0.101<extra></extra>", "<b>Fremont</b><br>BART \u00b7 Core<br>Amenities: 15<br>Ridership: 2,043<br>Unmet need: 0.081<extra></extra>", "<b>Fruitvale</b><br>BART \u00b7 Core<br>Amenities: 21<br>Ridership: 3,998<br>Unmet need: 0.174<extra></extra>", "<b>Glen Park</b><br>BART \u00b7 Core<br>Amenities: 13<br>Ridership: 3,186<br>Unmet need: 0.227<extra></extra>", "<b>Hayward</b><br>BART \u00b7 Core<br>Amenities: 10<br>Ridership: 2,294<br>Unmet need: 0.066<extra></extra>", "<b>Lake Merritt</b><br>BART \u00b7 Core<br>Amenities: 38<br>Ridership: 2,855<br>Unmet need: 0.056<extra></extra>", "<b>MacArthur</b><br>BART \u00b7 Core<br>Amenities: 10<br>Ridership: 3,762<br>Unmet need: 0.481<extra></extra>", "<b>Millbrae</b><br>BART \u00b7 Core<br>Amenities: 23<br>Ridership: 1,773<br>Unmet need: 0.068<extra></extra>", "<b>Montgomery St.</b><br>BART \u00b7 Core<br>Amenities: 49<br>Ridership: 14,342<br>Unmet need: 0.044<extra></extra>", "<b>Pittsburg/Bay Point</b><br>BART \u00b7 Core<br>Amenities: 8<br>Ridership: 2,197<br>Unmet need: 0.317<extra></extra>", "<b>Pittsburg Center</b><br>BART \u00b7 Core<br>Amenities: 3<br>Ridership: 1,798<br>Unmet need: 0.577<extra></extra>", "<b>Pleasant Hill/Contra Costa Centre</b><br>BART \u00b7 Core<br>Amenities: 7<br>Ridership: 2,536<br>Unmet need: 0.204<extra></extra>", "<b>Powell St.</b><br>BART \u00b7 Core<br>Amenities: 66<br>Ridership: 11,002<br>Unmet need: 0.012<extra></extra>", "<b>Richmond</b><br>BART \u00b7 Core<br>Amenities: 8<br>Ridership: 2,414<br>Unmet need: 0.388<extra></extra>", "<b>Rockridge</b><br>BART \u00b7 Core<br>Amenities: 10<br>Ridership: 2,638<br>Unmet need: 0.452<extra></extra>", "<b>San Leandro</b><br>BART \u00b7 Core<br>Amenities: 11<br>Ridership: 3,360<br>Unmet need: 0.358<extra></extra>", "<b>Union City</b><br>BART \u00b7 Core<br>Amenities: 10<br>Ridership: 1,858<br>Unmet need: 0.073<extra></extra>", "<b>Walnut Creek</b><br>BART \u00b7 Core<br>Amenities: 5<br>Ridership: 2,897<br>Unmet need: 0.360<extra></extra>", "<b>West Oakland</b><br>BART \u00b7 Core<br>Amenities: 16<br>Ridership: 3,510<br>Unmet need: 0.225<extra></extra>", "<b>Millbrae</b><br>Caltrain \u00b7 Core<br>Amenities: 23<br>Ridership: 1,773<br>Unmet need: 0.068<extra></extra>", "<b>Mountain View</b><br>Caltrain \u00b7 Core<br>Amenities: 13<br>Ridership: 2,288<br>Unmet need: 0.237<extra></extra>", "<b>Palo Alto</b><br>Caltrain \u00b7 Core<br>Amenities: 27<br>Ridership: 3,603<br>Unmet need: 0.104<extra></extra>", "<b>Redwood City</b><br>Caltrain \u00b7 Core<br>Amenities: 21<br>Ridership: 2,111<br>Unmet need: 0.161<extra></extra>", "<b>San Francisco Caltrain Station</b><br>Caltrain \u00b7 Core<br>Amenities: 25<br>Ridership: 6,874<br>Unmet need: 0.129<extra></extra>", "<b>San Jose Diridon</b><br>Caltrain \u00b7 Core<br>Amenities: 19<br>Ridership: 2,136<br>Unmet need: 0.041<extra></extra>"], "lat": {"dtype": "f8", "bdata": "Icms3uHmQkDItDaN7eFCQF3cRgN450JATpzc71DgQkAhdxGmKO1CQF8ktOVc3EJAFeY9zjTZQkCF0hdCzuNCQKWisfZ34EJA3PP8aaP8QkBpAkUsYtpCQDQPYJFf70JAoYMu4dDZQkBl/tE3afZCQFopBHKJ80JAouwt5XzlQkAT1VsDW8dCQLnhd9Mt40JA/u+ICtXdQkCDMLd7udVCQLaDEfsE5kJADqFKzR7qQkBd3hyu1cxCQEImGTkL5UJA4bchxmsCQ0AUe2gfKwJDQPewFwrY9kJAidS0i2nkQkBqFJLM6vdCQNJu9DEf7EJAADlhwmjcQkCrBIvDmctCQH3nFyXo80JAqruyCwbnQkBpb/CFycxCQEpdMo6RskJAcHfWbru4QkCxogbTML5CQOY9zjRh40JA/te5aTOqQkA="}, "lon": {"dtype": "f8", "bdata": "8x/Sb1+RXsD1FDlE3JpewPloccYwkV7ASYPb2sKaXsAceSCySJFewOKwNPCjnF7AHR8tzhiIXsBfYcH9gJpewCkmb4CZjF7AiV5GsdyBXsAzi1BsBZ5ewJ5+UBcpkV7AAJATJox5XsBrZFdaRpRewDApPj4hk17A6PaSxmiZXsDEQNe+gH5ewCxlGeJYjl7AutxgqMObXsB0CvKzkYVewGnjiLX4kF7AU67wLheRXsAP0765v5hewGdiuhCrmV7AwOszZ318XsCwjA3d7HhewL8LW7OVg17Akuf6PhyaXsAFUIwsmZZewGwKZHYWkF7AgPChREuKXsDx1Y7iHIFewDUmxFxShF7AdO/hkuOSXsCYbhKDwJhewDemJyzxhF7A1EM0uoOKXsCJQWDl0I5ewCl1yThGmV7AFF/tKM55XsA="}, "marker": {"color": "#378ADD", "size": {"dtype": "f8", "bdata": "lpaWlpaWN0A8PDw8PDw1QHh4eHh4eDNAtbS0tLS0NkC1tLS0tLQuQOLh4eHh4SVA8fDw8PDwIkAAAAAAAAA8QMTDw8PDwyFApqWlpaWlJ0CIh4eHh4cjQEtLS0tLSy9AAAAAAAAAKkC1tLS0tLQkQJaWlpaWlipA4uHh4eHhMkDT0tLS0tIoQFpaWlpaWixApqWlpaWlJ0Di4eHh4eElQC0tLS0tLTNA4uHh4eHhJUCIh4eHh4ctQGppaWlpaTZAtbS0tLS0JEDEw8PDw8MhQB4eHh4eHiRAaWlpaWlpO0C1tLS0tLQkQOLh4eHh4SVAeHh4eHh4JkDi4eHh4eElQPHw8PDw8CJAamlpaWlpKUCIh4eHh4ctQKalpaWlpSdA4uHh4eHhL0BaWlpaWlosQLW0tLS0tC5ALS0tLS0tK0A="}, "sizemode": "diameter"}, "mode": "markers", "name": "Core", "text": ["12th St. Oakland City Center", "16th St. Mission", "19th St. Oakland", "24th St. Mission", "Ashby", "Balboa Park", "Bay Fair", "Civic Center/UN Plaza", "Coliseum", "Concord", "Daly City", "Downtown Berkeley", "Dublin/Pleasanton", "El Cerrito del Norte", "El Cerrito Plaza", "Embarcadero", "Fremont", "Fruitvale", "Glen Park", "Hayward", "Lake Merritt", "MacArthur", "Millbrae", "Montgomery St.", "Pittsburg/Bay Point", "Pittsburg Center", "Pleasant Hill/Contra Costa Centre", "Powell St.", "Richmond", "Rockridge", "San Leandro", "Union City", "Walnut Creek", "West Oakland", "Millbrae", "Mountain View", "Palo Alto", "Redwood City", "San Francisco Caltrain Station", "San Jose Diridon"], "type": "scattermapbox"}, {"customdata": [4, 8, 9, 12, 24, 28, 30, 31, 32, 33, 40, 42, 43, 46, 47, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 64, 68, 69, 70, 73, 74, 75, 76, 77, 78], "hovertemplate": ["<b>Antioch</b><br>BART \u00b7 Peripheral<br>Amenities: 5<br>Ridership: 523<br>Unmet need: 0.076<extra></extra>", "<b>Berryessa/North San Jose</b><br>BART \u00b7 Peripheral<br>Amenities: 11<br>Ridership: 1,490<br>Unmet need: 0.179<extra></extra>", "<b>Castro Valley</b><br>BART \u00b7 Peripheral<br>Amenities: 10<br>Ridership: 1,228<br>Unmet need: 0.488<extra></extra>", "<b>Colma</b><br>BART \u00b7 Peripheral<br>Amenities: 8<br>Ridership: 1,528<br>Unmet need: 0.326<extra></extra>", "<b>Lafayette</b><br>BART \u00b7 Peripheral<br>Amenities: 11<br>Ridership: 1,641<br>Unmet need: 0.037<extra></extra>", "<b>Milpitas</b><br>BART \u00b7 Peripheral<br>Amenities: 8<br>Ridership: 1,238<br>Unmet need: 0.132<extra></extra>", "<b>North Berkeley</b><br>BART \u00b7 Peripheral<br>Amenities: 21<br>Ridership: 1,740<br>Unmet need: 0.131<extra></extra>", "<b>North Concord/Martinez</b><br>BART \u00b7 Peripheral<br>Amenities: 1<br>Ridership: 637<br>Unmet need: 0.234<extra></extra>", "<b>Oakland International Airport</b><br>BART \u00b7 Peripheral<br>Amenities: 2<br>Ridership: 571<br>Unmet need: 0.339<extra></extra>", "<b>Orinda</b><br>BART \u00b7 Peripheral<br>Amenities: 7<br>Ridership: 1,276<br>Unmet need: 0.015<extra></extra>", "<b>San Bruno</b><br>BART \u00b7 Peripheral<br>Amenities: 7<br>Ridership: 1,468<br>Unmet need: 0.368<extra></extra>", "<b>South Hayward</b><br>BART \u00b7 Peripheral<br>Amenities: 2<br>Ridership: 1,419<br>Unmet need: 0.036<extra></extra>", "<b>South San Francisco</b><br>BART \u00b7 Peripheral<br>Amenities: 6<br>Ridership: 1,347<br>Unmet need: 0.403<extra></extra>", "<b>Warm Springs/South Fremont</b><br>BART \u00b7 Peripheral<br>Amenities: 0<br>Ridership: 1,163<br>Unmet need: 0.325<extra></extra>", "<b>West Dublin/Pleasanton</b><br>BART \u00b7 Peripheral<br>Amenities: 7<br>Ridership: 1,280<br>Unmet need: 0.165<extra></extra>", "<b>22nd Street</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 22<br>Ridership: 1,261<br>Unmet need: 0.125<extra></extra>", "<b>Bayshore</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 4<br>Ridership: 168<br>Unmet need: 0.149<extra></extra>", "<b>Belmont</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 11<br>Ridership: 654<br>Unmet need: 0.315<extra></extra>", "<b>Blossom Hill Caltrain Station</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 5<br>Ridership: 71<br>Unmet need: 0.240<extra></extra>", "<b>Broadway</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 7<br>Ridership: 91<br>Unmet need: 0.388<extra></extra>", "<b>Burlingame</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 11<br>Ridership: 620<br>Unmet need: 0.099<extra></extra>", "<b>California Avenue</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 11<br>Ridership: 817<br>Unmet need: 0.123<extra></extra>", "<b>Capitol Caltrain Station</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 10<br>Ridership: 49<br>Unmet need: 0.102<extra></extra>", "<b>College Park</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 12<br>Ridership: 41<br>Unmet need: 0.064<extra></extra>", "<b>Gilroy</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 16<br>Ridership: 110<br>Unmet need: 0.112<extra></extra>", "<b>Hayward Park</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 14<br>Ridership: 366<br>Unmet need: 0.107<extra></extra>", "<b>Hillsdale</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 9<br>Ridership: 1,596<br>Unmet need: 0.204<extra></extra>", "<b>Lawrence</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 9<br>Ridership: 686<br>Unmet need: 0.458<extra></extra>", "<b>Menlo Park</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 16<br>Ridership: 863<br>Unmet need: 0.229<extra></extra>", "<b>Morgan Hill</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 20<br>Ridership: 130<br>Unmet need: 0.005<extra></extra>", "<b>San Antonio</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 20<br>Ridership: 655<br>Unmet need: 0.109<extra></extra>", "<b>San Bruno Caltrain Station</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 13<br>Ridership: 377<br>Unmet need: 0.177<extra></extra>", "<b>San Carlos</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 9<br>Ridership: 644<br>Unmet need: 0.041<extra></extra>", "<b>San Martin</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 4<br>Ridership: 25<br>Unmet need: 0.092<extra></extra>", "<b>San Mateo</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 20<br>Ridership: 1,270<br>Unmet need: 0.147<extra></extra>", "<b>Santa Clara Caltrain Station</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 7<br>Ridership: 839<br>Unmet need: 0.417<extra></extra>", "<b>South San Francisco Caltrain Station</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 12<br>Ridership: 692<br>Unmet need: 0.166<extra></extra>", "<b>Sunnyvale</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 5<br>Ridership: 1,770<br>Unmet need: 0.447<extra></extra>", "<b>Tamien Caltrain Station</b><br>Caltrain \u00b7 Peripheral<br>Amenities: 10<br>Ridership: 243<br>Unmet need: 0.386<extra></extra>"], "lat": {"dtype": "f8", "bdata": "WWq932j/QkDBOo4fKq9CQOHra11q2EJAp8zNN6LXQkA6yVaXU/JCQIem7PSDtEJAQWSRJt7vQkC/SdOgaABDQNkh/mFL20JAeoocIm7wQkAG1QYnotFCQDMzMzMz0UJACcTr+gXVQkDz/6ojR8BCQAOXx5qR2UJAbf5fdeTgQkD7V1aalNpCQDs2AvG6wkJA/mK2ZFWgQkDeH+9VK8tCQPVKWYY4ykJA2bRSCOS2QkA3xeOiWqRCQA4QzNHjq0JA0/iFV5KAQkAaNsr6zcZCQMjMjh9txUJASFD8GHOvQkBDHOviNrpCQLIPsiyYkEJAseTyayC0QkAHIJzsstBCQPYksDkHwUJAWf0RhgGLQkC4I5wWvMhCQP922a87rUJA7edo4/XTQkDWq8jogLBCQKTk1TkGqEJA"}, "lon": {"dtype": "f8", "bdata": "PUm6ZvJxXsCvWwTG+ndewMhgxanWhF7AOdTvwtadXsBuhhvw+YdewJFFmngHeV7ANZiG4SOSXsDkLy3qk4FewFtgj4mUjV7AJZNTO8OLXsD/rzpypJpewDgsDfyog17A3C4012mcXsBK7UW0HXxewLO1vkhoe17ARPzDlh6ZXsCpvB3htJlewKH4MeaukV7A94+F6BBzXsC6SQwCK5dewPz7jAsHll7AAp8fRgiJXsA/4les4XVewEYldQKael7Ap7BSQUVkXsC6E+y/zpNewL+ErJxNk17AeVioNc1/XsDvycNCrYtewK2JBb6iaV7Ases6+9qGXsDhtuFwWZpewNSa5h2nkF7ALLe0GhJnXsApyxDHupRewFA25Qrve17Ai5UQLeuZXsC8dJMYBIJewFuxv+yeeF7A"}, "marker": {"color": "#D85A30", "size": {"dtype": "f8", "bdata": "8fDw8PDwIkB4eHh4eHgmQOLh4eHh4SVAtbS0tLS0JEB4eHh4eHgmQLW0tLS0tCRAWlpaWlpaLECXlpaWlpYgQC0tLS0tLSFAHh4eHh4eJEAeHh4eHh4kQC0tLS0tLSFAiIeHh4eHI0AAAAAAAAAgQB4eHh4eHiRA8fDw8PDwLEBaWlpaWloiQHh4eHh4eCZA8fDw8PDwIkAeHh4eHh4kQHh4eHh4eCZAeHh4eHh4JkDi4eHh4eElQA8PDw8PDydAamlpaWlpKUA8PDw8PDwoQEtLS0tLSyVAS0tLS0tLJUBqaWlpaWkpQMTDw8PDwytAxMPDw8PDK0CmpaWlpaUnQEtLS0tLSyVAWlpaWlpaIkDEw8PDw8MrQB4eHh4eHiRADw8PDw8PJ0Dx8PDw8PAiQOLh4eHh4SVA"}, "sizemode": "diameter"}, "mode": "markers", "name": "Peripheral", "text": ["Antioch", "Berryessa/North San Jose", "Castro Valley", "Colma", "Lafayette", "Milpitas", "North Berkeley", "North Concord/Martinez", "Oakland International Airport", "Orinda", "San Bruno", "South Hayward", "South San Francisco", "Warm Springs/South Fremont", "West Dublin/Pleasanton", "22nd Street", "Bayshore", "Belmont", "Blossom Hill Caltrain Station", "Broadway", "Burlingame", "California Avenue", "Capitol Caltrain Station", "College Park", "Gilroy", "Hayward Park", "Hillsdale", "Lawrence", "Menlo Park", "Morgan Hill", "San Antonio", "San Bruno Caltrain Station", "San Carlos", "San Martin", "San Mateo", "Santa Clara Caltrain Station", "South San Francisco Caltrain Station", "Sunnyvale", "Tamien Caltrain Station"], "type": "scattermapbox"}, {"hoverinfo": "skip", "lat": [37.803768], "lon": [-122.27145], "marker": {"color": "rgba(255,215,0,0.55)", "size": 37.588235294117645, "sizemode": "diameter"}, "mode": "markers", "name": "_selected", "showlegend": false, "type": "scattermapbox"}], "layout": {"template": {"data": {"histogram2dcontour": [{"type": "histogram2dcontour", "colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}], "choropleth": [{"type": "choropleth", "colorbar": {"outlinewidth": 0, "ticks": ""}}], "histogram2d": [{"type": "histogram2d", "colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}], "heatmap": [{"type": "heatmap", "colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}], "contourcarpet": [{"type": "contourcarpet", "colorbar": {"outlinewidth": 0, "ticks": ""}}], "contour": [{"type": "contour", "colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}], "surface": [{"type": "surface", "colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}], "mesh3d": [{"type": "mesh3d", "colorbar": {"outlinewidth": 0, "ticks": ""}}], "scatter": [{"fillpattern": {"fillmode": "overlay", "size": 10, "solidity": 0.2}, "type": "scatter"}], "parcoords": [{"type": "parcoords", "line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scatterpolargl": [{"type": "scatterpolargl", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}, "pattern": {"fillmode": "overlay", "size": 10, "solidity": 0.2}}, "type": "bar"}], "scattergeo": [{"type": "scattergeo", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scatterpolar": [{"type": "scatterpolar", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "histogram": [{"marker": {"pattern": {"fillmode": "overlay", "size": 10, "solidity": 0.2}}, "type": "histogram"}], "scattergl": [{"type": "scattergl", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scatter3d": [{"type": "scatter3d", "line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scattermap": [{"type": "scattermap", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scattermapbox": [{"type": "scattermapbox", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scatterternary": [{"type": "scatterternary", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "scattercarpet": [{"type": "scattercarpet", "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}, "pattern": {"fillmode": "overlay", "size": 10, "solidity": 0.2}}, "type": "barpolar"}], "pie": [{"automargin": true, "type": "pie"}]}, "layout": {"autotypenumbers": "strict", "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "hovermode": "closest", "hoverlabel": {"align": "left"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"bgcolor": "#E5ECF6", "angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "ternary": {"bgcolor": "#E5ECF6", "aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]]}, "xaxis": {"gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "automargin": true, "zerolinewidth": 2}, "yaxis": {"gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "automargin": true, "zerolinewidth": 2}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white", "gridwidth": 2}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white", "gridwidth": 2}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white", "gridwidth": 2}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "geo": {"bgcolor": "white", "landcolor": "#E5ECF6", "subunitcolor": "white", "showland": true, "showlakes": true, "lakecolor": "white"}, "title": {"x": 0.05}, "mapbox": {"style": "light"}}}, "mapbox": {"center": {"lat": 37.64820474506329, "lon": -122.16846004646834}, "style": "carto-positron", "zoom": 9.5}, "margin": {"l": 0, "r": 0, "t": 0, "b": 0}, "legend": {"font": {"size": 12}, "x": 0.01, "y": 0.99, "bgcolor": "rgba(255,255,255,0.85)", "bordercolor": "#D3D1C7", "borderwidth": 0.5}, "height": 580, "paper_bgcolor": "white", "clickmode": "event+select"}, "config": {"plotlyServerURL": "https://plot.ly"}}}}], "tabbable": null, "tooltip": null}}, "c9ec8c9533044fc2b04992ebae2adbdb": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": "0.5px solid #D3D1C7", "border_left": "0.5px solid #D3D1C7", "border_right": "0.5px solid #D3D1C7", "border_top": "0.5px solid #D3D1C7", "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": "560px", "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": "0px", "right": null, "top": null, "visibility": null, "width": "310px"}}, "272341cf285441e5a457e7d156f68622": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c9ec8c9533044fc2b04992ebae2adbdb", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {}, "data": {"text/plain": "HTML(value='\\n    <div style=\"font-family:system-ui,sans-serif;\">\\n      <div style=\"display:flex;align-items:\u2026", "application/vnd.jupyter.widget-view+json": {"version_major": 2, "version_minor": 0, "model_id": "2e965edd91eb4cfdb03de840b7447b3a"}}}], "tabbable": null, "tooltip": null}}, "497fee24318542b9bc537fb2261b8107": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "87f600ad82604defb93b7295842b5558": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "2e965edd91eb4cfdb03de840b7447b3a": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_497fee24318542b9bc537fb2261b8107", "placeholder": "\u200b", "style": "IPY_MODEL_87f600ad82604defb93b7295842b5558", "tabbable": null, "tooltip": null, "value": "\n    <div style=\"font-family:system-ui,sans-serif;\">\n      <div style=\"display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;\">\n        <div style=\"width:10px;height:10px;border-radius:50%;background:#378ADD;margin-top:4px;flex-shrink:0;\"></div>\n        <div>\n          <div style=\"font-size:15px;font-weight:500;color:#2C2C2A;line-height:1.3;\">12th St. Oakland City Center</div>\n          <div style=\"font-size:12px;color:#888780;margin-top:2px;\">BART \u00b7 Core</div>\n        </div>\n      </div>\n\n      <div style=\"background:#F1EFE8;border-radius:8px;padding:10px 12px;margin-bottom:12px;\">\n        <div style=\"font-size:11px;color:#888780;margin-bottom:2px;\">Total amenities within \u00bd mile</div>\n        <div style=\"font-size:26px;font-weight:500;color:#2C2C2A;\">53</div>\n      </div>\n\n      <div style=\"margin-bottom:12px;\">\n        <div style=\"font-size:11px;font-weight:500;color:#5F5E5A;margin-bottom:6px;\">Amenity breakdown</div>\n        <div style=\"margin:4px 0;\"><div style=\"display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;\"><span style=\"color:#5F5E5A;\">Grocery</span><span style=\"font-weight:500;color:#2C2C2A;\">5</span></div><div style=\"background:#F1EFE8;border-radius:3px;height:6px;\"><div style=\"background:#378ADD;width:45%;height:6px;border-radius:3px;\"></div></div></div><div style=\"margin:4px 0;\"><div style=\"display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;\"><span style=\"color:#5F5E5A;\">Parks</span><span style=\"font-weight:500;color:#2C2C2A;\">10</span></div><div style=\"background:#F1EFE8;border-radius:3px;height:6px;\"><div style=\"background:#1D9E75;width:62%;height:6px;border-radius:3px;\"></div></div></div><div style=\"margin:4px 0;\"><div style=\"display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;\"><span style=\"color:#5F5E5A;\">Clinics</span><span style=\"font-weight:500;color:#2C2C2A;\">7</span></div><div style=\"background:#F1EFE8;border-radius:3px;height:6px;\"><div style=\"background:#D85A30;width:77%;height:6px;border-radius:3px;\"></div></div></div><div style=\"margin:4px 0;\"><div style=\"display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;\"><span style=\"color:#5F5E5A;\">Pharma</span><span style=\"font-weight:500;color:#2C2C2A;\">5</span></div><div style=\"background:#F1EFE8;border-radius:3px;height:6px;\"><div style=\"background:#7F77DD;width:100%;height:6px;border-radius:3px;\"></div></div></div><div style=\"margin:4px 0;\"><div style=\"display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;\"><span style=\"color:#5F5E5A;\">Childcare</span><span style=\"font-weight:500;color:#2C2C2A;\">2</span></div><div style=\"background:#F1EFE8;border-radius:3px;height:6px;\"><div style=\"background:#EF9F27;width:66%;height:6px;border-radius:3px;\"></div></div></div>\n      </div>\n\n      <div style=\"margin-bottom:12px;\">\n        <div style=\"font-size:11px;font-weight:500;color:#5F5E5A;margin-bottom:4px;\">Demographics</div>\n        <div style=\"display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #F1EFE8;font-size:12px;\"><span style=\"color:#888780;\">Median household income</span><span style=\"font-weight:500;color:#2C2C2A;\">$58,794</span></div>\n        <div style=\"display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #F1EFE8;font-size:12px;\"><span style=\"color:#888780;\">% No vehicle</span><span style=\"font-weight:500;color:#2C2C2A;\">58.5%</span></div>\n        <div style=\"display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #F1EFE8;font-size:12px;\"><span style=\"color:#888780;\">% Non-white</span><span style=\"font-weight:500;color:#2C2C2A;\">86.9%</span></div>\n        <div style=\"display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #F1EFE8;font-size:12px;\"><span style=\"color:#888780;\">Avg weekday ridership</span><span style=\"font-weight:500;color:#2C2C2A;\">5,164</span></div>\n      </div>\n\n      <div>\n        <div style=\"font-size:11px;font-weight:500;color:#5F5E5A;margin-bottom:4px;\">Equity metrics</div>\n        <div style=\"display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #F1EFE8;font-size:12px;\"><span style=\"color:#888780;\">Unmet need index</span><span style=\"font-weight:500;color:#2C2C2A;\"><span style=\"color:#1D9E75;font-weight:500;\">0.024</span></span></div>\n        <div style=\"display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #F1EFE8;font-size:12px;\"><span style=\"color:#888780;\">Amenity entropy</span><span style=\"font-weight:500;color:#2C2C2A;\">1.728</span></div>\n      </div>\n    </div>\n    "}}, "edffe9309eed415a94c6ec08e12a03a5": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5910fe093f3e4408871324c57eaced13": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "bc8075084a554c65a2c06de6cf963f43": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_edffe9309eed415a94c6ec08e12a03a5", "placeholder": "\u200b", "style": "IPY_MODEL_5910fe093f3e4408871324c57eaced13", "tabbable": null, "tooltip": null, "value": "<h3 style=\"margin:0 0 4px;font-size:16px;font-weight:500;\">Bay Area Transit Equity \u00b7 Station Amenity Map</h3><p style=\"margin:0 0 10px;font-size:12px;color:#888780;\">Bubble size = total amenities &nbsp;|&nbsp; <span style=\"color:#378ADD;\">\u25cf</span> Core &nbsp;<span style=\"color:#D85A30;\">\u25cf</span> Peripheral &nbsp;<span style=\"color:#E24B4A;\">\u25cb</span> High unmet need</p>"}}, "524cfe9e082a4de5b067dce13798893a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": "flex-start", "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "100%"}}, "21ae14380e2b460589b6c650f38c54e0": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_ec493bc9f4c44bfca3f3e6cdc99c3811", "IPY_MODEL_272341cf285441e5a457e7d156f68622"], "layout": "IPY_MODEL_524cfe9e082a4de5b067dce13798893a", "tabbable": null, "tooltip": null}}, "c02c0bffa7104c6dae7e32d38bc23af6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "908df1ae0416454580a4dac97feb844a": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_bc8075084a554c65a2c06de6cf963f43", "IPY_MODEL_944bfa7843064b068e99428858e30faa", "IPY_MODEL_c978e04d53784f3597196bafca3804a7", "IPY_MODEL_21ae14380e2b460589b6c650f38c54e0"], "layout": "IPY_MODEL_c02c0bffa7104c6dae7e32d38bc23af6", "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transit_equity_visualization (3)';</script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Transit Equity Visualization</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="transit_equity_visualization.html">Bay Area Transit Equity — Interactive Visualization</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=lab/tree/docs/transit_equity_visualization (3).ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftransit_equity_visualization (3).html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/transit_equity_visualization (3).ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bay Area Transit Equity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-where-you-live-near-transit-determine-what-you-can-access">Does where you live near transit determine what you can access?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-area-and-data">Study area and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-station-map">Interactive station map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-analysis">Equity analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology-notes">Methodology notes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bay-area-transit-equity">
+<h1>Bay Area Transit Equity<a class="headerlink" href="#bay-area-transit-equity" title="Link to this heading">#</a></h1>
+<section id="does-where-you-live-near-transit-determine-what-you-can-access">
+<h2>Does where you live near transit determine what you can access?<a class="headerlink" href="#does-where-you-live-near-transit-determine-what-you-can-access" title="Link to this heading">#</a></h2>
+<p>This analysis examines amenity access — grocery stores, parks, clinics, pharmacies, and childcare — within a half-mile walking radius of every BART station in the Bay Area. We classify stations as <strong>core</strong> (high ridership, central locations) or <strong>peripheral</strong> (lower ridership, suburban or terminus stations) and ask whether riders at peripheral stations face systematically worse access to essential services.</p>
+<p>The data comes from FY2025 BART ridership records, OpenStreetMap amenity extracts, and the 2024 ACS 5-year Census estimates. All analysis was conducted at the census tract level using a spatial join between station buffers and tract boundaries.</p>
+<blockquote>
+<div><p><strong>Group 13</strong> · Sonya Kiskachi, Destiny Ogu, Donjhai Holland · CP 255 · Spring 2026</p>
+</div></blockquote>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dependencies loaded ✓
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="study-area-and-data">
+<h2>Study area and data<a class="headerlink" href="#study-area-and-data" title="Link to this heading">#</a></h2>
+<p>Our dataset covers 79 BART stations across the Bay Area after removing two out-of-scope stations (Stanford and SFO, which serve captive populations rather than general riders). For each station we computed the count of five essential amenity categories within a 0.5-mile Euclidean buffer — a distance generally considered walkable in urban planning research. Census demographic variables (median household income, share of households without a vehicle, and share of non-white residents) were joined from the tract containing each station centroid.</p>
+<p>The table below shows a sample of the loaded data with key equity indicators.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded 79 stations  (40 core · 39 peripheral)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>station_name</th>
+      <th>agency</th>
+      <th>station_type</th>
+      <th>total_amenities</th>
+      <th>unmet_need_index</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12th St. Oakland City Center</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>53</td>
+      <td>0.024035</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>16th St. Mission</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>45</td>
+      <td>0.058484</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19th St. Oakland</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>39</td>
+      <td>0.073065</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24th St. Mission</td>
+      <td>BART</td>
+      <td>core</td>
+      <td>50</td>
+      <td>0.034129</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Antioch</td>
+      <td>BART</td>
+      <td>peripheral</td>
+      <td>5</td>
+      <td>0.076270</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="summary-statistics">
+<h2>Summary statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">#</a></h2>
+<p>The summary table below reveals a clear pattern: core stations average <strong>21.9 amenities</strong> within walking distance compared to just <strong>9.8</strong> for peripheral stations — a gap of more than 2× in raw access. The Gini coefficient of 0.43 for the full network indicates substantial inequality in how amenities are distributed across stations, comparable to income inequality levels seen in moderately unequal countries.</p>
+<p>Notably, the unmet need index — which combines high car-free household rates with low amenity counts — is elevated across both groups, suggesting that even some core stations serve transit-dependent populations without adequate nearby services.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_871d7">
+  <caption>Summary statistics by station type</caption>
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_871d7_level0_col0" class="col_heading level0 col0" >group</th>
+      <th id="T_871d7_level0_col1" class="col_heading level0 col1" >n</th>
+      <th id="T_871d7_level0_col2" class="col_heading level0 col2" >mean_amenities</th>
+      <th id="T_871d7_level0_col3" class="col_heading level0 col3" >median_amenities</th>
+      <th id="T_871d7_level0_col4" class="col_heading level0 col4" >gini</th>
+      <th id="T_871d7_level0_col5" class="col_heading level0 col5" >mean_unmet_need</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_871d7_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_871d7_row0_col0" class="data row0 col0" >All</td>
+      <td id="T_871d7_row0_col1" class="data row0 col1" >79</td>
+      <td id="T_871d7_row0_col2" class="data row0 col2" >15.9</td>
+      <td id="T_871d7_row0_col3" class="data row0 col3" >11.0</td>
+      <td id="T_871d7_row0_col4" class="data row0 col4" >0.428</td>
+      <td id="T_871d7_row0_col5" class="data row0 col5" >0.210</td>
+    </tr>
+    <tr>
+      <th id="T_871d7_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_871d7_row1_col0" class="data row1 col0" >Core</td>
+      <td id="T_871d7_row1_col1" class="data row1 col1" >40</td>
+      <td id="T_871d7_row1_col2" class="data row1 col2" >21.9</td>
+      <td id="T_871d7_row1_col3" class="data row1 col3" >16.5</td>
+      <td id="T_871d7_row1_col4" class="data row1 col4" >0.410</td>
+      <td id="T_871d7_row1_col5" class="data row1 col5" >0.217</td>
+    </tr>
+    <tr>
+      <th id="T_871d7_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_871d7_row2_col0" class="data row2 col0" >Peripheral</td>
+      <td id="T_871d7_row2_col1" class="data row2 col1" >39</td>
+      <td id="T_871d7_row2_col2" class="data row2 col2" >9.8</td>
+      <td id="T_871d7_row2_col3" class="data row2 col3" >9.0</td>
+      <td id="T_871d7_row2_col4" class="data row2 col4" >0.315</td>
+      <td id="T_871d7_row2_col5" class="data row2 col5" >0.204</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="interactive-station-map">
+<h2>Interactive station map<a class="headerlink" href="#interactive-station-map" title="Link to this heading">#</a></h2>
+<p>The map below plots all 79 stations sized by total amenity count and colored by station type. Stations with a red halo fall in the top quartile of our unmet need index — meaning they serve a high proportion of car-free households while offering relatively few walkable amenities. These are the stations where gaps in access are most consequential for riders who depend on transit as their primary mode.</p>
+<p><strong>How to use:</strong> Click any station bubble to see its full demographic and amenity profile in the panel on the right. Use the legend to toggle core and peripheral layers on and off.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unmet need threshold (top 25%): 0.332
+High-unmet-need stations: 20
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map builder ready ✓
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Detail panel builder ready ✓
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "908df1ae0416454580a4dac97feb844a"}</script></div>
+</div>
+</section>
+<section id="equity-analysis">
+<h2>Equity analysis<a class="headerlink" href="#equity-analysis" title="Link to this heading">#</a></h2>
+<p>The charts below unpack the core–peripheral amenity gap across multiple dimensions.</p>
+<p><strong>Amenity distribution</strong> (top left): The box plots show that core stations not only have higher median amenity counts but also greater spread — a handful of central stations like Powell St. and Montgomery St. have exceptionally high access, pulling the core mean up. Peripheral stations cluster tightly at the low end with little variation.</p>
+<p><strong>Unmet need</strong> (top right): Stations flagged with the highest unmet need index are disproportionately peripheral and located in lower-income corridors in the East Bay and South Bay. South Hayward, Bay Fair, and Hayward consistently appear at the top of this ranking.</p>
+<p><strong>Car-free households vs. amenities</strong> (bottom left): The scatter plot tests our central equity hypothesis — that stations serving the most car-dependent riders tend to have the fewest walkable amenities. The negative trend is visible but noisy, reflecting that some peripheral stations (e.g., in Walnut Creek) serve wealthy, low-transit-dependency communities with decent local retail.</p>
+<p><strong>Category breakdown</strong> (bottom right): The gap is most pronounced for groceries and clinics — resource types with the greatest health and daily-life implications for transit-dependent riders.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="methodology-notes">
+<h2>Methodology notes<a class="headerlink" href="#methodology-notes" title="Link to this heading">#</a></h2>
+<p><strong>Amenity classification:</strong> Points of interest were extracted from OpenStreetMap using the Overpass API with the following tag mappings: <code class="docutils literal notranslate"><span class="pre">shop=supermarket</span></code> / <code class="docutils literal notranslate"><span class="pre">shop=grocery</span></code> → Grocery; <code class="docutils literal notranslate"><span class="pre">leisure=park</span></code> / <code class="docutils literal notranslate"><span class="pre">landuse=park</span></code> → Parks; <code class="docutils literal notranslate"><span class="pre">amenity=clinic</span></code> / <code class="docutils literal notranslate"><span class="pre">amenity=hospital</span></code> / <code class="docutils literal notranslate"><span class="pre">amenity=doctors</span></code> → Clinics; <code class="docutils literal notranslate"><span class="pre">amenity=pharmacy</span></code> → Pharmacy; <code class="docutils literal notranslate"><span class="pre">amenity=childcare</span></code> / <code class="docutils literal notranslate"><span class="pre">amenity=kindergarten</span></code> → Childcare.</p>
+<p><strong>Unmet need index:</strong> Computed as <code class="docutils literal notranslate"><span class="pre">pct_no_vehicle</span> <span class="pre">×</span> <span class="pre">(1</span> <span class="pre">−</span> <span class="pre">normalized_amenity_count)</span></code>, then min-max normalized across all stations. Higher values indicate stations where a large share of riders lack cars and also lack walkable services.</p>
+<p><strong>Amenity entropy:</strong> Shannon entropy across the five amenity categories, measuring diversity of access rather than raw count. A station with 20 groceries and nothing else scores lower than one with 4 amenities of each type.</p>
+<p><strong>Statistical tests:</strong> Permutation tests (n=10,000 resamples) were used to compare core vs. peripheral distributions. All comparisons reported as significant passed FDR correction at q &lt; 0.05 (Benjamini-Hochberg method).</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Export block ready — uncomment to run.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#does-where-you-live-near-transit-determine-what-you-can-access">Does where you live near transit determine what you can access?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-area-and-data">Study area and data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-station-map">Interactive station map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equity-analysis">Equity analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology-notes">Methodology notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sonya Kiskachi, Destiny Ogu, Donjhai Holland
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
