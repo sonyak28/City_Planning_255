@@ -14,8 +14,8 @@ suburban, end-of-line — have systematically worse access to essential services
 stores, clinics, and pharmacies compared to riders at central core stations?**
 
 We built this analysis using FY2025 BART and Caltrain ridership records, OpenStreetMap amenity extracts, 
-and 2024 ACS 5-year Census estimates. All spatial analysis was done in Python using GeoPandas, 
-with interactive visualizations built in Plotly and Folium.
+and 2024 ACS 5-year Census estimates. All spatial analysis was done in Python using `GeoPandas`, 
+with interactive visualizations built in `Plotly` and `Folium`.
 
 **Group 13** · Sonya Kiskachi, Destiny Ogu, Donjhai Holland · CP 255 · Spring 2026
 
