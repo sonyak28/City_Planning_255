@@ -2,11 +2,6 @@
 
 **Does where you live near transit determine what you can access?**
 
-<p float="left">
-  <img src="https://www.bart.gov/sites/default/files/2025-01/BART-system-map-everyday-until-9pm.png" width="300" />
-  <img src="https://www.caltrain.com/files/styles/golden_ratio/public/images/2022-04/Stations-Zone-Map_0.jpg?itok=V2ySxmZk" width="200" /> 
-</p>
-
 Bay Area transit expansion has extended BART and Caltrain service into communities like Antioch
 and Berryessa over the past decade. However, building a station does not guarantee that the surrounding
 neighborhood offers basic amenities that residents may need within walking distance. 
