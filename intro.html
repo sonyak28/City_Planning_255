@@ -377,71 +377,78 @@
   systematically worse access to essential services like grocery stores, clinics, and pharmacies compared to 
   riders at central core stations?</strong></p>
 
-<h2>Key Findings</h2>
- 
-                <p>Our analysis finds statistically significant disparities between core and peripheral stations:</p>
- 
-                <div class="finding-box">
-                  Peripheral stations not only have <strong>fewer amenities</strong>, but also <strong>less diversity</strong> in amenity types on average.
-                </div>
-                <div class="finding-box">
-                  Core stations had the highest <strong>unmet need</strong> — high car-free households paired with low amenity counts.
-                </div>
+<div class="section">
+  <h2><span class="h2-pill"></span>Key Findings</h2>
+  <p style="font-size:0.88rem; color:var(--ink-muted); margin-bottom:14px;">
+    Our analysis finds statistically significant disparities between core and peripheral stations:
+  </p>
+  <div class="findings-grid">
+    <div class="finding-card f1">
+      <div class="finding-num">Finding 01</div>
+      <div class="finding-text">Peripheral stations not only have <strong>fewer amenities</strong>, but also <strong>less diversity</strong> in amenity types on average.</div>
+    </div>
+    <div class="finding-card f2">
+      <div class="finding-num">Finding 02</div>
+      <div class="finding-text">Core stations showed the highest <strong>unmet need</strong> — high car-free households paired with low amenity counts.</div>
+    </div>
+  </div>
+</div>
 
-<h2>Data Sources</h2>
- 
-                <p>We built this analysis primarily using FY2025 BART and Caltrain ridership records, OpenStreetMap amenity extracts,
-                and 2024 ACS 5-year Census estimates.</p>
- 
-                <div class="dataset-table-wrap">
-                  <table class="dataset-table">
-                    <thead>
-                      <tr>
-                        <th>Dataset</th>
-                        <th>Source</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Census tract boundaries</td>
-                        <td>TIGER/Line 2024, U.S. Census Bureau</td>
-                        <td>California tract shapefiles for spatial joining</td>
-                      </tr>
-                      <tr>
-                        <td>ACS 2024 (5-Year)</td>
-                        <td>Census API</td>
-                        <td>Tract-level demographics: income, vehicle access, race, poverty</td>
-                      </tr>
-                      <tr>
-                        <td>BART ridership (FY2025)</td>
-                        <td>BART monthly XLS, Jul 2024–Jun 2025</td>
-                        <td>Average weekday exits by station</td>
-                      </tr>
-                      <tr>
-                        <td>Caltrain ridership (FY2025)</td>
-                        <td>FY2025 Annual Ridership Report, Table 3</td>
-                        <td>Average mid-week ridership (AMWR) by station</td>
-                      </tr>
-                      <tr>
-                        <td>Amenities</td>
-                        <td>OpenStreetMap / compiled</td>
-                        <td>Grocery, park, clinic, pharmacy, hospital, childcare locations</td>
-                      </tr>
-                      <tr>
-                        <td>Station locations</td>
-                        <td>Compiled</td>
-                        <td>Lat/lon for all BART and Caltrain stations</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
- 
-                <p style="margin-top:12px;">All spatial analysis was done in Python using <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>,
-                with interactive visualizations built in <code class="docutils literal notranslate"><span class="pre">Plotly</span></code> and <code class="docutils literal notranslate"><span class="pre">Folium</span></code>.</p>
-    <p>We built this analysis using FY2025 BART and Caltrain ridership records, OpenStreetMap amenity extracts,
-and 2024 ACS 5-year Census estimates. All spatial analysis was done in Python using <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>,
-with interactive visualizations built in <code class="docutils literal notranslate"><span class="pre">Plotly</span></code> and <code class="docutils literal notranslate"><span class="pre">Folium</span></code>.</p>
+  <div class="section">
+    <h2><span class="h2-pill" style="background:var(--caltrain-red)"></span>Data Sources</h2>
+    <p style="font-size:0.88rem; color:var(--ink-muted); margin-bottom:12px;">
+      This analysis was built primarily using FY2025 BART and Caltrain ridership records, OpenStreetMap amenity extracts,
+      and 2024 ACS 5-year Census estimates.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dataset</th>
+            <th>Source</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Census tract boundaries</td>
+            <td>TIGER/Line 2024, U.S. Census Bureau</td>
+            <td>California tract shapefiles for spatial joining</td>
+          </tr>
+          <tr>
+            <td>ACS 2024 (5-Year)</td>
+            <td>Census API</td>
+            <td>Tract-level demographics: income, vehicle access, race, poverty</td>
+          </tr>
+          <tr>
+            <td>BART ridership (FY2025)</td>
+            <td>BART monthly XLS, Jul 2024–Jun 2025</td>
+            <td>Average weekday exits by station</td>
+          </tr>
+          <tr>
+            <td>Caltrain ridership (FY2025)</td>
+            <td>FY2025 Annual Ridership Report, Table 3</td>
+            <td>Average mid-week ridership (AMWR) by station</td>
+          </tr>
+          <tr>
+            <td>Amenities</td>
+            <td>OpenStreetMap / compiled</td>
+            <td>Grocery, park, clinic, pharmacy, hospital, childcare locations</td>
+          </tr>
+          <tr>
+            <td>Station locations</td>
+            <td>Compiled</td>
+            <td>Lat/lon for all BART and Caltrain stations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tech-line">
+      All spatial analysis was done in Python using <code>GeoPandas</code>, with interactive visualizations
+      built in <code>Plotly</code> and <code>Folium</code>.
+    </div>
+  </div>
+
 
 <h2>Scope and Limitations</h2>
  <p>This analysis focuses on <strong>amenity presence</strong>, not affordability, quality, or availability.
@@ -455,18 +462,18 @@ with interactive visualizations built in <code class="docutils literal notransla
 <hr class="docutils" />
 
 <div class="nav-hint">
-    <strong>Use the tabs on the left to explore:</strong>
-    <div class="nav-tabs">
-      <a class="nav-tab" href=""transit_equity_visualization.html"">
-        <span class="dot" style="background:#FFD800"></span>
-        Findings — interactive maps &amp; equity analysis across all 79 stations
-      </a>
-      <a class="nav-tab" href="statistical_results.html">
-        <span class="dot" style="background:#4DB848"></span>
-        Statistical Analysis — permutation tests, correlations &amp; full methodology
-      </a>
-    </div>
+  <strong>Use the tabs on the left to explore:</strong>
+  <div class="nav-tabs">
+    <a class="nav-tab" href="transit_equity_visualization.html">
+      <span class="dot" style="background:#FFD800"></span>
+      <span><strong>Findings</strong> — interactive maps &amp; equity analysis across all 79 stations</span>
+    </a>
+    <a class="nav-tab" href="statistical_results.html" style="margin-top: 10px;">
+      <span class="dot" style="background:#4DB848"></span>
+      <span><strong>Statistical Analysis</strong> — permutation tests, correlations &amp; full methodology</span>
+    </a>
   </div>
+</div>
 
 <p>Use the tabs on the left to explore:</p>
 <ul class="simple">
