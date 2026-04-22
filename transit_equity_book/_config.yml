@@ -23,6 +23,8 @@ sphinx:
 html:
   use_issues_button: true
   use_repository_button: true
+  extra_css:
+    - custom.css
 
 # Plotly figures need this so they are not stripped as "unsafe" HTML
 nb_render_plugin: default
