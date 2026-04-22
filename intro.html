@@ -68,6 +68,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+
+  <style>
+      /* Underline under every h2 in the article body */
+      .bd-article h2 {
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 0.3em;
+        margin-bottom: 0.8em;
+      }
+ 
+      /* ── Finding boxes ── */
+      .finding-card {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 14px 18px;
+        margin: 8px 0;
+        background: #f8f9fa;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      .finding-card.f1 { border-left: 4px solid #009BD9; }
+      .finding-card.f2 { border-left: 4px solid #E32119; }
+      .finding-num {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 4px;
+      }
+ 
+      /* ── Data sources table ── */
+      .table-wrap {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      .table-wrap table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.87rem;
+        margin: 0;          /* override Sphinx default margin */
+      }
+      .table-wrap thead tr {
+        background: #1a3a5c;
+        color: #ffffff;
+      }
+      .table-wrap thead th {
+        padding: 9px 14px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.76rem;
+        letter-spacing: 0.05em;
+        border: none;
+      }
+      .table-wrap tbody tr {
+        border-bottom: 1px solid #dee2e6;
+      }
+      .table-wrap tbody tr:last-child { border-bottom: none; }
+      .table-wrap tbody tr:hover { background: #f0f4f8; }
+      .table-wrap td {
+        padding: 9px 14px;
+        vertical-align: top;
+        border: none;
+      }
+      .table-wrap td:first-child {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .table-wrap td:nth-child(2) {
+        color: #666;
+        font-size: 0.81rem;
+      }
+ 
+      /* Tech line below table */
+      .tech-line {
+        margin-top: 10px;
+        font-size: 0.85rem;
+        color: #555;
+      }
+ 
+      /* ── Nav hint box ── */
+      .nav-hint {
+        background: #1a3a5c;
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin-top: 24px;
+        color: rgba(255,255,255,0.85);
+        font-size: 0.9rem;
+      }
+      .nav-hint > strong {
+        color: #fff;
+        display: block;
+        margin-bottom: 12px;
+      }
+ 
+      /* Vertical stack, no Bootstrap border */
+      .nav-tabs-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        border-bottom: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+ 
+      /* Each row is a pill-shaped card */
+      .nav-tab-item {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        background: rgba(255,255,255,0.1) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        border-radius: 6px !important;
+        padding: 10px 16px !important;
+        text-decoration: none !important;
+        color: rgba(255,255,255,0.85) !important;
+        transition: background 0.15s;
+        line-height: 1.5;
+        /* Remove any Sphinx/Bootstrap link styles */
+        box-shadow: none !important;
+      }
+      .nav-tab-item:hover {
+        background: rgba(255,255,255,0.2) !important;
+        text-decoration: none !important;
+        color: #fff !important;
+      }
+ 
+      /* Colour dot */
+      .nav-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+ 
+      /* Page name: underlined to signal it's the link target */
+      .tab-label {
+        color: #fff;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+ 
+      /* Description: NOT underlined, lighter colour */
+      .tab-desc {
+        color: rgba(255,255,255,0.7);
+        font-weight: 400;
+        text-decoration: none !important;
+      }
+    </style>
+ 
   </head>
   
   
@@ -377,21 +529,18 @@
   systematically worse access to essential services like grocery stores, clinics, and pharmacies compared to 
   riders at central core stations?</strong></p>
 
-<div class="section">
-  <h2><span class="h2-pill"></span>Key Findings</h2>
-  <p style="font-size:0.88rem; color:var(--ink-muted); margin-bottom:14px;">
-    Our analysis finds statistically significant disparities between core and peripheral stations:
-  </p>
-  <div class="findings-grid">
-    <div class="finding-card f1">
-      <div class="finding-num">Finding 01</div>
-      <div class="finding-text">Peripheral stations not only have <strong>fewer amenities</strong>, but also <strong>less diversity</strong> in amenity types on average.</div>
-    </div>
-    <div class="finding-card f2">
-      <div class="finding-num">Finding 02</div>
-      <div class="finding-text">Core stations showed the highest <strong>unmet need</strong> — high car-free households paired with low amenity counts.</div>
-    </div>
-  </div>
+<h2>Key Findings</h2>
+<p>Our analysis finds statistically significant disparities between core and peripheral stations:</p>
+
+<div class="finding-card f1">
+  <div class="finding-num">Finding 01</div>
+  Peripheral stations not only have <strong>fewer amenities</strong>, but also
+  <strong>less diversity</strong> in amenity types on average.
+</div>
+<div class="finding-card f2">
+  <div class="finding-num">Finding 02</div>
+  Core stations showed the highest <strong>unmet need</strong> — high car-free
+  households paired with low amenity counts.
 </div>
 
   <div class="section">
@@ -461,19 +610,6 @@
 <p><strong>Group 13</strong> · Sonya Kiskachi, Destiny Ogu, Donjhai Holland · CP 255 · Spring 2026</p>
 <hr class="docutils" />
 
-<div class="nav-hint">
-  <strong>Use the tabs on the left to explore:</strong>
-  <div class="nav-tabs">
-    <a class="nav-tab" href="transit_equity_visualization.html">
-      <span class="dot" style="background:#FFD800"></span>
-      <span><strong>Findings</strong> — interactive maps &amp; equity analysis across all 79 stations</span>
-    </a>
-    <a class="nav-tab" href="statistical_results.html" style="margin-top: 10px;">
-      <span class="dot" style="background:#4DB848"></span>
-      <span><strong>Statistical Analysis</strong> — permutation tests, correlations &amp; full methodology</span>
-    </a>
-  </div>
-</div>
 
 <p>Use the tabs on the left to explore:</p>
 <ul class="simple">
