@@ -1,5 +1,9 @@
 # Bay Area Transit Equity
 
+*Group 13: Sonya Kiskachi, Destiny Ogu, Donjhai Holland | CP 255 | Spring 2026*
+
+---
+
 **Does where you live near transit determine what you can access?**
 
 Bay Area transit expansion has extended BART and Caltrain service into communities like Antioch
@@ -24,10 +28,10 @@ Our analysis finds statistically significant disparities between core and periph
 ```{raw} html
 <div class="finding-card f1">
   <div class="finding-num">Finding 01</div>
-  Peripheral stations average <strong>9.8 amenities</strong> within walking 
-  distance versus <strong>21.9 for core stations</strong> — a gap that held 
-  across 6 of 10 amenity types after correcting for multiple comparisons 
-  (Glass Delta = 2.17).
+  Peripheral stations average 9.8 amenities within walking distance versus 21.9 
+  for core stations. That gap showed up in 6 of 10 amenity categories we tested, 
+  and the effect size (Glass Delta = 2.17) is large enough that it is hard to 
+  explain away.
 </div>
 <div class="finding-card f2">
   <div class="finding-num">Finding 02</div>
@@ -93,17 +97,16 @@ All spatial analysis was done in Python using `GeoPandas`, with interactive visu
 
 ## Scope and Limitations
 
-This analysis focuses on **amenity presence**, not affordability, quality, or availability.
-A clinic within a half mile of a station may have limited hours, may not take certain insurance plans,
-or have long wait times. Additionally, we only examine **BART and Caltrain** stations.
-There are bus networks that service residents across all nine Bay Area counties, including
-transit-dependent populations, which is out of our scope.
+This analysis measures amenity presence, not affordability, quality, or hours. 
+We cover only BART and Caltrain — Bay Area bus networks are out of scope. For a full discussion of missing data and methodological limitations, see Station Access Explorer.
 
 ---
 
-**Group 13** · Sonya Kiskachi, Destiny Ogu, Donjhai Holland · CP 255 · Spring 2026
+Browse the findings in **Station Access Explorer** and the full statistical 
+breakdown in **Methods & Results**.
 
 ---
+
 
 ```{tableofcontents}
 ```

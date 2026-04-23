@@ -17,6 +17,7 @@
 }
 .finding-card.f1 { border-left: 4px solid #009BD9; }
 .finding-card.f2 { border-left: 4px solid #E32119; }
+.finding-card.f3 { border-left: 4px solid #1D9E75; }
 .finding-num {
   font-size: 0.67rem;
   font-weight: 700;
