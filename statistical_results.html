@@ -366,7 +366,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -382,6 +384,14 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -831,6 +841,14 @@
 </script>
 </div></div>
 </div>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>This analysis set out to ask whether riders at peripheral Bay Area transit stations face systematically worse walkable amenity access than riders at core stations. The answer is yes, and the gap is large.</p>
+<p>Core stations average more than twice as many nearby amenities as peripheral stations (21.9 vs. 9.8), a difference that is statistically significant across 6 of 10 amenity categories after FDR correction and practically large by any effect size benchmark (Glass Delta = 2.17). The biggest gaps are in clinics and convenience stores — everyday essentials that transit-dependent riders cannot easily substitute with a car trip.</p>
+<p>The equity pattern is more nuanced than a simple core-peripheral story. The unmet need index reveals that some nominally core stations — Coliseum, Bay Fair, MacArthur — serve some of the most transit-dependent populations in the network while having among the fewest walkable services. These are not peripheral stations by ridership, but they are peripheral by investment. The demographic correlations reinforce this: the gap follows racial geography (rho = −0.243) more than income (rho = −0.064, not significant), which means policies targeting low-income neighborhoods by income threshold alone would miss many of the communities most affected.</p>
+<p>These findings have direct implications for transit-oriented development prioritization. Expanding transit service to underserved areas is necessary but not sufficient. The neighborhood built environment around stations — particularly access to clinics, pharmacies, and grocery stores — needs to be part of the same planning conversation.</p>
+<p><strong>Limitations.</strong> OSM coverage is thinner in peripheral areas, meaning our amenity counts likely underestimate the true gap. Amenity presence does not capture affordability, hours, or quality. Demographic variables are at the tract level and cannot support individual-level inference.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -878,6 +896,23 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
