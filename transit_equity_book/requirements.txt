@@ -1,3 +1,9 @@
 jupyter-book
-matplotlib
+pandas
+geopandas
+plotly
+folium
+ipywidgets
 numpy
+scipy
+scikit-learn
