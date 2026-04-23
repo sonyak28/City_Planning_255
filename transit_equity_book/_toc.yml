@@ -2,6 +2,6 @@ format: jb-book
 root: intro
 chapters:
   - file: transit_equity_visualization
-    title: Findings
+    title: Station Access Explorer
   - file: statistical_results
-    title: Statistical Analysis
+    title: Methods & Results
