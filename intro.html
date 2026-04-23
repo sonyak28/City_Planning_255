@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ea12e837" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -68,158 +69,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
-
-  <style>
-      /* Underline under every h2 in the article body */
-      .bd-article h2 {
-        border-bottom: 2px solid #dee2e6;
-        padding-bottom: 0.3em;
-        margin-bottom: 0.8em;
-      }
- 
-      /* ── Finding boxes ── */
-      .finding-card {
-        border: 1px solid #dee2e6;
-        border-radius: 6px;
-        padding: 14px 18px;
-        margin: 8px 0;
-        background: #f8f9fa;
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
-      .finding-card.f1 { border-left: 4px solid #009BD9; }
-      .finding-card.f2 { border-left: 4px solid #E32119; }
-      .finding-num {
-        font-size: 0.67rem;
-        font-weight: 700;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        color: #999;
-        margin-bottom: 4px;
-      }
- 
-      /* ── Data sources table ── */
-      .table-wrap {
-        border: 1px solid #dee2e6;
-        border-radius: 6px;
-        overflow: hidden;
-        margin-top: 10px;
-      }
-      .table-wrap table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.87rem;
-        margin: 0;          /* override Sphinx default margin */
-      }
-      .table-wrap thead tr {
-        background: #1a3a5c;
-        color: #ffffff;
-      }
-      .table-wrap thead th {
-        padding: 9px 14px;
-        text-align: left;
-        font-weight: 600;
-        font-size: 0.76rem;
-        letter-spacing: 0.05em;
-        border: none;
-      }
-      .table-wrap tbody tr {
-        border-bottom: 1px solid #dee2e6;
-      }
-      .table-wrap tbody tr:last-child { border-bottom: none; }
-      .table-wrap tbody tr:hover { background: #f0f4f8; }
-      .table-wrap td {
-        padding: 9px 14px;
-        vertical-align: top;
-        border: none;
-      }
-      .table-wrap td:first-child {
-        font-weight: 600;
-        white-space: nowrap;
-      }
-      .table-wrap td:nth-child(2) {
-        color: #666;
-        font-size: 0.81rem;
-      }
- 
-      /* Tech line below table */
-      .tech-line {
-        margin-top: 10px;
-        font-size: 0.85rem;
-        color: #555;
-      }
- 
-      /* ── Nav hint box ── */
-      .nav-hint {
-        background: #1a3a5c;
-        border-radius: 8px;
-        padding: 20px 24px;
-        margin-top: 24px;
-        color: rgba(255,255,255,0.85);
-        font-size: 0.9rem;
-      }
-      .nav-hint > strong {
-        color: #fff;
-        display: block;
-        margin-bottom: 12px;
-      }
- 
-      /* Vertical stack, no Bootstrap border */
-      .nav-tabs-list {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        border-bottom: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
- 
-      /* Each row is a pill-shaped card */
-      .nav-tab-item {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-        border-radius: 6px !important;
-        padding: 10px 16px !important;
-        text-decoration: none !important;
-        color: rgba(255,255,255,0.85) !important;
-        transition: background 0.15s;
-        line-height: 1.5;
-        /* Remove any Sphinx/Bootstrap link styles */
-        box-shadow: none !important;
-      }
-      .nav-tab-item:hover {
-        background: rgba(255,255,255,0.2) !important;
-        text-decoration: none !important;
-        color: #fff !important;
-      }
- 
-      /* Colour dot */
-      .nav-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
- 
-      /* Page name: underlined to signal it's the link target */
-      .tab-label {
-        color: #fff;
-        font-weight: 600;
-        text-decoration: underline;
-        text-underline-offset: 2px;
-      }
- 
-      /* Description: NOT underlined, lighter colour */
-      .tab-desc {
-        color: rgba(255,255,255,0.7);
-        font-weight: 400;
-        text-decoration: none !important;
-      }
-    </style>
- 
   </head>
   
   
@@ -488,7 +337,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -504,6 +355,16 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings">Key Findings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-and-limitations">Scope and Limitations</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -516,22 +377,21 @@
   <section class="tex2jax_ignore mathjax_ignore" id="bay-area-transit-equity">
 <h1>Bay Area Transit Equity<a class="headerlink" href="#bay-area-transit-equity" title="Link to this heading">#</a></h1>
 <p><strong>Does where you live near transit determine what you can access?</strong></p>
-<p>Bay Area transit expansion has extended BART and Caltrain service into communities like Antioch 
-  and Berryessa over the past decade. However, building a station does not guarantee that the surrounding
-  neighborhood offers basic amenities that residents may need within walking distance.</p>
+<p>Bay Area transit expansion has extended BART and Caltrain service into communities like Antioch
+and Berryessa over the past decade. However, building a station does not guarantee that the surrounding
+neighborhood offers basic amenities that residents may need within walking distance.</p>
 <p>A station that draws hundreds to thousands of daily riders but sits in a neighborhood with few nearby
-  amenities — such as grocery stores, pharmacies, and clinics — creates compounded mobility burdens,
-  with direct implications for transit-oriented development and equitable service planning. The riders
-  most affected are transit-dependent Bay Area residents, particularly low-income households, elderly
-  riders, and people with disabilities, who rely on transit not just for commuting but for reaching daily necessities.</p>
-<p>This project examines walkable amenity access across 79 BART and Caltrain stations in the Bay Area. We 
-  ask a simple question: <strong>Do riders at peripheral stations — lower ridership,suburban, end-of-line — have
-  systematically worse access to essential services like grocery stores, clinics, and pharmacies compared to 
-  riders at central core stations?</strong></p>
-
-<h2>Key Findings</h2>
+amenities — such as grocery stores, pharmacies, and clinics — creates compounded mobility burdens,
+with direct implications for transit-oriented development and equitable service planning. The riders
+most affected are transit-dependent Bay Area residents, particularly low-income households, elderly
+riders, and people with disabilities, who rely on transit not just for commuting but for reaching daily necessities.</p>
+<p>This project examines walkable amenity access across 79 BART and Caltrain stations in the
+Bay Area. We ask a simple question: <strong>Do riders at peripheral stations — lower ridership,
+suburban, end-of-line — have systematically worse access to essential services like grocery
+stores, clinics, and pharmacies compared to riders at central core stations?</strong></p>
+<section id="key-findings">
+<h2>Key Findings<a class="headerlink" href="#key-findings" title="Link to this heading">#</a></h2>
 <p>Our analysis finds statistically significant disparities between core and peripheral stations:</p>
-
 <div class="finding-card f1">
   <div class="finding-num">Finding 01</div>
   Peripheral stations not only have <strong>fewer amenities</strong>, but also
@@ -541,87 +401,67 @@
   <div class="finding-num">Finding 02</div>
   Core stations showed the highest <strong>unmet need</strong> — high car-free
   households paired with low amenity counts.
-</div>
-
-  <div class="section">
-    <h2><span class="h2-pill" style="background:var(--caltrain-red)"></span>Data Sources</h2>
-    <p style="font-size:0.88rem; color:var(--ink-muted); margin-bottom:12px;">
-      This analysis was built primarily using FY2025 BART and Caltrain ridership records, OpenStreetMap amenity extracts,
-      and 2024 ACS 5-year Census estimates.
-    </p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Dataset</th>
-            <th>Source</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Census tract boundaries</td>
-            <td>TIGER/Line 2024, U.S. Census Bureau</td>
-            <td>California tract shapefiles for spatial joining</td>
-          </tr>
-          <tr>
-            <td>ACS 2024 (5-Year)</td>
-            <td>Census API</td>
-            <td>Tract-level demographics: income, vehicle access, race, poverty</td>
-          </tr>
-          <tr>
-            <td>BART ridership (FY2025)</td>
-            <td>BART monthly XLS, Jul 2024–Jun 2025</td>
-            <td>Average weekday exits by station</td>
-          </tr>
-          <tr>
-            <td>Caltrain ridership (FY2025)</td>
-            <td>FY2025 Annual Ridership Report, Table 3</td>
-            <td>Average mid-week ridership (AMWR) by station</td>
-          </tr>
-          <tr>
-            <td>Amenities</td>
-            <td>OpenStreetMap / compiled</td>
-            <td>Grocery, park, clinic, pharmacy, hospital, childcare locations</td>
-          </tr>
-          <tr>
-            <td>Station locations</td>
-            <td>Compiled</td>
-            <td>Lat/lon for all BART and Caltrain stations</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="tech-line">
-      All spatial analysis was done in Python using <code>GeoPandas</code>, with interactive visualizations
-      built in <code>Plotly</code> and <code>Folium</code>.
-    </div>
-  </div>
-
-
-<h2>Scope and Limitations</h2>
- <p>This analysis focuses on <strong>amenity presence</strong>, not affordability, quality, or availability.
-    A clinic within a half mile of a station may have limited hours, may not take certain insurance plans,
-    or have long wait times. Additionally, we only examine <strong>BART and Caltrain</strong> stations.
-    There are bus networks that service residents across all nine Bay Area counties, including
-    transit-dependent populations, which is out of our scope.</p>
-
+</div></section>
+<section id="data-sources">
+<h2>Data Sources<a class="headerlink" href="#data-sources" title="Link to this heading">#</a></h2>
+<p>We built this analysis primarily using FY2025 BART and Caltrain ridership records, OpenStreetMap amenity extracts, and 2024 ACS 5-year Census estimates.</p>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Dataset</th><th>Source</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Census tract boundaries</td>
+        <td>TIGER/Line 2024, U.S. Census Bureau</td>
+        <td>California tract shapefiles for spatial joining</td>
+      </tr>
+      <tr>
+        <td>ACS 2024 (5-Year)</td>
+        <td>Census API</td>
+        <td>Tract-level demographics: income, vehicle access, race, poverty</td>
+      </tr>
+      <tr>
+        <td>BART ridership (FY2025)</td>
+        <td>BART monthly XLS, Jul 2024–Jun 2025</td>
+        <td>Average weekday exits by station</td>
+      </tr>
+      <tr>
+        <td>Caltrain ridership (FY2025)</td>
+        <td>FY2025 Annual Ridership Report, Table 3</td>
+        <td>Average mid-week ridership (AMWR) by station</td>
+      </tr>
+      <tr>
+        <td>Amenities</td>
+        <td>OpenStreetMap / compiled</td>
+        <td>Grocery, park, clinic, pharmacy, hospital, childcare locations</td>
+      </tr>
+      <tr>
+        <td>Station locations</td>
+        <td>Compiled</td>
+        <td>Lat/lon for all BART and Caltrain stations</td>
+      </tr>
+    </tbody>
+  </table>
+</div><p>All spatial analysis was done in Python using <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>, with interactive visualizations built in <code class="docutils literal notranslate"><span class="pre">Plotly</span></code> and <code class="docutils literal notranslate"><span class="pre">Folium</span></code>.</p>
+</section>
+<section id="scope-and-limitations">
+<h2>Scope and Limitations<a class="headerlink" href="#scope-and-limitations" title="Link to this heading">#</a></h2>
+<p>This analysis focuses on <strong>amenity presence</strong>, not affordability, quality, or availability.
+A clinic within a half mile of a station may have limited hours, may not take certain insurance plans,
+or have long wait times. Additionally, we only examine <strong>BART and Caltrain</strong> stations.
+There are bus networks that service residents across all nine Bay Area counties, including
+transit-dependent populations, which is out of our scope.</p>
 <hr class="docutils" />
 <p><strong>Group 13</strong> · Sonya Kiskachi, Destiny Ogu, Donjhai Holland · CP 255 · Spring 2026</p>
 <hr class="docutils" />
-
-
-<p>Use the tabs on the left to explore:</p>
-<ul class="simple">
-<li><p><strong>Findings</strong> — interactive maps and equity analysis across all 79 stations</p></li>
-<li><p><strong>Statistical Analysis</strong> — permutation tests, correlations, and the full methodology</p></li>
-</ul>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="transit_equity_visualization.html">Findings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statistical_results.html">Statistical Analysis</a></li>
 </ul>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -669,6 +509,25 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-findings">Key Findings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources">Data Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-and-limitations">Scope and Limitations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

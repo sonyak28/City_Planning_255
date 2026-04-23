@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ea12e837" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -69,29 +70,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
-
-  <style>
-      /* ── Finding boxes ── */
-      .finding-card {
-        border: 1px solid #dee2e6;
-        border-radius: 6px;
-        padding: 14px 18px;
-        margin: 8px 0;
-        background: #f8f9fa;
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
-      .finding-card.f1 { border-left: 4px solid #009BD9; }
-      .finding-card.f2 { border-left: 4px solid #E32119; }
-      .finding-num {
-        font-size: 0.67rem;
-        font-weight: 700;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        color: #525151;
-        margin-bottom: 4px;
-      }
-    </style>
   </head>
   
   
@@ -438,50 +416,7 @@
 <section id="study-area-and-data">
 <h2>Study area and data<a class="headerlink" href="#study-area-and-data" title="Link to this heading">#</a></h2>
 <p>We looked at 79 BART and Caltrain stations across the Bay Area, dropping SFO and Stanford since they serve captive audiences rather than everyday riders. For each station, we counted five types of essential amenities within a half-mile walking radius: grocery stores, parks, clinics, pharmacies, and childcare. We then pulled census data on median income, car-free households, and racial composition to understand who actually relies on these stations.</p>
-<p>The half-mile buffer is a standard walkability threshold in urban planning: it’s roughly a 10-minute walk. We classified stations as core (higher ridership, more central) or peripheral (lower ridership, suburban or terminus) to test whether location in the network predicts what you can access on foot. 
-    Core vs peripheral classification was done using a consensus appraoch across 3 independent methods applied to FY2025 ridership data:</p>
-<table style="width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 8px;">
-  <thead>
-    <tr>
-      <th style="border-bottom: 2px solid #dee2e6; padding: 8px 12px; text-align: left;">Method</th>
-      <th style="border-bottom: 2px solid #dee2e6; padding: 8px 12px; text-align: left;">Approach</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="border-bottom: 1px solid #dee2e6; padding: 8px 12px;">Percentile split</td>
-      <td style="border-bottom: 1px solid #dee2e6; padding: 8px 12px;">Stations at or above the 50th percentile of average weekday ridership → <strong>core</strong></td>
-    </tr>
-    <tr>
-      <td style="border-bottom: 1px solid #dee2e6; padding: 8px 12px;">K-means clustering</td>
-      <td style="border-bottom: 1px solid #dee2e6; padding: 8px 12px;">2-cluster k-means on log-transformed ridership; higher-centroid cluster → <strong>core</strong></td>
-    </tr>
-    <tr>
-      <td style="padding: 8px 12px;">Jenks natural breaks</td>
-      <td style="padding: 8px 12px;">Single largest gap in the ridership distribution defines the boundary</td>
-    </tr>
-  </tbody>
-</table>
-
-<p style="margin-top: 12px;">A station is labeled <strong>core</strong> if at least 2 of 3 methods agree.
-This resulted in <strong>40 core stations</strong> and <strong>39 peripheral stations</strong> across both agencies.</p>
-
-<div style="display: flex; gap: 12px; margin-top: 16px;">
-  <div class="finding-card f1" style="flex: 1;">
-    <div class="finding-num"><strong>Peripheral</strong></div>
-    Tend to be suburban, end-of-line, or low-frequency stops — places like
-    <em>Gilroy, San Martin, College Park</em> on Caltrain, or the far East Bay and
-    <em>Antioch terminus</em> on BART.
-  </div>
-  <div class="finding-card f2" style="flex: 1;">
-    <div class="finding-num"><strong>Core</strong></div>
-    High-density anchors: <em>Embarcadero, Powell, 16th St. Mission, Palo Alto</em>,
-    and similar hubs with high ridership and strong surrounding activity.
-  </div>
-</div>
-
-
-<p>The table below shows a sample of the dataset with key fields for each station.</p>
+<p>The half-mile buffer is a standard walkability threshold in urban planning: it’s roughly a 10-minute walk. We classified stations as core (higher ridership, more central) or peripheral (lower ridership, suburban or terminus) to test whether location in the network predicts what you can access on foot. The table below shows a sample of the dataset with key fields for each station.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
@@ -557,7 +492,6 @@ This resulted in <strong>40 core stations</strong> and <strong>39 peripheral sta
 </table>
 </div></div>
 </div>
-
 </section>
 <section id="summary-statistics">
 <h2>Summary statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">#</a></h2>
