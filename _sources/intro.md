@@ -24,13 +24,22 @@ Our analysis finds statistically significant disparities between core and periph
 ```{raw} html
 <div class="finding-card f1">
   <div class="finding-num">Finding 01</div>
-  Peripheral stations not only have <strong>fewer amenities</strong>, but also
-  <strong>less diversity</strong> in amenity types on average.
+  Peripheral stations average <strong>9.8 amenities</strong> within walking 
+  distance versus <strong>21.9 for core stations</strong> — a gap that held 
+  across 6 of 10 amenity types after correcting for multiple comparisons 
+  (Glass Delta = 2.17).
 </div>
 <div class="finding-card f2">
   <div class="finding-num">Finding 02</div>
-  Core stations showed the highest <strong>unmet need</strong> — high car-free
-  households paired with low amenity counts.
+  The stations with the highest unmet need — where car-free household rates are 
+  high and walkable amenities are scarce — are concentrated in East Oakland and 
+  the outer East Bay, with Coliseum station ranking worst (index = 0.801).
+</div>
+<div class="finding-card f3">
+  <div class="finding-num">Finding 03</div>
+  Stations in majority non-white neighborhoods have significantly fewer walkable 
+  amenities (Spearman rho = −0.243, p = 0.047). Income was not a significant 
+  predictor, meaning the gap follows racial geography more than income alone.
 </div>
 ```
 
