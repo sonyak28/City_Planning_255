@@ -378,9 +378,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -396,14 +394,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -485,11 +475,11 @@ document.write(`
   </div>
 
   <div class='eq-callout' style='margin-bottom:1.5rem'>
-    <strong style='color:#1a1a1a'>Bottom line:</strong> Core stations have on average <strong>more than twice as many</strong> nearby amenities as peripheral stations (21.9 vs. 9.8).
+    Core stations have on average <strong>more than twice as many</strong> nearby amenities as peripheral stations (21.9 vs. 9.8).
     This gap held up across 6 out of 10 amenity types after correcting for multiple comparisons.
-    The effect size — Glass’s Delta of 2.17 — is extremely large: the average core station is better served than roughly 98% of peripheral stations.
-    This is not a small difference. It points to a real structural gap.
-  </div>
+    The effect size (Glass's Delta of 2.17) is extremely large: the average core station is better served than roughly 98% of peripheral stations.
+    This is not a small difference and points to a real structural gap.
+</div>
 
   <p class='eq-section'>Core vs peripheral: permutation test results (10,000 resamples)</p>
   <p style='font-size:12px;color:#999;margin-bottom:10px;font-family:inherit'>
@@ -527,7 +517,7 @@ document.write(`
     <strong>Are stations serving higher proportions of non-white residents, low-income households, or zero-vehicle households more likely to be amenity-poor?</strong><br>
     Having a transit station is not the same thing as having equitable access.
     If the stations serving the most disadvantaged communities also have the fewest nearby services,
-    that creates a compounding disadvantage — not just a transit gap, but a gap in everyday livability.<br><br>
+    that creates a compounding disadvantage. <br><br>
     We used <strong>Spearman rank correlations</strong> to test whether three demographic variables are related to how amenity-rich a station’s neighborhood is.
     Spearman is more appropriate than Pearson here because our amenity counts are skewed and not normally distributed.
     It works off rankings rather than raw values, so it is less sensitive to outliers.
@@ -575,7 +565,7 @@ document.write(`
   </div>
 
   <div class='eq-takeaway'>
-    <strong>Answer: Partially yes, and the pattern matters.</strong>
+    <strong>Answer: Partially yes.</strong>
     Stations in majority non-white neighborhoods face a measurable amenity disadvantage.
     Zero-vehicle households show the opposite pattern, but that mostly reflects urban density rather than true equity.
     Income alone does not explain the gap, which suggests that equity-focused planning needs to account for racial geography and long-term neighborhood investment patterns, not just income.
@@ -606,7 +596,7 @@ document.write(`
   </div>
 
   <div class='eq-callout' style='margin-bottom:1.5rem'>
-    <strong style='color:#1a1a1a'>Why the peripheral Gini is lower — and why that is not necessarily good news:</strong>
+    <strong style='color:#1a1a1a'>Why the peripheral Gini is lower, and why that is not necessarily good news:</strong>
     Peripheral stations have a lower Gini (0.315 vs. 0.410 for core) because they are <em>uniformly</em> underserved.
     There is less inequality among them because most of them are similarly sparse.
     Core stations show more internal variation: some are very well-served (such as Montgomery St. or 12th St. Oakland),
@@ -665,8 +655,7 @@ document.write(`
   </div>
 
   <div class='eq-callout' style='margin-bottom:1.5rem'>
-    <strong style='color:#1a1a1a'>Bottom line:</strong>
-    Core stations are not only surrounded by <em>more</em> amenities — they also tend to have a <em>more balanced mix</em> of them (p = 0.041).
+    Core stations are not only surrounded by <em>more</em> amenities, they also tend to have a <em>more balanced mix</em> of them (p = 0.041).
     Peripheral riders do not just have fewer options; they also have less variety.
     That matters because if the only thing nearby is a convenience store,
     riders may still need to travel farther for a prescription, a doctor, or basic groceries.
@@ -675,7 +664,7 @@ document.write(`
   <p class='eq-section'>Top 10 most diverse stations by amenity entropy</p>
   <p style='font-size:12px;color:#999;margin-bottom:10px;font-family:inherit'>
     <strong>How to read:</strong> Entropy is highest when amenities are spread evenly across all 8 categories (max possible &asymp; 2.08).
-    Heat shading by column shows relative abundance — darker blue means more of that category relative to other stations.
+    Heat shading by column shows relative abundance: darker blue means more of that category relative to other stations.
     A station can rank highly here even without the highest total count; what matters is balance.
   </p>
   <table class='eq-tbl' id='eq-div-tbl'>
@@ -853,15 +842,6 @@ document.write(`
 </script>
 </div></div>
 </div>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>This analysis set out to ask whether riders at peripheral Bay Area transit stations face systematically worse walkable amenity access than riders at core stations. The answer is yes, and the gap is large.</p>
-<p>Core stations average more than twice as many nearby amenities as peripheral stations (21.9 vs. 9.8), a difference that is statistically significant across 6 of 10 amenity categories after FDR correction and practically large by any effect size benchmark (Glass Delta = 2.17). The biggest gaps are in clinics and convenience stores — everyday essentials that transit-dependent riders cannot easily substitute with a car trip.</p>
-<p>The equity pattern is more nuanced than a simple core-peripheral story. The unmet need index reveals that some nominally core stations — Coliseum, Bay Fair, MacArthur — serve some of the most transit-dependent populations in the network while having among the fewest walkable services. These are not peripheral stations by ridership, but they are peripheral by investment. The demographic correlations reinforce this: the gap follows racial geography (rho = −0.243) more than income (rho = −0.064, not significant), which means policies targeting low-income neighborhoods by income threshold alone would miss many of the communities most affected.</p>
-<p>The implication for transit planning is straightforward: building a station is
-not enough. What gets built around it matters too. Expanding transit service to underserved areas is necessary but not sufficient.</p>
-<p><strong>Limitations.</strong> OSM coverage is thinner in peripheral areas, meaning our amenity counts likely underestimate the true gap. Amenity presence does not capture affordability, hours, or quality. Demographic variables are at the tract level and cannot support individual-level inference.</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -918,21 +898,6 @@ not enough. What gets built around it matters too. Expanding transit service to 
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
