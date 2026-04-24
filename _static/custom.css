@@ -27,6 +27,26 @@
   margin-bottom: 4px;
 }
 
+.chart-callout {
+  background: #f0f5fb;
+  border-left: 3px solid #378ADD;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 1rem 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.chart-callout-red {
+  background: #f0f5fb;
+  border-left: 3px solid #dd3745;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 1rem 0;
+  font-size: 14px;
+  color: #444;
+}
+
 /* ── Data sources table ── */
 .table-wrap {
   border: 1px solid #dee2e6;
