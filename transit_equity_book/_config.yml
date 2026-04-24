@@ -22,6 +22,7 @@ sphinx:
 # Jupyter Book HTML output settings
 html:
   use_issues_button: true
+  favicon: "_static/favicon.png"
   use_repository_button: true
   extra_css:
     - custom.css

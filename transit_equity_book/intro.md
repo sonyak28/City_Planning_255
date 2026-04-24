@@ -102,8 +102,7 @@ We cover only BART and Caltrain — Bay Area bus networks are out of scope. For 
 
 ---
 
-Browse the findings in **Station Access Explorer** and the full statistical 
-breakdown in **Methods & Results**.
+Browse the data yourself in **Station Access Explorer**, see what we found in **Findings**, and read the full statistical breakdown in **Methods & Results**.
 
 ---
 

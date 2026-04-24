@@ -3,6 +3,8 @@ root: intro
 chapters:
   - file: transit_equity_visualization
     title: Station Access Explorer
+  - file: findings
+    title: Findings
   - file: statistical_results
     title: Methods & Results
   - file: references
