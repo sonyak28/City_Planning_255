@@ -11,14 +11,13 @@ and Berryessa over the past decade. However, building a station does not guarant
 neighborhood offers basic amenities that residents may need within walking distance.
 
 A station that draws hundreds to thousands of daily riders but sits in a neighborhood with few nearby
-amenities — such as grocery stores, pharmacies, and clinics — creates compounded mobility burdens,
+amenities (such as grocery stores, pharmacies, and clinics) creates compounded mobility burdens,
 with direct implications for transit-oriented development and equitable service planning. The riders
 most affected are transit-dependent Bay Area residents, particularly low-income households, elderly
 riders, and people with disabilities, who rely on transit not just for commuting but for reaching daily necessities.
 
 This project examines walkable amenity access across 79 BART and Caltrain stations in the
-Bay Area. We ask a simple question: **Do riders at peripheral stations — lower ridership,
-suburban, end-of-line — have systematically worse access to essential services like grocery
+Bay Area. We ask a simple question: **Do riders at peripheral stations have systematically worse access to essential services like grocery
 stores, clinics, and pharmacies compared to riders at central core stations?**
 
 ## Key Findings
@@ -35,8 +34,8 @@ Our analysis finds statistically significant disparities between core and periph
 </div>
 <div class="finding-card f2">
   <div class="finding-num">Finding 02</div>
-  The stations with the highest unmet need — where car-free household rates are 
-  high and walkable amenities are scarce — are concentrated in East Oakland and 
+  The stations with the highest unmet need, where car-free household rates are 
+  high and walkable amenities are scarce, are concentrated in East Oakland and 
   the outer East Bay, with Coliseum station ranking worst (index = 0.801).
 </div>
 <div class="finding-card f3">
@@ -98,7 +97,24 @@ All spatial analysis was done in Python using `GeoPandas`, with interactive visu
 ## Scope and Limitations
 
 This analysis measures amenity presence, not affordability, quality, or hours. 
-We cover only BART and Caltrain — Bay Area bus networks are out of scope. For a full discussion of missing data and methodological limitations, see Station Access Explorer.
+We cover only BART and Caltrain. Bay Area bus networks are out of scope. For a full discussion of missing data and methodological limitations, see Station Access Explorer.
+
+## Conclusion
+
+Building a station is not enough. What gets built around it matters too.
+
+Core stations average more than twice as many nearby amenities as peripheral 
+stations (21.9 vs. 9.8), a difference that is statistically significant across 
+6 of 10 amenity categories after FDR correction. The biggest gaps are in clinics 
+and convenience stores. These are everyday essentials that transit-dependent riders cannot 
+easily substitute with a car trip.
+
+The unmet need index reveals that some nominally core stations. Coliseum, Bay 
+Fair, MacArthur serve some of the most transit-dependent populations in the 
+network while having among the fewest walkable services. The gap follows racial 
+geography (rho = −0.243) more than income (rho = −0.064, not significant), which 
+means policies targeting low-income neighborhoods by income threshold alone would 
+miss many of the communities most affected.
 
 ---
 
