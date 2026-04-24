@@ -20,6 +20,16 @@ This project examines walkable amenity access across 79 BART and Caltrain statio
 Bay Area. We ask a simple question: **Do riders at peripheral stations have systematically worse access to essential services like grocery
 stores, clinics, and pharmacies compared to riders at central core stations?**
 
+## Why this matters now
+
+BART's Antioch extension opened in 2023, adding two new stations to the East Bay. 
+Caltrain electrification finished in 2024, expanding capacity along the Peninsula. 
+Both are presented as equity wins: more transit access for underserved communities. 
+But a [2024 MTC report on transit-oriented communities](https://mtc.ca.gov) found 
+that station-area development is concentrated in already-wealthy corridors, leaving 
+newly served communities with the infrastructure but not the services. Our analysis 
+puts numbers to that gap for the first time across both systems.
+
 ## Key Findings
 
 Our analysis finds statistically significant disparities between core and peripheral stations:
