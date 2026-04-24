@@ -109,8 +109,8 @@ stations (21.9 vs. 9.8), a difference that is statistically significant across
 and convenience stores. These are everyday essentials that transit-dependent riders cannot 
 easily substitute with a car trip.
 
-The unmet need index reveals that some nominally core stations. Coliseum, Bay 
-Fair, MacArthur serve some of the most transit-dependent populations in the 
+The unmet need index reveals that some nominally core stations such as Coliseum, Bay 
+Fair, MacArthur, serve some of the most transit-dependent populations in the 
 network while having among the fewest walkable services. The gap follows racial 
 geography (rho = −0.243) more than income (rho = −0.064, not significant), which 
 means policies targeting low-income neighborhoods by income threshold alone would 
@@ -118,10 +118,25 @@ miss many of the communities most affected.
 
 ---
 
-Browse the data yourself in **Station Access Explorer**, see what we found in **Findings**, and read the full statistical breakdown in **Methods & Results**.
+**Where to go next**
 
----
-
-
-```{tableofcontents}
+```{raw} html
+<div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:12px;">
+  <a href="transit_equity_visualization.html" style="display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;">
+    <span style="font-weight:600; color:#378ADD; min-width:200px;">Station Access Explorer</span>
+    <span style="color:#666; font-size:14px;">Interactive maps to explore amenity access at any station directly</span>
+  </a>
+  <a href="findings.html" style="display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;">
+    <span style="font-weight:600; color:#378ADD; min-width:200px;">Findings</span>
+    <span style="color:#666; font-size:14px;">Charts and analysis showing the core-peripheral gap and who is most affected</span>
+  </a>
+  <a href="statistical_results.html" style="display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;">
+    <span style="font-weight:600; color:#378ADD; min-width:200px;">Methods & Results</span>
+    <span style="color:#666; font-size:14px;">Permutation tests, correlations, and effect sizes behind the findings</span>
+  </a>
+  <a href="references.html" style="display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;">
+    <span style="font-weight:600; color:#378ADD; min-width:200px;">References</span>
+    <span style="color:#666; font-size:14px;">Data sources, methods citations, and system maps</span>
+  </a>
+</div>
 ```
