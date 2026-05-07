@@ -7,20 +7,33 @@ this analysis are all stops on both systems except SFO/Millbrae (BART) and
 Stanford (Caltrain).
 
 ```{raw} html
-<div style="margin-bottom:2rem;">
-  <img 
-    src="_static/bart_caltrain_map.png" 
-    alt="BART and Caltrain combined system map showing all stations across the Bay Area" 
-    style="width:100%; max-width:800px; border:0.5px solid #D3D1C7; border-radius:8px; display:block; margin:0 auto;"
-  />
-  <p style="font-size:12px; color:#888; margin-top:8px; text-align:center;">
-    Combined BART and Caltrain system map. Caltrain service is shown as the 
-    Purple Line running along the Peninsula from San Francisco to Gilroy. 
-    Stations included in this analysis are all stops on both systems except 
-    SFO and Stanford. Source: BART (2025).
-  </p>
+<div style="margin-bottom:2rem; display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+
+  <div style="max-width:600px;">
+    <img 
+      src="_static/bart_map.png"
+      alt="BART map"
+      style="width:100%; border:0.5px solid #D3D1C7; border-radius:8px;"
+    />
+    <p style="font-size:12px; color:#888; text-align:center;">
+      BART system map. Source: BART (2025).
+    </p>
+  </div>
+
+  <div style="max-width:600px;">
+    <img 
+      src="_static/caltrain_service_map.png"
+      alt="Caltrain map"
+      style="width:100%; border:0.5px solid #D3D1C7; border-radius:8px;"
+    />
+    <p style="font-size:12px; color:#888; text-align:center;">
+      Caltrain service map. Source: Caltrain (2025).
+    </p>
+  </div>
+
 </div>
 ```
+
 ---
 
 ## Data Sources
