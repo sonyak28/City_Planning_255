@@ -1,0 +1,104 @@
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/opt/anaconda3/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/opt/anaconda3/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/opt/anaconda3/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/opt/anaconda3/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/anaconda3/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import warnings
+warnings.filterwarnings("ignore")
+
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.express as px
+from IPython.display import display, HTML
+import statsmodels.api as sm
+
+DATA_PATH = "../data/processed/final_station_data.csv"
+df = pd.read_csv(DATA_PATH)
+df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
+
+required = {
+    "station_name": "Unknown",
+    "agency": "—",
+    "station_type": "unknown",
+    "latitude": None,
+    "longitude": None,
+    "total_amenities": 0,
+    "grocery": 0,
+    "park": 0,
+    "clinic": 0,
+    "pharmacy": 0,
+    "childcare": 0,
+    "ridership": 0,
+    "median_income": np.nan,
+    "pct_no_vehicle": np.nan,
+    "pct_nonwhite": np.nan,
+    "unmet_need_index": np.nan,
+    "amenity_entropy": np.nan,
+}
+for col, default in required.items():
+    if col not in df.columns:
+        df[col] = default
+
+df = df.dropna(subset=["latitude", "longitude"])
+df["station_type"] = df["station_type"].str.lower().fillna("unknown")
+
+core = df[df["station_type"] == "core"]
+peri = df[df["station_type"] == "peripheral"]
+
+COLORS = {
+    "core":       "#378ADD",
+    "peripheral": "#D85A30",
+    "unknown":    "#888780",
+    "unmet_ring": "rgba(120, 3, 179, 0.33)"
+}
+
+from IPython.display import display, HTML
+display(HTML("<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>"))
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 6[39m
+[32m      4[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mnp[39;00m
+[32m      5[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
+[32m----> [39m[32m6[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mplotly[39;00m[34;01m.[39;00m[34;01mgraph_objects[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mgo[39;00m
+[32m      7[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mplotly[39;00m[34;01m.[39;00m[34;01mexpress[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpx[39;00m
+[32m      8[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mIPython[39;00m[34;01m.[39;00m[34;01mdisplay[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m display, HTML
+
+[31mModuleNotFoundError[39m: No module named 'plotly'
+
